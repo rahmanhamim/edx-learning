@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import NavigationBar from "components/shared/navigationbar/NavigationBar";
 
 const theme = createTheme({
   palette: {
@@ -10,9 +11,9 @@ const theme = createTheme({
       dark: "#000",
     },
     secondary: {
-      light: "#99241c",
+      light: "#454545",
       main: "#D13328",
-      dark: "#000",
+      dark: "#99241c",
     },
   },
   components: {
@@ -29,11 +30,10 @@ const theme = createTheme({
   },
 });
 
-console.log(theme);
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
+      <NavigationBar />
       <Component {...pageProps} />
     </ThemeProvider>
   );

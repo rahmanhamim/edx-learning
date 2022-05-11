@@ -3,16 +3,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import CourseHome from "../components/course/CourseHome";
 
 const Home: NextPage = () => {
-  return (
-    <Box>
-      <Typography variant="h1" color="secondary.light">
-        hello
-      </Typography>
-      <Button variant="contained">link</Button>
-    </Box>
-  );
+  return <CourseHome />;
 };
 
 export default Home;
