@@ -1,22 +1,21 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import TitleMain from "components/shared/titles/TitleMain";
 import React from "react";
+import CourseAsideContent from "./CourseAsideContent";
+import CourseMainContent from "./CourseMainContent";
 
 const CourseHome = () => {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ my: 2 }}>
       <TitleMain text="Python Basics for Data Science" my="2rem" />
-      <Box
-        sx={{
-          boxShadow: "1px 1px 1px 2px rgba(215,215,215,.5)",
-          p: 2,
-          borderRadius: "5px",
-        }}
-      >
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-          Pick up where you left off
-        </Typography>
-      </Box>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={8}>
+          <CourseMainContent />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <CourseAsideContent />
+        </Grid>
+      </Grid>
     </Container>
   );
 };

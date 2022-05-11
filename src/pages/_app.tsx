@@ -23,6 +23,7 @@ const theme = createTheme({
           props: { variant: "contained" },
           style: {
             borderRadius: "1px",
+            padding: ".7rem 1.1rem",
           },
         },
       ],

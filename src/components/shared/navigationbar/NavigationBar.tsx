@@ -58,9 +58,10 @@ const NavigationBar = () => {
       my: 0,
       py: 1,
       px: 2,
+      fontSize: "1.2rem",
       cursor: "pointer",
       "&: hover": {
-        bgcolor: "#ebe6e6",
+        bgcolor: "#e1dddb",
       },
     },
   };
@@ -116,7 +117,10 @@ const NavigationBar = () => {
               >
                 IBM PY0101EN
               </Typography>
-              <Typography color="secondary.light" sx={{ fontWeight: "bold" }}>
+              <Typography
+                color="secondary.light"
+                sx={{ fontWeight: "bold", fontSize: "1.1rem" }}
+              >
                 Python Basics for Data Science
               </Typography>
             </Box>
