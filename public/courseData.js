@@ -1,6 +1,7 @@
 const courseData = [
   {
     id: 1,
+    progress: 0,
     title: "Python Basics for Data Science",
     aboutCourse: [
       {

@@ -1,7 +1,6 @@
 import {
   AppBar,
   Box,
-  Button,
   Container,
   FormControl,
   MenuItem,
@@ -15,6 +14,7 @@ import React from "react";
 import { Theme, useTheme } from "@mui/material/styles";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useRouter } from "next/router";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -51,6 +51,22 @@ const NavigationBar = () => {
       typeof value === "string" ? value.split(",") : value
     );
   };
+
+  const Styles = {
+    navLinks: {
+      display: "inline-block",
+      my: 0,
+      py: 1,
+      px: 2,
+      cursor: "pointer",
+      "&: hover": {
+        bgcolor: "#ebe6e6",
+      },
+    },
+  };
+
+  const router = useRouter();
+  console.log(router);
 
   return (
     <AppBar
@@ -89,7 +105,7 @@ const NavigationBar = () => {
                 </a>
               </Link>
             </Box>
-            <Box>
+            <Box sx={{ ml: "1em" }}>
               <Typography
                 variant="body2"
                 sx={{
@@ -126,7 +142,7 @@ const NavigationBar = () => {
                     multiple
                     displayEmpty
                     value={personName}
-                    onChange={handleChange}
+                    // onChange={handleChange}
                     input={<OutlinedInput />}
                     renderValue={(selected) => {
                       if (selected.length === 0) {
@@ -168,31 +184,50 @@ const NavigationBar = () => {
           <Link href="/">
             <Typography
               sx={{
-                display: "inline-block",
-                mx: 1,
-                my: 0,
-                py: 1,
-                px: 2,
-                cursor: "pointer",
-                borderBottom: "4px solid #00262B",
-                "&: hover": {
-                  bgcolor: "#ebe6e6",
-                },
+                ...Styles.navLinks,
+                borderBottom: `${
+                  router.pathname === "/" ? "4px solid #00262B" : ""
+                }`,
               }}
             >
               Course
             </Typography>
           </Link>
-          <Link href="/">
-            <Typography sx={{ display: "inline-block", mx: 1 }}>
-              Course
+          <Link href="/progress">
+            <Typography
+              sx={{
+                ...Styles.navLinks,
+                borderBottom: `${
+                  router.pathname === "/progress" ? "4px solid #00262B" : ""
+                }`,
+              }}
+            >
+              Progress
             </Typography>
           </Link>
-          <Link href="/">
-            <Typography sx={{ display: "inline", mx: 1 }}>Course</Typography>
+          <Link href="/dates">
+            <Typography
+              sx={{
+                ...Styles.navLinks,
+                borderBottom: `${
+                  router.pathname === "/dates" ? "4px solid #00262B" : ""
+                }`,
+              }}
+            >
+              Dates
+            </Typography>
           </Link>
-          <Link href="/">
-            <Typography sx={{ display: "inline", mx: 1 }}>Course</Typography>
+          <Link href="/discussion">
+            <Typography
+              sx={{
+                ...Styles.navLinks,
+                borderBottom: `${
+                  router.pathname === "/discussion" ? "4px solid #00262B" : ""
+                }`,
+              }}
+            >
+              Discussion
+            </Typography>
           </Link>
         </Box>
       </Container>
