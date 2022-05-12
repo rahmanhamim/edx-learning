@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
+import CourseMainModulesList from "./CourseMainModulesList";
 
 const CourseMainContent = () => {
   return (
@@ -15,7 +16,7 @@ const CourseMainContent = () => {
       >
         <Typography
           variant="h6"
-          sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
+          sx={{ fontWeight: "bold", fontSize: { xs: "1.2rem", md: "1.5rem" } }}
         >
           Pick up where you left off
         </Typography>
@@ -25,11 +26,14 @@ const CourseMainContent = () => {
             bgcolor: "secondary.main",
             fontWeight: "bold",
             "&: hover": { bgcolor: "secondary.dark" },
+            p: { xs: ".5rem 1rem", md: ".5rem 2rem" },
+            fontSize: ".8rem",
           }}
         >
           Start Course
         </Button>
       </Box>
+      <CourseMainModulesList />
     </Box>
   );
 };

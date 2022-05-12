@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import NavigationBar from "components/shared/navigationbar/NavigationBar";
+import Footer from "components/shared/footer/Footer";
 
 const theme = createTheme({
   palette: {
@@ -23,7 +24,7 @@ const theme = createTheme({
           props: { variant: "contained" },
           style: {
             borderRadius: "1px",
-            padding: ".7rem 1.1rem",
+            padding: ".6rem 1.2rem",
           },
         },
       ],
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <NavigationBar />
       <Component {...pageProps} />
+      <Footer />
     </ThemeProvider>
   );
 }

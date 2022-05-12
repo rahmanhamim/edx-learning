@@ -67,7 +67,6 @@ const NavigationBar = () => {
   };
 
   const router = useRouter();
-  console.log(router);
 
   return (
     <AppBar
