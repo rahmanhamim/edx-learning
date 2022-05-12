@@ -118,9 +118,9 @@ const CourseMainModulesList = () => {
             <Typography sx={{ fontWeight: "bold" }}>{module?.title}</Typography>
           </AccordionSummary>
 
-          {module.moduleContent.moduleResourse.map((lessons) => (
+          {module.moduleContent.map((lessons) => (
             <AccordionDetails
-              key={lessons.moduleID}
+              key={lessons.id}
               sx={{
                 display: "flex",
                 py: 2,

@@ -14,18 +14,14 @@ export interface AboutCourse {
 }
 
 export interface Module {
+  id: string;
   title: string;
-  moduleContent: ModuleContent;
+  moduleContent: ModuleContent[];
 }
 
 export interface ModuleContent {
   type: string;
-  moduleResourse: ModuleResourse[];
-}
-
-export interface ModuleResourse {
-  type: string;
-  moduleID: string;
+  id: string;
   title: string;
   content: string;
 }
