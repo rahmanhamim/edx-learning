@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import NavigationBar from "components/shared/navigationbar/NavigationBar";
 import Footer from "components/shared/footer/Footer";
+import { wrapper } from "redux/store";
 
 const theme = createTheme({
   palette: {
@@ -42,4 +43,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
