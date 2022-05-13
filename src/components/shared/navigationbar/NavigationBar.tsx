@@ -185,52 +185,52 @@ const NavigationBar = () => {
         </Toolbar>
         <Box>
           <Link href="/">
-            <Typography
-              sx={{
-                ...Styles.navLinks,
+            <a
+              className="navlinks"
+              style={{
                 borderBottom: `${
                   router.pathname === "/" ? "4px solid #00262B" : ""
                 }`,
               }}
             >
               Course
-            </Typography>
+            </a>
           </Link>
           <Link href="/progress">
-            <Typography
-              sx={{
-                ...Styles.navLinks,
+            <a
+              className="navlinks"
+              style={{
                 borderBottom: `${
                   router.pathname === "/progress" ? "4px solid #00262B" : ""
                 }`,
               }}
             >
               Progress
-            </Typography>
+            </a>
           </Link>
           <Link href="/dates">
-            <Typography
-              sx={{
-                ...Styles.navLinks,
+            <a
+              className="navlinks"
+              style={{
                 borderBottom: `${
                   router.pathname === "/dates" ? "4px solid #00262B" : ""
                 }`,
               }}
             >
               Dates
-            </Typography>
+            </a>
           </Link>
           <Link href="/discussion">
-            <Typography
-              sx={{
-                ...Styles.navLinks,
+            <a
+              className="navlinks"
+              style={{
                 borderBottom: `${
                   router.pathname === "/discussion" ? "4px solid #00262B" : ""
                 }`,
               }}
             >
               Discussion
-            </Typography>
+            </a>
           </Link>
         </Box>
       </Container>

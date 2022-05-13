@@ -1,8 +1,9 @@
+import LessonHtml from "components/lessons/LessonHtml";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 
 const HtmlLesson = () => {
-  return <div>Html Lesson</div>;
+  return <LessonHtml />;
 };
 
 export default HtmlLesson;
@@ -15,11 +16,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   //   params: { details: blog.id },
   // }));
 
-  const data = [1, 2];
+  const data = ["1", "2"];
 
-  const paths = data.map((ninja) => {
+  const paths = data.map((id) => {
     return {
-      params: { html: ninja.toString() },
+      params: { html: id },
     };
   });
 
