@@ -123,7 +123,7 @@ const LessonHtml = () => {
           </Typography>
           <Typography
             sx={{
-              my: 5,
+              my: 3,
               color: "#646464",
               lineHeight: "1.6",
               fontSize: "1.05rem",
@@ -132,6 +132,61 @@ const LessonHtml = () => {
             In this lesson, you will learn the basics of Python and you will
             write your first Python program:
           </Typography>
+          <Typography
+            component="ul"
+            sx={{
+              color: "#646464",
+              mb: 6,
+              fontSize: "1.05rem",
+            }}
+          >
+            <Typography component="li">
+              Demonstrate an understanding of types in python by
+              converting/casting data types: strings, floats, integers.
+            </Typography>
+            <Typography component="li">
+              Interpret variables and solve expressions by applying mathematical
+              operations.
+            </Typography>
+          </Typography>
+        </Box>
+        {/* NEXT PREV BUTTON BOTTOM */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mb: 5,
+          }}
+        >
+          <Button
+            sx={{
+              px: 5,
+              py: "10px",
+              border: "1px solid #EAEAEA",
+              mx: "2px",
+              "&: hover": {
+                bgcolor: "#454545",
+                color: "#fff",
+              },
+            }}
+          >
+            <ArrowBackIosIcon sx={{ fontSize: "0.8rem", mr: 1 }} /> Previous
+          </Button>
+          <Button
+            sx={{
+              px: 5,
+              py: "10px",
+              border: "1px solid #EAEAEA",
+              mx: "2px",
+              width: "400px",
+              "&: hover": {
+                bgcolor: "#00262b",
+                color: "#fff",
+              },
+            }}
+          >
+            Next <ArrowForwardIosIcon sx={{ fontSize: "0.8rem", ml: 1 }} />
+          </Button>
         </Box>
       </Box>
     </Container>
