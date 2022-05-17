@@ -7,8 +7,14 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SaveIcon from "@mui/icons-material/Save";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import { ModuleContent } from "datatypes/coursetypes";
 
-const LessonHtml = () => {
+interface Props {
+  lesson: ModuleContent;
+}
+
+const LessonHtml = ({ lesson }: Props) => {
+  console.log("From Lesson Html component", lesson);
   return (
     <Container maxWidth="xl" sx={{ my: 2 }}>
       {/* Breadcrumb links */}

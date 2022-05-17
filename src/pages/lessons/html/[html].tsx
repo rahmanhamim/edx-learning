@@ -1,9 +1,14 @@
 import LessonHtml from "components/lessons/LessonHtml";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
+import { ModuleContent } from "../../../datatypes/coursetypes";
 
-const HtmlLesson = () => {
-  return <LessonHtml />;
+interface Props {
+  lesson: ModuleContent;
+}
+
+const HtmlLesson = ({ lesson }: Props) => {
+  return <LessonHtml lesson={lesson} />;
 };
 
 export default HtmlLesson;
@@ -12,33 +17,52 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch("https://jsonkeeper.com/b/KDCQ");
   const courses = await res.json();
 
-  // const paths = courses.map((blog: any) => ({
-  //   params: { details: blog.id },
-  // }));
+  const htmlCourse: any = [];
 
-  const data = ["1", "2"];
-
-  const paths = data.map((id) => {
-    return {
-      params: { html: id },
-    };
+  courses[0]?.modules?.forEach((course: any) => {
+    course?.moduleContent?.forEach((lesson: any) => {
+      if (lesson?.type === "html") {
+        htmlCourse?.push(lesson);
+      }
+    });
   });
+
+  const paths = htmlCourse.map((lesson: any) => ({
+    params: { html: lesson.id },
+  }));
+
+  // const data = ["1", "2"];
+  // const paths = data.map((id) => {
+  //   return {
+  //     params: { html: id },
+  //   };
+  // });
 
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  // const res = await fetch("https://jsonkeeper.com/b/KDCQ");
-  // const courses = await res.json();
+  const res = await fetch("https://jsonkeeper.com/b/KDCQ");
+  const courses = await res.json();
 
-  // const course = courses.find(
-  //   (blog: any) => blog.id.toString() === context.params?.details
-  // );
+  const htmlCourse: any = [];
 
-  const id = context.params?.html;
-  console.log(id);
+  courses[0]?.modules?.forEach((course: any) => {
+    course?.moduleContent?.forEach((lesson: any) => {
+      if (lesson?.type === "html") {
+        htmlCourse?.push(lesson);
+      }
+    });
+  });
 
-  const course = { hello: "jello" };
+  const courseData = htmlCourse.find(
+    (lesson: any) => lesson.id.toString() === context.params?.html
+  );
 
-  return { props: { course } };
+  // const id = context.params?.html;
+  // console.log(id);
+
+  const lesson = courseData;
+
+  return { props: { lesson } };
 };

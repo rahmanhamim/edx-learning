@@ -44,7 +44,16 @@ const CourseMainModulesList = () => {
     (state: State) => state.courses.courseData[0]
   );
 
-  console.log(course.modules);
+  // const demoCourse: any = [];
+
+  // course.modules.forEach((course) => {
+  //   course.moduleContent.forEach((lesson) => {
+  //     if (lesson.type === "html") {
+  //       demoCourse.push(lesson);
+  //     }
+  //   });
+  // });
+  // console.log(demoCourse);
 
   return (
     <Box sx={{ my: 2 }}>
@@ -133,7 +142,7 @@ const CourseMainModulesList = () => {
             >
               <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
               {lessons.type === "html" && (
-                <Link href="/lessons/html/1">
+                <Link href={`/lessons/html/${lessons.id}`}>
                   <a style={{ color: "#00688D" }}>{lessons.title}</a>
                 </Link>
               )}
