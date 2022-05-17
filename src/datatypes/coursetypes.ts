@@ -24,4 +24,5 @@ export interface ModuleContent {
   id: string;
   title: string;
   content: string;
+  moduleTitle?: string;
 }

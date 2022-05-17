@@ -50,17 +50,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
   courses[0]?.modules?.forEach((course: any) => {
     course?.moduleContent?.forEach((lesson: any) => {
       if (lesson?.type === "html") {
+        lesson.moduleTitle = course.title;
         htmlCourse?.push(lesson);
       }
     });
   });
 
+  // console.log(courses[0]?.modules[0].title);
+  // console.log(htmlCourse);
+
   const courseData = htmlCourse.find(
     (lesson: any) => lesson.id.toString() === context.params?.html
   );
-
-  // const id = context.params?.html;
-  // console.log(id);
 
   const lesson = courseData;
 
