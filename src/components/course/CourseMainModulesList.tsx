@@ -12,6 +12,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Course } from "datatypes/coursetypes";
 import { useSelector } from "react-redux";
 import { State } from "redux/reducers";
+import Link from "next/link";
 
 const CustomExpandIcon = () => {
   return (
@@ -81,7 +82,9 @@ const CourseMainModulesList = () => {
             }}
           >
             <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
-            <Typography sx={{ color: "#00688D" }}>{about.title}</Typography>
+            <Link href="/">
+              <a style={{ color: "#00688D" }}>{about.title}</a>
+            </Link>
           </AccordionDetails>
         ))}
       </Accordion>
@@ -129,7 +132,9 @@ const CourseMainModulesList = () => {
               }}
             >
               <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
-              <Typography sx={{ color: "#00688D" }}>{lessons.title}</Typography>
+              <Link href="/">
+                <a style={{ color: "#00688D" }}>{lessons.title}</a>
+              </Link>
             </AccordionDetails>
           ))}
         </Accordion>
