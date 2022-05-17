@@ -189,7 +189,7 @@ const NavigationBar = () => {
               className="navlinks"
               style={{
                 borderBottom: `${
-                  router.pathname === "/" ? "4px solid #00262B" : ""
+                  router.pathname === "/" ? "4px solid #00262B" : "transparent"
                 }`,
               }}
             >
@@ -201,7 +201,9 @@ const NavigationBar = () => {
               className="navlinks"
               style={{
                 borderBottom: `${
-                  router.pathname === "/progress" ? "4px solid #00262B" : ""
+                  router.pathname === "/progress"
+                    ? "4px solid #00262B"
+                    : "transparent"
                 }`,
               }}
             >
@@ -213,7 +215,9 @@ const NavigationBar = () => {
               className="navlinks"
               style={{
                 borderBottom: `${
-                  router.pathname === "/dates" ? "4px solid #00262B" : ""
+                  router.pathname === "/dates"
+                    ? "4px solid #00262B"
+                    : "transparent"
                 }`,
               }}
             >
@@ -225,7 +229,9 @@ const NavigationBar = () => {
               className="navlinks"
               style={{
                 borderBottom: `${
-                  router.pathname === "/discussion" ? "4px solid #00262B" : ""
+                  router.pathname === "/discussion"
+                    ? "4px solid #00262B"
+                    : "transparent"
                 }`,
               }}
             >

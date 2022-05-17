@@ -44,7 +44,7 @@ const CourseMainModulesList = () => {
     (state: State) => state.courses.courseData[0]
   );
 
-  console.dir(course.modules);
+  console.log(course.modules);
 
   return (
     <Box sx={{ my: 2 }}>
@@ -132,9 +132,25 @@ const CourseMainModulesList = () => {
               }}
             >
               <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
-              <Link href="/">
+              {lessons.type === "html" && (
+                <Link href="/lessons/html/1">
+                  <a style={{ color: "#00688D" }}>{lessons.title}</a>
+                </Link>
+              )}
+              {lessons.type === "video" && (
+                <Link href="/lessons/video/1">
+                  <a style={{ color: "#00688D" }}>{lessons.title}</a>
+                </Link>
+              )}
+              {lessons.type === "quiz" && (
+                <Link href="/lessons/quiz/1">
+                  <a style={{ color: "#00688D" }}>{lessons.title}</a>
+                </Link>
+              )}
+
+              {/* <Link href="/">
                 <a style={{ color: "#00688D" }}>{lessons.title}</a>
-              </Link>
+              </Link> */}
             </AccordionDetails>
           ))}
         </Accordion>
