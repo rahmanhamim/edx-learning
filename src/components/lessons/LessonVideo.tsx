@@ -11,6 +11,9 @@ import { ModuleContent } from "datatypes/coursetypes";
 import { useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import { useRouter } from "next/router";
+// import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const LessonVideo = () => {
   const lessons: ModuleContent[] = useSelector(
@@ -103,9 +106,9 @@ const LessonVideo = () => {
           </Button>
         </Box>
         {/* LESSON DATA */}
-        <Box sx={{ my: 3, width: { xs: "90%", md: "70%" }, mx: "auto" }}>
+        <Box sx={{ my: 3, width: { xs: "95%", md: "70%" }, mx: "auto" }}>
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            lesson?.title
+            {lesson.title}
           </Typography>
           <Link href="/">
             <Typography
@@ -116,21 +119,41 @@ const LessonVideo = () => {
                 "*": { fontSize: ".8rem", fontWeight: "light", mr: 1, mt: 1 },
               }}
             >
-              <BookmarkBorderRoundedIcon />
+              <Typography component="span">
+                <BookmarkBorderRoundedIcon />
+              </Typography>
               <Typography component="span">Bookmark this page</Typography>
             </Typography>
           </Link>
-
           <Box
             sx={{
-              color: "#646464",
-              my: 8,
-              "& p": { fontSize: "1.2rem" },
-              "& h3": { fontSize: "2rem", fontWeight: "500" },
-              "& li": { fontSize: "1.2rem", lineHeight: "1.5" },
+              bgcolor: "#F5F5F5",
+              p: 2,
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
-            dangerouslySetInnerHTML __html: lesson.content
+            <ReactPlayer
+              style={{ border: "1px solid red" }}
+              url={lesson.content}
+            />
+            <Box
+              sx={{
+                width: "30%",
+                pl: 1,
+                "*": {
+                  color: "#2074B5",
+                  cursor: "pointer",
+                  "&: hover": { textDecoration: "underline" },
+                },
+              }}
+            >
+              <Typography sx={{ mb: 10 }}>
+                Start of transcript. Skip to the end.
+              </Typography>
+              <Typography>Start of transcript. Skip to the end.</Typography>
+              <Typography>Start of transcript. Skip to the end.</Typography>
+            </Box>
           </Box>
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}

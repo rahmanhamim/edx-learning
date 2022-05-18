@@ -117,7 +117,9 @@ const LessonHtml = () => {
                 "*": { fontSize: ".8rem", fontWeight: "light", mr: 1, mt: 1 },
               }}
             >
-              <BookmarkBorderRoundedIcon />
+              <Typography component="span">
+                <BookmarkBorderRoundedIcon />
+              </Typography>
               <Typography component="span">Bookmark this page</Typography>
             </Typography>
           </Link>
