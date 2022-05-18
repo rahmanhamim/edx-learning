@@ -5,15 +5,15 @@ import { useDispatch } from "react-redux";
 import { ModuleContent } from "../../../datatypes/coursetypes";
 
 interface Props {
-  lesson: ModuleContent[];
+  lessons: ModuleContent[];
 }
 
-const HtmlLesson = ({ lesson }: Props) => {
+const HtmlLesson = ({ lessons }: Props) => {
   const dispatch = useDispatch();
 
   dispatch({
     type: "HTML_LESSON_FETCH",
-    payload: lesson,
+    payload: lessons,
   });
 
   return <LessonHtml />;
@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     (lesson: any) => lesson.id.toString() === context.params?.html
   );
 
-  const lesson = htmlCourse;
+  const lessons = htmlCourse;
 
-  return { props: { lesson } };
+  return { props: { lessons } };
 };
