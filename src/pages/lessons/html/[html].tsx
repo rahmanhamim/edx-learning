@@ -1,20 +1,28 @@
 import LessonHtml from "components/lessons/LessonHtml";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { ModuleContent } from "../../../datatypes/coursetypes";
 
 interface Props {
-  lesson: ModuleContent;
+  lesson: ModuleContent[];
 }
 
 const HtmlLesson = ({ lesson }: Props) => {
-  return <LessonHtml lesson={lesson} />;
+  const dispatch = useDispatch();
+
+  dispatch({
+    type: "HTML_LESSON_FETCH",
+    payload: lesson,
+  });
+
+  return <LessonHtml />;
 };
 
 export default HtmlLesson;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch("https://jsonkeeper.com/b/KDCQ");
+  const res = await fetch("https://jsonkeeper.com/b/EIRB");
   const courses = await res.json();
 
   const htmlCourse: any = [];
@@ -31,18 +39,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { html: lesson.id },
   }));
 
-  // const data = ["1", "2"];
-  // const paths = data.map((id) => {
-  //   return {
-  //     params: { html: id },
-  //   };
-  // });
-
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://jsonkeeper.com/b/KDCQ");
+  const res = await fetch("https://jsonkeeper.com/b/EIRB");
   const courses = await res.json();
 
   const htmlCourse: any = [];
@@ -56,14 +57,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
     });
   });
 
-  // console.log(courses[0]?.modules[0].title);
-  // console.log(htmlCourse);
-
   const courseData = htmlCourse.find(
     (lesson: any) => lesson.id.toString() === context.params?.html
   );
 
-  const lesson = courseData;
+  const lesson = htmlCourse;
 
   return { props: { lesson } };
 };

@@ -44,17 +44,6 @@ const CourseMainModulesList = () => {
     (state: State) => state.courses.courseData[0]
   );
 
-  // const demoCourse: any = [];
-
-  // course.modules.forEach((course) => {
-  //   course.moduleContent.forEach((lesson) => {
-  //     if (lesson.type === "html") {
-  //       demoCourse.push(lesson);
-  //     }
-  //   });
-  // });
-  // console.log(demoCourse);
-
   return (
     <Box sx={{ my: 2 }}>
       <Accordion

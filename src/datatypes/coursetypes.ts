@@ -25,4 +25,5 @@ export interface ModuleContent {
   title: string;
   content: string;
   moduleTitle?: string;
+  isCompleted: boolean;
 }

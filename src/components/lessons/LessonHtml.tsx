@@ -8,13 +8,28 @@ import SaveIcon from "@mui/icons-material/Save";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import { ModuleContent } from "datatypes/coursetypes";
+import { useSelector } from "react-redux";
+import { State } from "redux/reducers";
+import { useRouter } from "next/router";
 
-interface Props {
-  lesson: ModuleContent;
-}
+const LessonHtml = () => {
+  const lessons: ModuleContent[] = useSelector(
+    (state: State) => state.courses.htmlLessons
+  );
 
-const LessonHtml = ({ lesson }: Props) => {
-  console.log("From Lesson Html component", lesson);
+  const router = useRouter();
+  const routeID = router.query.html;
+
+  const lesson = lessons.find(
+    (lesson: any) => lesson.id.toString() === routeID
+  );
+
+  console.log(lesson);
+
+  if (!lesson) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <Container maxWidth="xl" sx={{ my: 2 }}>
       {/* Breadcrumb links */}
@@ -44,7 +59,7 @@ const LessonHtml = ({ lesson }: Props) => {
               "&: hover": { textDecoration: "underline" },
             }}
           >
-            Module 1 - Python Basics /{" "}
+            {lesson?.moduleTitle} /{" "}
           </Typography>
         </Link>
         <Link href="/">
@@ -55,7 +70,7 @@ const LessonHtml = ({ lesson }: Props) => {
               "&: hover": { textDecoration: "underline" },
             }}
           >
-            Module Introduction and Learning Objectives
+            {lesson?.title}
           </Typography>
         </Link>
       </Box>
@@ -91,7 +106,7 @@ const LessonHtml = ({ lesson }: Props) => {
         {/* LESSON DATA */}
         <Box sx={{ my: 3, width: { xs: "90%", md: "70%" }, mx: "auto" }}>
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            Module Introduction and Learning Objectives
+            {lesson?.title}
           </Typography>
           <Link href="/">
             <Typography
@@ -106,55 +121,17 @@ const LessonHtml = ({ lesson }: Props) => {
               <Typography component="span">Bookmark this page</Typography>
             </Typography>
           </Link>
-          <Typography
-            sx={{
-              mt: 5,
-              mb: 4,
-              color: "#646464",
-              lineHeight: "1.6",
-              fontSize: "1.05rem",
-            }}
-          >
-            This module teaches the basics of Python and begins by exploring
-            some of the different data types such as integers, real numbers, and
-            strings. Continue with the module and learn how to use expressions
-            in mathematical operations, store values in variables, and the many
-            different ways to manipulate strings.
-          </Typography>
-          <Typography
-            variant="h5"
-            sx={{ color: "#646464", fontSize: "1.7rem", fontWeight: "100" }}
-          >
-            LEARNING OBJECTIVES
-          </Typography>
-          <Typography
-            sx={{
-              my: 3,
-              color: "#646464",
-              lineHeight: "1.6",
-              fontSize: "1.05rem",
-            }}
-          >
-            In this lesson, you will learn the basics of Python and you will
-            write your first Python program:
-          </Typography>
-          <Typography
-            component="ul"
+
+          <Box
             sx={{
               color: "#646464",
-              mb: 6,
-              fontSize: "1.05rem",
+              my: 8,
+              "& p": { fontSize: "1.2rem" },
+              "& h3": { fontSize: "2rem", fontWeight: "500" },
+              "& li": { fontSize: "1.2rem", lineHeight: "1.5" },
             }}
-          >
-            <Typography component="li">
-              Demonstrate an understanding of types in python by
-              converting/casting data types: strings, floats, integers.
-            </Typography>
-            <Typography component="li">
-              Interpret variables and solve expressions by applying mathematical
-              operations.
-            </Typography>
-          </Typography>
+            dangerouslySetInnerHTML={{ __html: lesson.content }}
+          ></Box>
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box
