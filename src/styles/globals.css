@@ -29,15 +29,18 @@ a {
 
 /* react player */
 
-.player-wrapper {
-  width: 100%;
-  height: auto;
-}
+/* .player-wrapper {
+} */
+
 .react-player {
-  padding-top: 56.25%;
-  position: relative;
+  width: 75% !important;
 }
 
-.react-player > div {
-  position: absolute;
+@media only screen and (max-width: 900px) {
+  .react-player {
+    width: 100% !important;
+  }
 }
+
+/* .react-player > div {
+} */

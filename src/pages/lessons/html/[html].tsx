@@ -44,6 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch("https://jsonkeeper.com/b/EIRB");
+  //
   const courses = await res.json();
 
   const htmlCourse: any = [];

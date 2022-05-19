@@ -125,36 +125,52 @@ const LessonVideo = () => {
               <Typography component="span">Bookmark this page</Typography>
             </Typography>
           </Link>
+          {/* Video content here */}
           <Box
             sx={{
+              minHeight: "420px",
               bgcolor: "#F5F5F5",
               p: 2,
               display: "flex",
               justifyContent: "space-between",
+              flexDirection: { xs: "column", md: "row" },
             }}
           >
             <ReactPlayer
-              style={{ border: "1px solid red" }}
+              className="react-player"
+              controls={true}
               url={lesson.content}
             />
             <Box
               sx={{
-                width: "30%",
+                width: { xs: "100%", md: "25%" },
                 pl: 1,
                 "*": {
                   color: "#2074B5",
                   cursor: "pointer",
+                  fontSize: ".9rem",
                   "&: hover": { textDecoration: "underline" },
                 },
               }}
             >
-              <Typography sx={{ mb: 10 }}>
-                Start of transcript. Skip to the end.
-              </Typography>
-              <Typography>Start of transcript. Skip to the end.</Typography>
-              <Typography>Start of transcript. Skip to the end.</Typography>
+              <Box
+                sx={{
+                  overflowY: "scroll",
+                  height: { md: "300px", xs: "150px" },
+                }}
+              >
+                {[1, 2, 4, 5, 6, 7, 8, 9, 10, 11].map((val, idx) => (
+                  <Typography key={idx} sx={{ my: 2, fontSize: ".9rem" }}>
+                    Start of transcript. Skip to the end.
+                  </Typography>
+                ))}
+              </Box>
             </Box>
           </Box>
+          {/* Video content  end here */}
+          {/* Video navigation content */}
+
+          {/* Video navigation content  end*/}
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box
