@@ -6,6 +6,28 @@ import FlagIcon from "@mui/icons-material/Flag";
 
 const CourseAsideGoalCard = () => {
   const Styles = {
+    goalCardsContainer: {
+      boxShadow: "1px 1px 2px 1px rgba(215,215,215,.5)",
+      borderRadius: "5px",
+      p: 3,
+    },
+    goalTitleMain: {
+      color: "primary.main",
+      fontWeight: "bold",
+      fontSize: "1.1rem",
+      pt: 1,
+    },
+    goalSubtitle: {
+      color: "primary.main",
+      fontSize: "0.9rem",
+      my: 1,
+    },
+    goalCardContainer: {
+      display: "flex",
+      justifyContent: { md: "center", lg: "space-between" },
+      alignItems: "center",
+      flexWrap: "wrap",
+    },
     goalCard: {
       border: "3px solid #EAE6E5",
       borderRadius: "5px",
@@ -15,42 +37,15 @@ const CourseAsideGoalCard = () => {
     },
   };
   return (
-    <Box
-      sx={{
-        boxShadow: "1px 1px 2px 1px rgba(215,215,215,.5)",
-        borderRadius: "5px",
-        p: 3,
-      }}
-    >
-      <Typography
-        variant="h6"
-        sx={{
-          color: "primary.main",
-          fontWeight: "bold",
-          fontSize: "1.1rem",
-          pt: 1,
-        }}
-      >
+    <Box sx={Styles.goalCardsContainer}>
+      <Typography variant="h6" sx={Styles.goalTitleMain}>
         Set a weekly learning goal
       </Typography>
-      <Typography
-        sx={{
-          color: "primary.main",
-          fontSize: "0.9rem",
-          my: 1,
-        }}
-      >
+      <Typography sx={Styles.goalSubtitle}>
         Setting a goal motivates you to finish the course. You can always change
         it later.
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: { md: "center", lg: "space-between" },
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
+      <Box sx={Styles.goalCardContainer}>
         <Box sx={Styles.goalCard}>
           <Typography>
             <EmojiFlagsIcon />

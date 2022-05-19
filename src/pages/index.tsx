@@ -8,12 +8,6 @@ import { Course } from "datatypes/coursetypes";
 const Home: NextPage<{ courses: Course[] }> = (courses) => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   fetch("/courseData.json")
-  //     .then((res) => res.json())
-  //     .then((data) => setCourses(data));
-  // }, []);
-
   useEffect(() => {
     dispatch({
       type: "COURSE_FETCH",

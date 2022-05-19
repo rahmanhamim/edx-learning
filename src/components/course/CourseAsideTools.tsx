@@ -6,6 +6,22 @@ import SecurityUpdateSharpIcon from "@mui/icons-material/SecurityUpdateSharp";
 import ExploreSharpIcon from "@mui/icons-material/ExploreSharp";
 
 const CourseAsideTools = () => {
+  const Styles = {
+    toolsContainer: {
+      "*": {
+        color: "#00688D",
+        mr: 1,
+        my: "2px",
+        fontWeight: "light",
+        fontSize: "0.9rem",
+      },
+    },
+    toolsItem: {
+      display: "flex",
+      alignItems: "center",
+    },
+  };
+
   return (
     <Box
       sx={{
@@ -15,29 +31,19 @@ const CourseAsideTools = () => {
       <Typography variant="h6" sx={{ fontWeight: "bold" }}>
         Course Tools
       </Typography>
-      <Box
-        sx={{
-          "*": {
-            color: "#00688D",
-            mr: 1,
-            my: "2px",
-            fontWeight: "light",
-            fontSize: "0.9rem",
-          },
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={Styles.toolsContainer}>
+        <Box sx={Styles.toolsItem}>
           <BookmarkIcon /> <Typography component="span">Bookmarks</Typography>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={Styles.toolsItem}>
           <InfoIcon />
           <Typography component="span">Financial Assistance</Typography>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={Styles.toolsItem}>
           <SecurityUpdateSharpIcon />
           <Typography component="span">Updates</Typography>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={Styles.toolsItem}>
           <ExploreSharpIcon />
           <Typography component="span">Launch tour</Typography>
         </Box>

@@ -44,76 +44,82 @@ const CourseMainModulesList = () => {
     (state: State) => state.courses.courseData[0]
   );
 
+  const Styles = {
+    aboutCourseAccordionContainer: {
+      borderRadius: "0px !important",
+      boxShadow: "0",
+      border: ".5px solid #DFDFDF",
+    },
+    aboutCourseSummary: {
+      py: 1,
+      border: ".5px solid #DFDFDF",
+      "*": {
+        transform: "translateY(0%) rotate(0deg) important",
+      },
+    },
+    circleIcon: {
+      mr: 2,
+      color: "#8F8F8F",
+    },
+    accordionDetails: {
+      display: "flex",
+      py: 2,
+      borderBottom: "1px solid #dfdfdf",
+      mx: 2,
+    },
+    moduleAccordionContainer: {
+      borderRadius: "0px !important",
+      boxShadow: "0",
+      border: ".5px solid #DFDFDF",
+      my: 1,
+    },
+    moduleAccordionSummary: {
+      py: 1,
+      border: ".5px solid #DFDFDF",
+      "*": {
+        transform: "translateY(0%) rotate(0deg) important",
+      },
+    },
+    moduleAccordionDetails: {
+      display: "flex",
+      py: 2,
+      borderBottom: "1px solid #dfdfdf",
+      mx: 2,
+    },
+  };
+
   return (
     <Box sx={{ my: 2 }}>
-      <Accordion
-        sx={{
-          borderRadius: "0px !important",
-          boxShadow: "0",
-          border: ".5px solid #DFDFDF",
-        }}
-      >
+      <Accordion sx={Styles.aboutCourseAccordionContainer}>
         <AccordionSummary
           expandIcon={<CustomExpandIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
-          sx={{
-            py: 1,
-            border: ".5px solid #DFDFDF",
-            "*": {
-              transform: "translateY(0%) rotate(0deg) important",
-            },
-          }}
+          sx={Styles.aboutCourseSummary}
         >
-          <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+          <CheckCircleOutlineIcon sx={Styles.circleIcon} />
           <Typography sx={{ fontWeight: "bold" }}>About This Course</Typography>
         </AccordionSummary>
         {/* about Accordion */}
         {course.aboutCourse.map((about) => (
-          <AccordionDetails
-            key={about.id}
-            sx={{
-              display: "flex",
-              py: 2,
-              borderBottom: "1px solid #dfdfdf",
-              mx: 2,
-            }}
-          >
-            <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+          <AccordionDetails key={about.id} sx={Styles.accordionDetails}>
+            <CheckCircleOutlineIcon sx={Styles.circleIcon} />
             <Link href="/">
               <a style={{ color: "#00688D" }}>{about.title}</a>
             </Link>
           </AccordionDetails>
         ))}
       </Accordion>
-      {/*  ---------
-      
-      
-      ---------------
-      
-      
-      ---------   */}
+      {/*   --------------------- 
+      Module Accordion Starts Here 
+      ---------------------------- */}
       {course.modules.map((module) => (
-        <Accordion
-          key={module.title}
-          sx={{
-            borderRadius: "0px !important",
-            boxShadow: "0",
-            border: ".5px solid #DFDFDF",
-            my: 1,
-          }}
-        >
+        <Accordion key={module.title} sx={Styles.moduleAccordionContainer}>
           <AccordionSummary
             expandIcon={<CustomExpandIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
-            sx={{
-              py: 1,
-              border: ".5px solid #DFDFDF",
-              "*": {
-                transform: "translateY(0%) rotate(0deg) important",
-              },
-            }}
+            sx={Styles.moduleAccordionSummary}
           >
             <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
             <Typography sx={{ fontWeight: "bold" }}>{module?.title}</Typography>
@@ -122,12 +128,7 @@ const CourseMainModulesList = () => {
           {module.moduleContent.map((lessons) => (
             <AccordionDetails
               key={lessons.id}
-              sx={{
-                display: "flex",
-                py: 2,
-                borderBottom: "1px solid #dfdfdf",
-                mx: 2,
-              }}
+              sx={Styles.moduleAccordionDetails}
             >
               <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
               {lessons.type === "html" && (

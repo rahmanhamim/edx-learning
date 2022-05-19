@@ -3,28 +3,49 @@ import { Box, Button, Typography } from "@mui/material";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 
 const CourseAsideDiscount = () => {
+  const Styles = {
+    discountContainerBox: { border: "2px solid #DFDFDF", py: 2 },
+    discountTitle: {
+      fontWeight: "bold",
+      px: 2,
+    },
+    discountTime: {
+      fontWeight: "bold",
+      bgcolor: "#FCF1F4",
+      px: 2,
+      py: 1,
+      my: 1,
+    },
+    discountPointContainer: {
+      px: 2,
+      py: 1,
+      "*": {
+        display: "flex",
+        alignItems: "start",
+        mr: 1,
+        my: "3px",
+      },
+    },
+    upgradeBtn: {
+      width: "100%",
+      fontWeight: "bold",
+      fontSize: "1rem",
+    },
+    bottomDivider: {
+      borderBottom: "1px solid #DFDFDF",
+      mt: 2,
+      height: "2px",
+      width: "100%",
+    },
+  };
+
   return (
-    <Box sx={{ border: "2px solid #DFDFDF", py: 2 }}>
-      <Typography sx={{ fontWeight: "bold", px: 2 }}>
+    <Box sx={Styles.discountContainerBox}>
+      <Typography sx={Styles.discountTitle}>
         15% First-Time Learner Discount
       </Typography>
-      <Typography
-        sx={{ fontWeight: "bold", bgcolor: "#FCF1F4", px: 2, py: 1, my: 1 }}
-      >
-        6 days left
-      </Typography>
-      <Box
-        sx={{
-          px: 2,
-          py: 1,
-          "*": {
-            display: "flex",
-            alignItems: "start",
-            mr: 1,
-            my: "3px",
-          },
-        }}
-      >
+      <Typography sx={Styles.discountTime}>6 days left</Typography>
+      <Box sx={Styles.discountPointContainer}>
         <Typography>
           <CheckSharpIcon />
           <Typography component="span">
@@ -51,21 +72,11 @@ const CourseAsideDiscount = () => {
         </Typography>
       </Box>
       <Typography sx={{ mx: 2 }}>
-        <Button
-          variant="contained"
-          sx={{ width: "100%", fontWeight: "bold", fontSize: "1rem" }}
-        >
+        <Button variant="contained" sx={Styles.upgradeBtn}>
           Upgrade for $84.15 ($̶9̶9)
         </Button>
       </Typography>
-      <Box
-        sx={{
-          borderBottom: "1px solid #DFDFDF",
-          mt: 2,
-          height: "2px",
-          width: "100%",
-        }}
-      ></Box>
+      <Box sx={Styles.bottomDivider}></Box>
       <Typography sx={{ textAlign: "center", pt: 2 }}>
         Use code{" "}
         <Typography component="span" sx={{ fontWeight: "bold" }}>

@@ -4,12 +4,32 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Link from "next/link";
 
 const CourseAsideDates = () => {
+  const Styles = {
+    importantDateText: {
+      fontWeight: "bold",
+      fontSize: "1.1rem",
+      my: 2,
+    },
+    dateText: {
+      fontWeight: "bold",
+      fontSize: ".9rem",
+    },
+    eventTextLink: {
+      fontSize: ".9rem",
+      fontWeight: "bold",
+      color: "#00688C",
+      my: "3px",
+    },
+    eventText: {
+      fontSize: ".9rem",
+      fontWeight: "bold",
+      my: "3px",
+    },
+  };
+
   return (
     <Box sx={{ mb: 20 }}>
-      <Typography
-        variant="h6"
-        sx={{ fontWeight: "bold", fontSize: "1.1rem", my: 2 }}
-      >
+      <Typography variant="h6" sx={Styles.importantDateText}>
         Important dates
       </Typography>
       {/* Date Content 1 */}
@@ -22,9 +42,7 @@ const CourseAsideDates = () => {
           </Grid>
           <Grid item xs={11}>
             <Box>
-              <Typography sx={{ fontWeight: "bold", fontSize: ".9rem" }}>
-                Mon, May 16, 2022
-              </Typography>
+              <Typography sx={Styles.dateText}>Mon, May 16, 2022</Typography>
             </Box>
           </Grid>
         </Grid>
@@ -32,14 +50,7 @@ const CourseAsideDates = () => {
           <Grid item xs={1}></Grid>
           <Grid item xs={11}>
             <Box>
-              <Typography
-                sx={{
-                  fontSize: ".9rem",
-                  fontWeight: "bold",
-                  color: "#00688C",
-                  my: "3px",
-                }}
-              >
+              <Typography sx={Styles.eventTextLink}>
                 Graded Quiz: Python Basics
               </Typography>
             </Box>
@@ -56,9 +67,7 @@ const CourseAsideDates = () => {
           </Grid>
           <Grid item xs={8}>
             <Box>
-              <Typography sx={{ fontWeight: "bold", fontSize: ".9rem" }}>
-                Wed, Jun 8, 2022
-              </Typography>
+              <Typography sx={Styles.dateText}>Wed, Jun 8, 2022</Typography>
             </Box>
           </Grid>
         </Grid>
@@ -66,13 +75,7 @@ const CourseAsideDates = () => {
           <Grid item xs={1}></Grid>
           <Grid item xs={11}>
             <Box>
-              <Typography
-                sx={{
-                  fontSize: ".9rem",
-                  fontWeight: "bold",
-                  my: "3px",
-                }}
-              >
+              <Typography sx={Styles.eventText}>
                 Audit Access Expires
               </Typography>
               <Typography
@@ -98,9 +101,7 @@ const CourseAsideDates = () => {
             </Grid>
             <Grid item xs={11}>
               <Box>
-                <Typography sx={{ fontWeight: "bold", fontSize: ".9rem" }}>
-                  Thu, Dec 22, 2022
-                </Typography>
+                <Typography sx={Styles.dateText}>Thu, Dec 22, 2022</Typography>
               </Box>
             </Grid>
           </Grid>
@@ -108,13 +109,7 @@ const CourseAsideDates = () => {
             <Grid item xs={1}></Grid>
             <Grid item xs={11}>
               <Box>
-                <Typography
-                  sx={{
-                    fontSize: ".9rem",
-                    fontWeight: "bold",
-                    my: "3px",
-                  }}
-                >
+                <Typography sx={Styles.eventText}>
                   Verification Upgrade Deadline
                 </Typography>
                 <Typography
@@ -143,9 +138,7 @@ const CourseAsideDates = () => {
             </Grid>
             <Grid item xs={11}>
               <Box>
-                <Typography sx={{ fontWeight: "bold", fontSize: ".9rem" }}>
-                  Sat, Dec 31, 2022
-                </Typography>
+                <Typography sx={Styles.dateText}>Sat, Dec 31, 2022</Typography>
               </Box>
             </Grid>
           </Grid>
@@ -153,15 +146,7 @@ const CourseAsideDates = () => {
             <Grid item xs={1}></Grid>
             <Grid item xs={11}>
               <Box>
-                <Typography
-                  sx={{
-                    fontSize: ".9rem",
-                    fontWeight: "bold",
-                    my: "3px",
-                  }}
-                >
-                  Course ends
-                </Typography>
+                <Typography sx={Styles.eventText}>Course ends</Typography>
                 <Typography
                   sx={{
                     fontSize: ".8rem",
@@ -204,7 +189,6 @@ const CourseAsideDates = () => {
             style={{
               color: "#00688C",
               textDecoration: "underline",
-
               fontSize: ".8rem",
             }}
           >
