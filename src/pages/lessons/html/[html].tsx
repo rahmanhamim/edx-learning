@@ -21,22 +21,18 @@ const HtmlLesson = ({ lessons }: Props) => {
 
 export default HtmlLesson;
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
   const res = await fetch("https://jsonkeeper.com/b/HDDH");
   const courses = await res.json();
 
   const htmlCourse: any = [];
 
-  courses[0]?.modules?.forEach((course: any) => {
-    course?.moduleContent?.forEach((lesson: any) => {
-      if (lesson?.type === "html") {
-        htmlCourse?.push(lesson);
-      }
-    });
-  });
+  const courseData = htmlCourse.find(
+    (lesson: any) => lesson.id.toString() === context.defaultLocale
+  );
 
   const paths = htmlCourse.map((lesson: any) => ({
-    params: { html: lesson.id },
+    params: { html: courseData.id },
   }));
 
   return { paths, fallback: false };
@@ -57,10 +53,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     });
   });
-
-  const courseData = htmlCourse.find(
-    (lesson: any) => lesson.id.toString() === context.params?.html
-  );
 
   const lessons = htmlCourse;
 
