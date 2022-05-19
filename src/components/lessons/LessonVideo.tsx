@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
@@ -106,7 +106,14 @@ const LessonVideo = () => {
           </Button>
         </Box>
         {/* LESSON DATA */}
-        <Box sx={{ my: 3, width: { xs: "95%", md: "70%" }, mx: "auto" }}>
+        <Box
+          sx={{
+            my: 6,
+            mb: 8,
+            width: { xs: "95%", md: "70%" },
+            mx: "auto",
+          }}
+        >
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
             {lesson.title}
           </Typography>
@@ -128,49 +135,97 @@ const LessonVideo = () => {
           {/* Video content here */}
           <Box
             sx={{
-              minHeight: "420px",
               bgcolor: "#F5F5F5",
-              p: 2,
-              display: "flex",
-              justifyContent: "space-between",
-              flexDirection: { xs: "column", md: "row" },
+              px: 3,
+              py: 2,
             }}
           >
-            <ReactPlayer
-              className="react-player"
-              controls={true}
-              url={lesson.content}
-            />
             <Box
               sx={{
-                width: { xs: "100%", md: "25%" },
-                pl: 1,
-                "*": {
-                  color: "#2074B5",
-                  cursor: "pointer",
-                  fontSize: ".9rem",
-                  "&: hover": { textDecoration: "underline" },
-                },
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: { xs: "column", md: "row" },
               }}
             >
+              <ReactPlayer
+                playerOptions={{ autoplay: true }}
+                className="react-player"
+                style={{
+                  width: "100%",
+                }}
+                controls={true}
+                url={lesson.content}
+              />
               <Box
                 sx={{
-                  overflowY: "scroll",
-                  height: { md: "300px", xs: "150px" },
+                  width: { xs: "100%", md: "25%" },
+                  pl: 1,
+                  "*": {
+                    color: "#2074B5",
+                    cursor: "pointer",
+                    fontSize: ".9rem",
+                  },
                 }}
               >
-                {[1, 2, 4, 5, 6, 7, 8, 9, 10, 11].map((val, idx) => (
-                  <Typography key={idx} sx={{ my: 2, fontSize: ".9rem" }}>
-                    Start of transcript. Skip to the end.
-                  </Typography>
-                ))}
+                <Box
+                  sx={{
+                    overflowY: "scroll",
+                    height: { md: "300px", xs: "150px" },
+                    mt: { xs: 3, md: "none" },
+                  }}
+                >
+                  {[1, 2, 4, 5, 6, 7, 8, 9, 10, 11].map((val, idx) => (
+                    <Typography
+                      key={idx}
+                      sx={{
+                        my: 2,
+                        fontSize: ".9rem",
+                        "&: hover": { textDecoration: "underline" },
+                      }}
+                    >
+                      Start of transcript. Skip to the end.
+                    </Typography>
+                  ))}
+                </Box>
               </Box>
             </Box>
+            {/* Video content  end here */}
+            {/* Video navigation content */}
+            <Grid container>
+              <Grid item xs={12} md={6} sx={{ my: 4 }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  Video
+                </Typography>
+                <Typography
+                  sx={{ color: "#2074B5", textDecoration: "underline" }}
+                >
+                  Download Video file
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6} sx={{ my: 4 }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  Transcripts
+                </Typography>
+                <Typography
+                  sx={{ color: "#2074B5", textDecoration: "underline" }}
+                >
+                  Download SubRip (.srt) file
+                </Typography>
+                <Typography
+                  sx={{ color: "#2074B5", textDecoration: "underline" }}
+                >
+                  Download Text (.txt) file
+                </Typography>
+              </Grid>
+            </Grid>
+            {/* Video navigation content  end*/}
           </Box>
-          {/* Video content  end here */}
-          {/* Video navigation content */}
-
-          {/* Video navigation content  end*/}
+          <Typography sx={{ my: 2 }}>
+            In the video at 1:32 the line says: &#39;Notice how the last index
+            is one larger than the length of the tuple.&#39; The line should be
+            read as &#39;Notice how the last index is one larger than the last
+            index of the tuple.&#39;
+          </Typography>
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box

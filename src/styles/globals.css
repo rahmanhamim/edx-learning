@@ -29,11 +29,9 @@ a {
 
 /* react player */
 
-/* .player-wrapper {
-} */
-
 .react-player {
   width: 75% !important;
+  background-color: #000000;
 }
 
 @media only screen and (max-width: 900px) {
