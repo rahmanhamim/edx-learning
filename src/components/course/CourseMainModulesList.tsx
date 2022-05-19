@@ -100,7 +100,9 @@ const CourseMainModulesList = () => {
           <CheckCircleOutlineIcon sx={Styles.circleIcon} />
           <Typography sx={{ fontWeight: "bold" }}>About This Course</Typography>
         </AccordionSummary>
-        {/* about Accordion */}
+        {/* --------------------- 
+        About Accordion Starts Here 
+        ------------------------ */}
         {course.aboutCourse.map((about) => (
           <AccordionDetails key={about.id} sx={Styles.accordionDetails}>
             <CheckCircleOutlineIcon sx={Styles.circleIcon} />

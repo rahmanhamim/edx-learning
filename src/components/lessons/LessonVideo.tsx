@@ -22,7 +22,6 @@ const LessonVideo = () => {
 
   const router = useRouter();
   const routeID = router.query.video;
-  console.log(router);
 
   const lesson = lessons.find(
     (lesson: any) => lesson.id.toString() === routeID

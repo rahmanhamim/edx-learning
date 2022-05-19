@@ -12,7 +12,6 @@ interface Props {
 }
 
 const QuizCard = ({ quizData }: Props) => {
-  console.log(quizData, "from card");
   return (
     <FormControl sx={{ width: "100%" }}>
       {/* <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel> */}

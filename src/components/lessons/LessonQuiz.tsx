@@ -20,9 +20,7 @@ export interface QuizData {
 }
 
 const LessonQuiz = ({ quizData }: Props) => {
-  const submitHandle = () => {
-    console.log("hello quiz");
-  };
+  const submitHandle = () => {};
 
   return (
     <Container maxWidth="xl" sx={{ my: 2 }}>
