@@ -16,19 +16,15 @@ const VideoLesson = ({ lessons }: any) => {
 
 export default VideoLesson;
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
   const res = await fetch("https://jsonkeeper.com/b/HDDH");
   const courses = await res.json();
 
   const videoCourse: any = [];
 
-  courses[0]?.modules?.forEach((course: any) => {
-    course?.moduleContent?.forEach((lesson: any) => {
-      if (lesson?.type === "video") {
-        videoCourse?.push(lesson);
-      }
-    });
-  });
+  const courseData = videoCourse.find(
+    (lesson: any) => lesson.id.toString() === context
+  );
 
   const paths = videoCourse.map((lesson: any) => ({
     params: { video: lesson.id },
@@ -52,9 +48,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
     });
   });
 
-  // const courseData = videoCourse.find(
-  //   (lesson: any) => lesson.id.toString() === context.params?.html
-  // );
+  courses[0]?.modules?.forEach((course: any) => {
+    course?.moduleContent?.forEach((lesson: any) => {
+      if (lesson?.type === "video") {
+        videoCourse?.push(lesson);
+      }
+    });
+  });
 
   const lessons = videoCourse;
 
