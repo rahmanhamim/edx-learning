@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import NavigationBar from "components/shared/navigationbar/NavigationBar";
 import Footer from "components/shared/footer/Footer";
 import { wrapper } from "redux/store";
+import NextNProgress from "nextjs-progressbar";
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <NavigationBar />
+      <NextNProgress
+        color="#00688C"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={2}
+        showOnShallow={true}
+      />
       <Component {...pageProps} />
       <Footer />
     </ThemeProvider>

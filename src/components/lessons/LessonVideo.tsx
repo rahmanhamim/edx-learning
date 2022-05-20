@@ -147,7 +147,6 @@ const LessonVideo = () => {
               }}
             >
               <ReactPlayer
-                playerOptions={{ autoplay: true }}
                 className="react-player"
                 style={{
                   width: "100%",

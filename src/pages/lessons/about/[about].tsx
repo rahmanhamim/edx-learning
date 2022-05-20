@@ -1,7 +1,56 @@
+import LessonAbout from "components/lessons/LessonAbout";
+import { AboutCourse } from "datatypes/coursetypes";
+import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
+import { useDispatch } from "react-redux";
 
-const AboutPage = () => {
-  return <div>This is about</div>;
+interface Props {
+  lessons: AboutCourse[];
+}
+
+const AboutPage = ({ lessons }: Props) => {
+  const dispatch = useDispatch();
+  dispatch({
+    type: "ABOUT_LESSON_FETCH",
+    payload: lessons,
+  });
+
+  return <LessonAbout />;
 };
 
 export default AboutPage;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch("https://jsonkeeper.com/b/HDDH");
+  const courses = await res.json();
+
+  const aboutCourse: any = [];
+
+  courses[0]?.aboutCourse?.forEach((elem: any) => {
+    aboutCourse.push(elem);
+  });
+
+  console.log(aboutCourse);
+
+  const paths = aboutCourse.map((lesson: any) => ({
+    params: { about: lesson.id },
+  }));
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const res = await fetch("https://jsonkeeper.com/b/HDDH");
+  //
+  const courses = await res.json();
+
+  const aboutCourse: any = [];
+
+  courses[0]?.aboutCourse?.forEach((elem: any) => {
+    elem.moduleTitle = elem.title;
+    aboutCourse.push(elem);
+  });
+
+  const lessons = aboutCourse;
+
+  return { props: { lessons } };
+};

@@ -52,10 +52,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     });
   });
 
-  // const courseData = videoCourse.find(
-  //   (lesson: any) => lesson.id.toString() === context.params?.html
-  // );
-
   const lessons = videoCourse;
 
   return { props: { lessons } };

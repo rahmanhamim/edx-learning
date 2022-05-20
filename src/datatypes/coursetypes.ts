@@ -11,6 +11,7 @@ export interface AboutCourse {
   title: string;
   textContent: string;
   links: string[];
+  moduleTitle?: string;
 }
 
 export interface Module {
