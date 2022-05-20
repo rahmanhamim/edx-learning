@@ -9,6 +9,7 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import QuizCard from "./QuizCard";
 import LessonBreadcrumbs from "./LessonBreadcrumbs";
+import QuizQuestions from "./QuizQuestions";
 
 interface Props {
   quizData: QuizData[];
@@ -18,6 +19,7 @@ export interface QuizData {
   question: string;
   choices: string[];
   answer: string;
+  explanation: string;
 }
 
 const LessonQuiz = ({ quizData }: Props) => {
@@ -107,42 +109,16 @@ const LessonQuiz = ({ quizData }: Props) => {
                 display: "flex",
                 alignItems: "center",
                 cursor: "pointer",
-                "*": { fontSize: ".8rem", fontWeight: "light", mr: 1, mt: 1 },
               }}
             >
               <Typography component="span">
-                <BookmarkBorderRoundedIcon />
+                <BookmarkBorderRoundedIcon sx={{ mt: 1, mr: 1 }} />
               </Typography>
               <Typography component="span">Bookmark this page</Typography>
             </Typography>
           </Link>
 
-          {quizData.map((question, index) => (
-            <Box key={index} sx={{ m: 5, color: "#41464B" }}>
-              <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>
-                Question {index + 1}
-              </Typography>
-              <Typography sx={{ my: 2 }}>0/0 point (ungraded)</Typography>
-              <Typography sx={{ my: 1, fontSize: "1.3rem" }}>
-                {question.question}
-              </Typography>
-              {/* ---------------------------------------- */}
-              <QuizCard quizData={quizData} />
-
-              {/* ------------------------------- */}
-              <Button
-                sx={{
-                  bgcolor: "primary.main",
-                  color: "primary.light",
-                  borderRadius: "0",
-                  px: 2,
-                  my: 3,
-                }}
-              >
-                Submit
-              </Button>
-            </Box>
-          ))}
+          <QuizQuestions quizData={quizData} />
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box sx={Styles.bottomNextPrevBtnContainer}>

@@ -72,7 +72,7 @@ const Questions = ({
                 type="radio"
                 name="answer"
                 value={choice}
-                // onChange={(e) => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
               />
               {choice}
             </label>
