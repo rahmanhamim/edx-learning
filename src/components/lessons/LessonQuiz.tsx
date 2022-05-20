@@ -16,6 +16,7 @@ interface Props {
 }
 
 export interface QuizData {
+  qid: number;
   question: string;
   choices: string[];
   answer: string;

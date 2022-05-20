@@ -8,8 +8,25 @@ interface Props {
 }
 
 const QuizQuestions = ({ quizData }: Props) => {
-  const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState<any[]>([]);
+  // console.log(quizData);
   console.log(answers);
+
+  const handleQuizSubmit = (submitId: number) => {
+    const foundQuestion = quizData.find(
+      (question) => question.qid === submitId
+    );
+    console.log("found ques", foundQuestion);
+    const userAnswer = answers.find((answer) => answer?.qid === submitId);
+
+    console.log("userAnswer", userAnswer);
+
+    if (foundQuestion?.answer === userAnswer.selected) {
+      alert("correct answer");
+    } else {
+      alert("worng answer");
+    }
+  };
 
   return (
     <>
@@ -27,6 +44,8 @@ const QuizQuestions = ({ quizData }: Props) => {
             choices={quiz.choices}
             setAnswers={setAnswers}
             question={quiz.question}
+            qid={quiz.qid}
+            answers={answers}
           />
 
           {/* ------------------------------- */}
@@ -38,6 +57,7 @@ const QuizQuestions = ({ quizData }: Props) => {
               px: 2,
               my: 3,
             }}
+            onClick={() => handleQuizSubmit(quiz.qid)}
           >
             Submit
           </Button>

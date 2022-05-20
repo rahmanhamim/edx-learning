@@ -9,14 +9,39 @@ interface Props {
   choices: string[];
   setAnswers: any;
   question: string;
+  qid: number;
+  answers: any[];
 }
 
-const QuizCard = ({ choices, setAnswers, question }: Props) => {
+const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
   const radioChanger = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAnswers((prevState: any[]) => [
-      ...prevState,
-      { question: question, selected: e.target?.value },
-    ]);
+    if (answers.length === 0) {
+      setAnswers((prevState: any[]) => [
+        ...prevState,
+        { question: question, selected: e.target?.value, qid: qid },
+      ]);
+    }
+
+    const exist = answers.find((answer) => answer.qid === qid);
+
+    const newAnswer = answers.map((ans) =>
+      ans.qid !== qid
+        ? ans
+        : { question: question, selected: e.target?.value, qid: qid }
+    );
+
+    if (exist) {
+      console.log("if it exists");
+      setAnswers(newAnswer);
+    }
+
+    if (!exist && answers.length !== 0) {
+      console.log("it doesn't exsist on array");
+      setAnswers((prevState: any[]) => [
+        ...prevState,
+        { question: question, selected: e.target?.value, qid: qid },
+      ]);
+    }
   };
 
   return (
