@@ -29,8 +29,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     aboutCourse.push(elem);
   });
 
-  console.log(aboutCourse);
-
   const paths = aboutCourse.map((lesson: any) => ({
     params: { about: lesson.id },
   }));
