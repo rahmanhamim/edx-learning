@@ -53,7 +53,10 @@ const LessonHtml = () => {
       display: "flex",
       alignItems: "center",
       cursor: "pointer",
-      "*": { fontSize: ".8rem", fontWeight: "light", mr: 1, mt: 1 },
+    },
+    bookmarkIcon: {
+      mr: 1,
+      mt: 1,
     },
     bottomNextPrevBtnContainer: {
       display: "flex",
@@ -117,12 +120,11 @@ const LessonHtml = () => {
           <Link href="/">
             <Typography sx={Styles.bookmarkBox}>
               <Typography component="span">
-                <BookmarkBorderRoundedIcon />
+                <BookmarkBorderRoundedIcon sx={Styles.bookmarkIcon} />
               </Typography>
               <Typography component="span">Bookmark this page</Typography>
             </Typography>
           </Link>
-
           <Box
             sx={{
               color: "#646464",

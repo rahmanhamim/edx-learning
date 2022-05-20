@@ -13,6 +13,7 @@ import { State } from "redux/reducers";
 import { useRouter } from "next/router";
 // import ReactPlayer from "react-player";
 import dynamic from "next/dynamic";
+import LessonBreadcrumbs from "./LessonBreadcrumbs";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const LessonVideo = () => {
@@ -27,6 +28,69 @@ const LessonVideo = () => {
     (lesson: any) => lesson.id.toString() === routeID
   );
 
+  // Styles
+  const Styles = {
+    contentContainer: {
+      border: "1px solid #EAEAEA",
+      my: 2,
+    },
+    topNextPrevContainer: {
+      display: "flex",
+      justifyContent: "space-between",
+      borderBottom: "1px solid #eaeaea",
+    },
+    topNextPrevBtn: { px: 5, py: "10px" },
+    nextPrevIcon: { fontSize: "0.8rem", mx: 1 },
+    saveBtn: {
+      bgcolor: "#EEF7E4",
+      width: "100%",
+      borderBottom: "2px solid #00262B",
+      borderRadius: "0px",
+      py: "10px",
+    },
+    lessonDataContainer: {
+      my: 3,
+      width: { xs: "90%", md: "70%" },
+      mx: "auto",
+    },
+    bookmarkBox: {
+      display: "flex",
+      alignItems: "center",
+      cursor: "pointer",
+    },
+    bookmarkIcon: {
+      mr: 1,
+      mt: 1,
+    },
+    bottomNextPrevBtnContainer: {
+      display: "flex",
+      justifyContent: "center",
+      mb: 5,
+    },
+    bottomPrevBtn: {
+      px: 5,
+      py: "10px",
+      border: "1px solid #EAEAEA",
+      mx: "2px",
+      "&: hover": {
+        bgcolor: "#454545",
+        color: "#fff",
+      },
+    },
+    bottomNextBtn: {
+      px: 5,
+      py: "10px",
+      border: "1px solid #EAEAEA",
+      mx: "2px",
+      width: "400px",
+      "&: hover": {
+        bgcolor: "#00262b",
+        color: "#fff",
+      },
+    },
+  };
+  // Styles End Here
+
   if (!lesson) {
     return <h1>Loading...</h1>;
   }
@@ -34,74 +98,22 @@ const LessonVideo = () => {
   return (
     <Container maxWidth="xl" sx={{ my: 2 }}>
       {/* Breadcrumb links */}
-      <Box sx={{ mt: 5, display: "flex", alignItems: "center" }}>
-        <Link href="/">
-          <Typography
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              cursor: "pointer",
-              "&: hover": { textDecoration: "underline" },
-            }}
-          >
-            <HomeIcon
-              sx={{
-                marginRight: "5px",
-              }}
-            />
-            Course /
-          </Typography>
-        </Link>
-        <Link href="/">
-          <Typography
-            sx={{
-              marginLeft: "10px",
-              cursor: "pointer",
-              "&: hover": { textDecoration: "underline" },
-            }}
-          >
-            {lesson?.moduleTitle} /{" "}
-          </Typography>
-        </Link>
-        <Link href="/">
-          <Typography
-            sx={{
-              marginLeft: "10px",
-              cursor: "pointer",
-              "&: hover": { textDecoration: "underline" },
-            }}
-          >
-            {lesson?.title}
-          </Typography>
-        </Link>
-      </Box>
-
+      <LessonBreadcrumbs
+        moduleTitle={lesson.moduleTitle}
+        title={lesson.title}
+      />
       <Box component="main" sx={{ border: "1px solid #EAEAEA", my: 2 }}>
         {/* NEXT PREVIOUS BUTTONS */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            borderBottom: "1px solid #eaeaea",
-          }}
-        >
-          <Button sx={{ px: 5, py: "10px" }}>
-            <ArrowBackIosIcon sx={{ fontSize: "0.8rem", mr: 1 }} /> Previous
+        <Box sx={Styles.topNextPrevContainer}>
+          <Button sx={Styles.topNextPrevBtn}>
+            <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
-          <Button
-            sx={{
-              bgcolor: "#EEF7E4",
-              width: "100%",
-              borderBottom: "2px solid #00262B",
-              borderRadius: "0px",
-              py: "10px",
-            }}
-          >
+          <Button sx={Styles.saveBtn}>
             <SaveIcon sx={{ color: "#0D7D4D" }} />
             <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
           </Button>
-          <Button sx={{ px: 5, py: "10px" }}>
-            Next <ArrowForwardIosIcon sx={{ fontSize: "0.8rem", ml: 1 }} />
+          <Button sx={Styles.topNextPrevBtn}>
+            Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
           </Button>
         </Box>
         {/* LESSON DATA */}
@@ -117,16 +129,9 @@ const LessonVideo = () => {
             {lesson.title}
           </Typography>
           <Link href="/">
-            <Typography
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                cursor: "pointer",
-                "*": { fontSize: ".8rem", fontWeight: "light", mr: 1, mt: 1 },
-              }}
-            >
+            <Typography sx={Styles.bookmarkBox}>
               <Typography component="span">
-                <BookmarkBorderRoundedIcon />
+                <BookmarkBorderRoundedIcon sx={Styles.bookmarkIcon} />
               </Typography>
               <Typography component="span">Bookmark this page</Typography>
             </Typography>
@@ -226,41 +231,12 @@ const LessonVideo = () => {
           </Typography>
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            mb: 5,
-          }}
-        >
-          <Button
-            sx={{
-              px: 5,
-              py: "10px",
-              border: "1px solid #EAEAEA",
-              mx: "2px",
-              "&: hover": {
-                bgcolor: "#454545",
-                color: "#fff",
-              },
-            }}
-          >
-            <ArrowBackIosIcon sx={{ fontSize: "0.8rem", mr: 1 }} /> Previous
+        <Box sx={Styles.bottomNextPrevBtnContainer}>
+          <Button sx={Styles.bottomPrevBtn}>
+            <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
-          <Button
-            sx={{
-              px: 5,
-              py: "10px",
-              border: "1px solid #EAEAEA",
-              mx: "2px",
-              width: "400px",
-              "&: hover": {
-                bgcolor: "#00262b",
-                color: "#fff",
-              },
-            }}
-          >
-            Next <ArrowForwardIosIcon sx={{ fontSize: "0.8rem", ml: 1 }} />
+          <Button sx={Styles.bottomNextBtn}>
+            Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
           </Button>
         </Box>
       </Box>
