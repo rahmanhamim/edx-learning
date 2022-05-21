@@ -6,10 +6,10 @@ import {
 } from "@mui/material";
 
 interface Props {
-  choices: string[];
+  choices: string[] | undefined;
   setAnswers: any;
-  question: string;
-  qid: number;
+  question: string | undefined;
+  qid: number | undefined;
   answers: any[];
 }
 
@@ -51,7 +51,7 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
         aria-labelledby="demo-radio-buttons-group-label"
         name="radio-buttons-group"
       >
-        {choices.map((choice, index) => (
+        {choices?.map((choice, index) => (
           <FormControlLabel
             key={index}
             sx={{ mx: 0, my: 1, border: "2px solid #E2E3E5" }}

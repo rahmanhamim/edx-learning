@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
 import HomeIcon from "@mui/icons-material/Home";
@@ -10,20 +10,26 @@ import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded
 import QuizCard from "./QuizCard";
 import LessonBreadcrumbs from "./LessonBreadcrumbs";
 import QuizQuestions from "./QuizQuestions";
+import { useSelector } from "react-redux";
+import { State } from "redux/reducers";
+import _ from "lodash";
 
 interface Props {
   quizData: QuizData[];
 }
 
 export interface QuizData {
-  qid: number;
-  question: string;
-  choices: string[];
-  answer: string;
-  explanation: string;
+  userScore: number;
+  qid?: number | undefined;
+  question?: string | undefined;
+  choices?: string[] | undefined;
+  answer?: string | undefined;
+  explanation?: string | undefined;
+  point?: number | undefined;
+  attemptRemaining?: number | undefined;
 }
 
-const LessonQuiz = ({ quizData }: Props) => {
+const LessonQuiz = () => {
   const Styles = {
     topNextPrevContainer: {
       display: "flex",
@@ -76,6 +82,17 @@ const LessonQuiz = ({ quizData }: Props) => {
     },
   };
 
+  const quizData: QuizData[] = useSelector(
+    (state: State) => state.courses.quizData
+  );
+
+  const [clonedQuizData, setClonedQuizData] = useState<QuizData[]>([]);
+
+  useEffect(() => {
+    let clonedState = _.cloneDeep(quizData);
+    setClonedQuizData(clonedState);
+  }, [quizData]);
+
   const submitHandle = () => {};
 
   return (
@@ -119,7 +136,10 @@ const LessonQuiz = ({ quizData }: Props) => {
             </Typography>
           </Link>
 
-          <QuizQuestions quizData={quizData} />
+          <QuizQuestions
+            quizData={clonedQuizData}
+            setClonedQuizData={setClonedQuizData}
+          />
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box sx={Styles.bottomNextPrevBtnContainer}>

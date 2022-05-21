@@ -1,5 +1,6 @@
 import LessonQuiz from "components/lessons/LessonQuiz";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const QuizLesson = () => {
   const [quizData, setQuizData] = useState([]);
@@ -10,11 +11,20 @@ const QuizLesson = () => {
       .then((data) => setQuizData(data));
   }, []);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: "QUIZ_DATA_FETCH",
+      payload: quizData,
+    });
+  }, [quizData]);
+
   const checkAnswer = (e: React.MouseEvent) => {};
 
   const nextQuestion = () => {};
 
-  return <LessonQuiz quizData={quizData} />;
+  return <LessonQuiz />;
 };
 
 export default QuizLesson;
