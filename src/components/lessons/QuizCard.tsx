@@ -4,6 +4,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { useState } from "react";
 
 interface Props {
   choices: string[] | undefined;
@@ -44,6 +45,11 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
     }
   };
 
+  const [selectedChoice, setSelectedChoice] = useState<string>("");
+  const selectQuizOption = (choice: string) => {
+    setSelectedChoice(choice);
+  };
+
   return (
     <FormControl sx={{ width: "100%" }}>
       {/* <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel> */}
@@ -54,7 +60,15 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
         {choices?.map((choice, index) => (
           <FormControlLabel
             key={index}
-            sx={{ mx: 0, my: 1, border: "2px solid #E2E3E5" }}
+            sx={{
+              mx: 0,
+              my: 1,
+              // border: "2px solid #E2E3E5",
+              border:
+                selectedChoice === choice
+                  ? "2px solid #00688D"
+                  : "2px solid #E2E3E5",
+            }}
             value={choice}
             control={
               <Radio
@@ -64,6 +78,7 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
                   },
                 }}
                 onChange={(e) => radioChanger(e)}
+                onClick={() => selectQuizOption(choice)}
               />
             }
             label={choice}

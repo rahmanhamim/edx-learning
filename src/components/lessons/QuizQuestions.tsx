@@ -21,7 +21,10 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
     console.log("found ques", foundQuestion);
     const userAnswer = answers.find((answer) => answer?.qid === submitId);
 
-    console.log("userAnswer", userAnswer);
+    if (!userAnswer) {
+      alert("please select and answer");
+      return;
+    }
 
     if (foundQuestion?.answer === userAnswer.selected) {
       const updatedQuizData = quizData.map((ques) =>
@@ -75,7 +78,16 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
               borderRadius: "0",
               px: 2,
               my: 3,
+              "&:hover": {
+                bgcolor: "secondary.light",
+              },
+              "&:disabled": {
+                backgroundColor: "#F9F9F9",
+                color: "#C6C6C6",
+                border: "1px solid #C6C6C6",
+              },
             }}
+            // disabled
             onClick={() => handleQuizSubmit(quiz.qid)}
           >
             Submit
