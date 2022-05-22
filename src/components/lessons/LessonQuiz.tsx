@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
-import HomeIcon from "@mui/icons-material/Home";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SaveIcon from "@mui/icons-material/Save";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
-import QuizCard from "./QuizCard";
 import LessonBreadcrumbs from "./LessonBreadcrumbs";
 import QuizQuestions from "./QuizQuestions";
 import { useSelector } from "react-redux";
@@ -92,8 +90,6 @@ const LessonQuiz = () => {
     let clonedState = _.cloneDeep(quizData);
     setClonedQuizData(clonedState);
   }, [quizData]);
-
-  const submitHandle = () => {};
 
   return (
     <Container maxWidth="xl" sx={{ my: 2 }}>

@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { useDispatch } from "react-redux";
 import { QuizData } from "./LessonQuiz";
 import QuizCard from "./QuizCard";
 
@@ -12,13 +11,11 @@ interface Props {
 const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
   const [answers, setAnswers] = useState<any[]>([]);
 
-  const dispatch = useDispatch();
-
   const handleQuizSubmit = (submitId: number | undefined) => {
     const foundQuestion = quizData.find(
       (question) => question.qid === submitId
     );
-    console.log("found ques", foundQuestion);
+    // console.log("found ques", foundQuestion);
     const userAnswer = answers.find((answer) => answer?.qid === submitId);
 
     if (!userAnswer) {
@@ -34,17 +31,13 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
 
       console.log(updatedQuizData, "this is updated state");
 
-      alert("correct answer");
-      // dispatch({
-      //   type: "SET_CORRECT_ANSEWER",
-      //   payload: quizData,
-      // });
+      // alert("correct answer");
     } else {
       const updatedQuizData = quizData.map((ques) =>
         ques.qid !== submitId ? ques : { ...foundQuestion, userScore: 0 }
       );
       setClonedQuizData(updatedQuizData);
-      alert("worng answer");
+      // alert("worng answer");
     }
   };
 

@@ -32,12 +32,12 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
     );
 
     if (exist) {
-      console.log("if it exists");
+      // console.log("if it exists");
       setAnswers(newAnswer);
     }
 
     if (!exist && answers.length !== 0) {
-      console.log("it doesn't exsist on array");
+      // console.log("it doesn't exsist on array");
       setAnswers((prevState: any[]) => [
         ...prevState,
         { question: question, selected: e.target?.value, qid: qid },
@@ -52,7 +52,6 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
 
   return (
     <FormControl sx={{ width: "100%" }}>
-      {/* <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel> */}
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         name="radio-buttons-group"
@@ -63,7 +62,6 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
             sx={{
               mx: 0,
               my: 1,
-              // border: "2px solid #E2E3E5",
               border:
                 selectedChoice === choice
                   ? "2px solid #00688D"
@@ -90,34 +88,3 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
 };
 
 export default QuizCard;
-
-/* 
-
- <>
-      {choices.map((choice: any, index: any) => (
-        <FormControl key={index} sx={{ width: "100%" }}>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel> 
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="radio-buttons-group"
-          >
-            <FormControlLabel
-              sx={{ mx: 0, my: 1, border: "2px solid #E2E3E5" }}
-              value={choice}
-              control={
-                <Radio
-                  sx={{
-                    "&.Mui-checked": {
-                      color: "#0075FF",
-                    },
-                  }}
-                />
-              }
-              label={choice}
-            />
-          </RadioGroup>
-        </FormControl>
-      ))}
-    </>
-
-*/
