@@ -2,6 +2,8 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { QuizData } from "./LessonQuiz";
 import QuizCard from "./QuizCard";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   quizData: QuizData[];
@@ -23,21 +25,37 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
       return;
     }
 
-    if (foundQuestion?.answer === userAnswer.selected) {
-      const updatedQuizData = quizData.map((ques) =>
-        ques.qid !== submitId ? ques : { ...foundQuestion, userScore: 1 }
-      );
-      setClonedQuizData(updatedQuizData);
+    if (foundQuestion) {
+      if (foundQuestion?.answer === userAnswer.selected) {
+        const updatedQuizData = quizData.map((ques) =>
+          ques.qid !== submitId
+            ? ques
+            : {
+                ...foundQuestion,
+                userScore: 1,
+                isCorrect: true,
+                attempt: foundQuestion.attempt + 1,
+              }
+        );
+        setClonedQuizData(updatedQuizData);
 
-      console.log(updatedQuizData, "this is updated state");
+        console.log(updatedQuizData, "this is updated state");
 
-      // alert("correct answer");
-    } else {
-      const updatedQuizData = quizData.map((ques) =>
-        ques.qid !== submitId ? ques : { ...foundQuestion, userScore: 0 }
-      );
-      setClonedQuizData(updatedQuizData);
-      // alert("worng answer");
+        // alert("correct answer");
+      } else {
+        const updatedQuizData = quizData.map((ques) =>
+          ques.qid !== submitId
+            ? ques
+            : {
+                ...foundQuestion,
+                userScore: 0,
+                isCorrect: false,
+                attempt: foundQuestion.attempt + 1,
+              }
+        );
+        setClonedQuizData(updatedQuizData);
+        // alert("worng answer");
+      }
     }
   };
 
@@ -60,31 +78,34 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
             setAnswers={setAnswers}
             question={quiz.question}
             qid={quiz.qid}
+            quiz={quiz}
             answers={answers}
+            handleQuizSubmit={handleQuizSubmit}
           />
 
+          {quiz.isCorrect === true && (
+            <>
+              <CheckIcon
+                sx={{
+                  display: "block",
+                  color: "#0D7D4D",
+                  fontSize: "2rem",
+                }}
+              />
+              <Box sx={{ borderBottom: "3px solid #0D7D4D" }}></Box>
+            </>
+          )}
+
+          {quiz.isCorrect === false && (
+            <>
+              <CloseIcon
+                sx={{ display: "block", color: "#AB0D02", fontSize: "2rem" }}
+              />
+              <Box sx={{ borderBottom: "3px solid #AB0D02" }}></Box>
+            </>
+          )}
+
           {/* ------------------------------- */}
-          <Button
-            sx={{
-              bgcolor: "primary.main",
-              color: "primary.light",
-              borderRadius: "0",
-              px: 2,
-              my: 3,
-              "&:hover": {
-                bgcolor: "secondary.light",
-              },
-              "&:disabled": {
-                backgroundColor: "#F9F9F9",
-                color: "#C6C6C6",
-                border: "1px solid #C6C6C6",
-              },
-            }}
-            // disabled
-            onClick={() => handleQuizSubmit(quiz.qid)}
-          >
-            Submit
-          </Button>
         </Box>
       ))}
     </>

@@ -1,20 +1,33 @@
 import {
+  Button,
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { QuizData } from "./LessonQuiz";
 
 interface Props {
   choices: string[] | undefined;
   setAnswers: any;
   question: string | undefined;
   qid: number | undefined;
+  quiz: QuizData;
   answers: any[];
+  handleQuizSubmit: (submitId: number | undefined) => void;
 }
 
-const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
+const QuizCard = ({
+  choices,
+  setAnswers,
+  question,
+  qid,
+  quiz,
+  answers,
+  handleQuizSubmit,
+}: Props) => {
   const radioChanger = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (answers.length === 0) {
       setAnswers((prevState: any[]) => [
@@ -51,39 +64,66 @@ const QuizCard = ({ choices, setAnswers, question, qid, answers }: Props) => {
   };
 
   return (
-    <FormControl sx={{ width: "100%" }}>
-      <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
-        name="radio-buttons-group"
+    <>
+      <FormControl sx={{ width: "100%" }}>
+        <RadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          name="radio-buttons-group"
+        >
+          {choices?.map((choice, index) => (
+            <FormControlLabel
+              key={index}
+              sx={{
+                mx: 0,
+                my: 1,
+                border:
+                  selectedChoice === choice
+                    ? "2px solid #00688D"
+                    : "2px solid #E2E3E5",
+              }}
+              value={choice}
+              control={
+                <Radio
+                  sx={{
+                    "&.Mui-checked": {
+                      color: "#0075FF",
+                    },
+                  }}
+                  onChange={(e) => radioChanger(e)}
+                  onClick={() => selectQuizOption(choice)}
+                />
+              }
+              label={choice}
+            />
+          ))}
+        </RadioGroup>
+      </FormControl>
+      <Button
+        sx={{
+          width: "120px",
+          bgcolor: "primary.main",
+          color: "primary.light",
+          borderRadius: "0",
+          px: 2,
+          my: 3,
+          "&:hover": {
+            bgcolor: "secondary.light",
+          },
+          "&:disabled": {
+            backgroundColor: "#F9F9F9",
+            color: "#C6C6C6",
+            border: "1px solid #C6C6C6",
+          },
+        }}
+        disabled={quiz.attempt == 2 ? true : selectedChoice ? false : true}
+        onClick={() => handleQuizSubmit(qid)}
       >
-        {choices?.map((choice, index) => (
-          <FormControlLabel
-            key={index}
-            sx={{
-              mx: 0,
-              my: 1,
-              border:
-                selectedChoice === choice
-                  ? "2px solid #00688D"
-                  : "2px solid #E2E3E5",
-            }}
-            value={choice}
-            control={
-              <Radio
-                sx={{
-                  "&.Mui-checked": {
-                    color: "#0075FF",
-                  },
-                }}
-                onChange={(e) => radioChanger(e)}
-                onClick={() => selectQuizOption(choice)}
-              />
-            }
-            label={choice}
-          />
-        ))}
-      </RadioGroup>
-    </FormControl>
+        Submit
+      </Button>
+      <Typography component="span" sx={{ ml: 2 }}>
+        You have used {quiz.attempt} of 2 attempts
+      </Typography>
+    </>
   );
 };
 

@@ -24,7 +24,8 @@ export interface QuizData {
   answer?: string | undefined;
   explanation?: string | undefined;
   point?: number | undefined;
-  attemptRemaining?: number | undefined;
+  attempt: number;
+  isCorrect: string | boolean;
 }
 
 const LessonQuiz = () => {
