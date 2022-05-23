@@ -24,6 +24,31 @@ const LessonHtml = () => {
     (lesson: any) => lesson.id.toString() === routeID
   );
 
+  const courses = useSelector((state: State) => state.courses.courseData[0]);
+
+  const nextModuleBtn = () => {
+    let allRoutes: any[] = [];
+    let allRouteLessonTypeIndex: any[] = [];
+
+    courses.modules.forEach((module: any) => {
+      // console.log(module.moduleContent, "s");
+      module.moduleContent.forEach((eachMod: any) => {
+        allRoutes.push(eachMod.id);
+        allRouteLessonTypeIndex.push(eachMod.type);
+      });
+    });
+
+    let currentRouteIndex = allRoutes.indexOf(routeID);
+
+    let nextRoute = `/lessons/${
+      allRouteLessonTypeIndex[currentRouteIndex + 1]
+    }/${allRoutes[currentRouteIndex + 1]}`;
+
+    // console.log(allRoutes.indexOf(routeID));
+    // console.log(allRoutes);
+    router.push(nextRoute);
+  };
+
   // Styles
   const Styles = {
     contentContainer: {
@@ -110,6 +135,9 @@ const LessonHtml = () => {
           </Button>
           <Button sx={Styles.topNextPrevBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
+          </Button>
+          <Button onClick={nextModuleBtn}>
+            <a>Next</a>
           </Button>
         </Box>
         {/* LESSON DATA */}
