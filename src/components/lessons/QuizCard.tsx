@@ -8,9 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { QuizData } from "./LessonQuiz";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import { QuizData } from "datatypes/coursetypes";
 
 interface Props {
   choices: string[] | undefined;
