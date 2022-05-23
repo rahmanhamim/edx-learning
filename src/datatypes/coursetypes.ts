@@ -24,7 +24,7 @@ export interface ModuleContent {
   type: string;
   id: string;
   title: string;
-  content: string | QuizData[];
+  content: string;
   quizContent: QuizData[];
   moduleTitle?: string;
   isCompleted: boolean;
