@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormControlLabel,
@@ -8,6 +9,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { QuizData } from "./LessonQuiz";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   choices: string[] | undefined;
@@ -98,6 +101,56 @@ const QuizCard = ({
           ))}
         </RadioGroup>
       </FormControl>
+      <Box>
+        {quiz.isCorrect === false && (
+          <>
+            <CloseIcon
+              sx={{
+                display: "block",
+                color: "#AB0D02",
+                fontSize: "2rem",
+                my: "5px",
+              }}
+            />
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                fontSize: "1.1rem",
+                lineHeight: "1.2",
+              }}
+            >
+              Answer
+            </Typography>
+            <Typography sx={{ fontSize: "1.1rem", lineHeight: "1.2", mb: 1 }}>
+              Incorrect: incorrect, {quiz.explanation}
+            </Typography>
+          </>
+        )}
+        {quiz.isCorrect === true && (
+          <>
+            <CheckIcon
+              sx={{
+                display: "block",
+                color: "#0D7D4D",
+                fontSize: "2rem",
+                my: "5px",
+              }}
+            />
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                fontSize: "1.1rem",
+                lineHeight: "1.2",
+              }}
+            >
+              Answer
+            </Typography>
+            <Typography sx={{ fontSize: "1.1rem", lineHeight: "1.2", mb: 1 }}>
+              Correct: Correct, {quiz.explanation}
+            </Typography>
+          </>
+        )}
+      </Box>
       <Button
         sx={{
           width: "120px",
@@ -105,7 +158,7 @@ const QuizCard = ({
           color: "primary.light",
           borderRadius: "0",
           px: 2,
-          my: 3,
+          my: 1,
           "&:hover": {
             bgcolor: "secondary.light",
           },

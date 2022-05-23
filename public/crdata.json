@@ -54,7 +54,41 @@
             "type": "quiz",
             "id": "cr1mod1content3",
             "title": "Practice Quiz: Types",
-            "content": "",
+            "content": [
+                          { 
+                            "qid": 1,
+                            "question": "What is the type of the following: 0",
+                            "choices": ["Int", "Float"],
+                            "answer": "Int",
+                            "explanation": "as there is no decimal the number is of type int. You also use the type function.",
+                            "userScore": 0,
+                            "point": 1,
+                            "attempt": 0,
+                            "isCorrect": ""
+                          },
+                          {
+                            "qid": 2,
+                            "question": "What is the type of the following number: 3.12323",
+                            "choices": ["Int", "Float"],
+                            "answer": "Float",
+                            "explanation": "as there is a decimal the number is of type float. You can also use the type function to verify your results.",
+                            "userScore": 0,
+                            "point": 1,
+                            "attempt": 0,
+                            "isCorrect": ""
+                          },
+                          {
+                            "qid": 3,
+                            "question": "What is the result of the following: int(3.99)",
+                            "choices": ["3.99", "3"],
+                            "answer": "3",
+                            "explanation": "In Python, if you cast a float to an integer, the conversion truncates towards zero, i.e.you just get rid of the numbers after the decimal place. So for 3.99 you just get rid of the '.99' leaving 3.",
+                            "userScore": 0,
+                            "point": 1,
+                            "attempt": 0,
+                            "isCorrect": ""
+                          }
+                        ],
             "isCompleted": false
           }
         ]
@@ -81,7 +115,41 @@
             "type": "quiz",
             "id": "cr1mod2content3",
             "title": "Practice Quiz: Types",
-            "content": "",
+            "content": [
+                          { 
+                            "qid": 1,
+                            "question": "What is the type of the following: 0",
+                            "choices": ["Int", "Float"],
+                            "answer": "Int",
+                            "explanation": "as there is no decimal the number is of type int. You also use the type function.",
+                            "userScore": 0,
+                            "point": 1,
+                            "attempt": 0,
+                            "isCorrect": ""
+                          },
+                          {
+                            "qid": 2,
+                            "question": "What is the type of the following number: 3.12323",
+                            "choices": ["Int", "Float"],
+                            "answer": "Float",
+                            "explanation": "as there is a decimal the number is of type float. You can also use the type function to verify your results.",
+                            "userScore": 0,
+                            "point": 1,
+                            "attempt": 0,
+                            "isCorrect": ""
+                          },
+                          {
+                            "qid": 3,
+                            "question": "What is the result of the following: int(3.99)",
+                            "choices": ["3.99", "3"],
+                            "answer": "3",
+                            "explanation": "In Python, if you cast a float to an integer, the conversion truncates towards zero, i.e.you just get rid of the numbers after the decimal place. So for 3.99 you just get rid of the '.99' leaving 3.",
+                            "userScore": 0,
+                            "point": 1,
+                            "attempt": 0,
+                            "isCorrect": ""
+                          }
+                        ],
             "isCompleted": false
           }
         ]

@@ -24,7 +24,7 @@ export interface ModuleContent {
   type: string;
   id: string;
   title: string;
-  content: string;
+  content: string | any[];
   moduleTitle?: string;
   isCompleted: boolean;
 }

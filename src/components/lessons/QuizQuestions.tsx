@@ -85,23 +85,42 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
 
           {quiz.isCorrect === true && (
             <>
-              <CheckIcon
-                sx={{
-                  display: "block",
-                  color: "#0D7D4D",
-                  fontSize: "2rem",
-                }}
-              />
-              <Box sx={{ borderBottom: "3px solid #0D7D4D" }}></Box>
+              <Box sx={{ borderBottom: "3px solid #0D7D4D", mt: 2 }}></Box>
+              <Box
+                sx={{ display: "flex", alignItems: "center", mt: "5px", mb: 3 }}
+              >
+                <CheckIcon
+                  sx={{
+                    color: "#0D7D4D",
+                    fontSize: "2rem",
+                    mr: 1,
+                  }}
+                />
+                <Typography component="span" sx={{ fontSize: "1.1rem" }}>
+                  Correct (1/1 point)
+                </Typography>
+              </Box>
+              <Box sx={{ borderBottom: "1px solid #DDDDDD" }}> </Box>
             </>
           )}
-
           {quiz.isCorrect === false && (
             <>
-              <CloseIcon
-                sx={{ display: "block", color: "#AB0D02", fontSize: "2rem" }}
-              />
-              <Box sx={{ borderBottom: "3px solid #AB0D02" }}></Box>
+              <Box sx={{ borderBottom: "3px solid #0D7D4D", mt: 2 }}></Box>
+              <Box
+                sx={{ display: "flex", alignItems: "center", mt: "5px", mb: 3 }}
+              >
+                <CloseIcon
+                  sx={{
+                    color: "#AB0D02",
+                    fontSize: "2rem",
+                    mr: 1,
+                  }}
+                />
+                <Typography component="span" sx={{ fontSize: "1.1rem" }}>
+                  Incorrect (0/1 point)
+                </Typography>
+              </Box>
+              <Box sx={{ borderBottom: "1px solid #DDDDDD" }}> </Box>
             </>
           )}
 
