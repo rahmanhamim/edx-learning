@@ -3,6 +3,7 @@ const initialState = {
   htmlLessons: [],
   videoLessons: [],
   aboutLessons: [],
+  quizLessons: [],
   quizData: [],
 };
 
@@ -32,6 +33,11 @@ export const courseReducer = (state: any = initialState, action: any): any => {
       return {
         ...state,
         quizData: action.payload,
+      };
+    case "QUIZ_LESSON_FETCH":
+      return {
+        ...state,
+        quizLessons: action.payload,
       };
 
     default:

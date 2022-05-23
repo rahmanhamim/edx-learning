@@ -24,7 +24,20 @@ export interface ModuleContent {
   type: string;
   id: string;
   title: string;
-  content: string | any[];
+  content: string | QuizData[];
+  quizContent: QuizData[];
   moduleTitle?: string;
   isCompleted: boolean;
+}
+
+export interface QuizData {
+  userScore: number;
+  qid?: number | undefined;
+  question?: string | undefined;
+  choices?: string[] | undefined;
+  answer?: string | undefined;
+  explanation?: string | undefined;
+  point?: number | undefined;
+  attempt: number;
+  isCorrect: string | boolean;
 }

@@ -151,14 +151,17 @@ const LessonVideo = () => {
                 flexDirection: { xs: "column", md: "row" },
               }}
             >
-              <ReactPlayer
-                className="react-player"
-                style={{
-                  width: "100%",
-                }}
-                controls={true}
-                url={lesson.content}
-              />
+              {typeof lesson.content === "string" && (
+                <ReactPlayer
+                  className="react-player"
+                  style={{
+                    width: "100%",
+                  }}
+                  controls={true}
+                  url={lesson.content}
+                />
+              )}
+
               <Box
                 sx={{
                   width: { xs: "100%", md: "25%" },

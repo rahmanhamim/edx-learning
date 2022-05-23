@@ -7,6 +7,7 @@ import { Course } from "datatypes/coursetypes";
 
 const Home: NextPage<{ courses: Course[] }> = (courses) => {
   const dispatch = useDispatch();
+  console.log(courses);
 
   useEffect(() => {
     dispatch({
@@ -21,7 +22,9 @@ const Home: NextPage<{ courses: Course[] }> = (courses) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://jsonkeeper.com/b/HDDH");
+  // const res = await fetch("https://jsonkeeper.com/b/HDDH");
+  // const res = await fetch("https://jsonkeeper.com/b/ZH88");
+  const res = await fetch("https://jsonkeeper.com/b/887C");
   const courses: Course[] = await res.json();
 
   return {

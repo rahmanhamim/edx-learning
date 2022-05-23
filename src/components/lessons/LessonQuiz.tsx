@@ -11,22 +11,8 @@ import QuizQuestions from "./QuizQuestions";
 import { useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import _ from "lodash";
-
-interface Props {
-  quizData: QuizData[];
-}
-
-export interface QuizData {
-  userScore: number;
-  qid?: number | undefined;
-  question?: string | undefined;
-  choices?: string[] | undefined;
-  answer?: string | undefined;
-  explanation?: string | undefined;
-  point?: number | undefined;
-  attempt: number;
-  isCorrect: string | boolean;
-}
+import { ModuleContent, QuizData } from "datatypes/coursetypes";
+import { useRouter } from "next/router";
 
 const LessonQuiz = () => {
   const Styles = {
@@ -81,9 +67,19 @@ const LessonQuiz = () => {
     },
   };
 
-  const quizData: QuizData[] = useSelector(
-    (state: State) => state.courses.quizData
+  const lessons: ModuleContent[] = useSelector(
+    (state: State) => state.courses.quizLessons
   );
+
+  const router = useRouter();
+  const routeID = router.query.quiz;
+
+  const lesson = lessons.find(
+    (lesson: any) => lesson.id.toString() === routeID
+  );
+
+  const quizData: QuizData[] = lesson!.quizContent;
+  console.log(quizData, "from quiz api");
 
   const [clonedQuizData, setClonedQuizData] = useState<QuizData[]>([]);
 
@@ -91,6 +87,10 @@ const LessonQuiz = () => {
     let clonedState = _.cloneDeep(quizData);
     setClonedQuizData(clonedState);
   }, [quizData]);
+
+  if (!lesson) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <Container maxWidth="xl" sx={{ my: 2 }}>

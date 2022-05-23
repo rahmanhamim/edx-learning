@@ -144,7 +144,7 @@ const CourseMainModulesList = () => {
                 </Link>
               )}
               {lessons.type === "quiz" && (
-                <Link href="/lessons/quiz/1">
+                <Link href={`/lessons/quiz/${lessons.id}`}>
                   <a style={{ color: "#00688D" }}>{lessons.title}</a>
                 </Link>
               )}

@@ -54,7 +54,8 @@
             "type": "quiz",
             "id": "cr1mod1content3",
             "title": "Practice Quiz: Types",
-            "content": [
+            "content": "",
+            "quizContent": [
                           { 
                             "qid": 1,
                             "question": "What is the type of the following: 0",
@@ -115,7 +116,8 @@
             "type": "quiz",
             "id": "cr1mod2content3",
             "title": "Practice Quiz: Types",
-            "content": [
+            "content": "",
+            "quizContent": [
                           { 
                             "qid": 1,
                             "question": "What is the type of the following: 0",

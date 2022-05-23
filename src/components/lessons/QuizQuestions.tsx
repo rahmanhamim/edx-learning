@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { QuizData } from "./LessonQuiz";
+import { QuizData } from "../../datatypes/coursetypes";
 import QuizCard from "./QuizCard";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
