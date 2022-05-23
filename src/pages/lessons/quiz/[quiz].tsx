@@ -33,8 +33,7 @@ const QuizLesson = ({ lessons }: any) => {
 export default QuizLesson;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const res = await fetch("https://jsonkeeper.com/b/ZH88");
-  const res = await fetch("https://jsonkeeper.com/b/887C");
+  const res = await fetch("https://jsonkeeper.com/b/4S3V");
   const courses = await res.json();
 
   const quizLessons: any = [];
@@ -55,8 +54,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  // const res = await fetch("https://jsonkeeper.com/b/ZH88");
-  const res = await fetch("https://jsonkeeper.com/b/887C");
+  const res = await fetch("https://jsonkeeper.com/b/4S3V");
   const courses = await res.json();
 
   const quizLessons: any = [];

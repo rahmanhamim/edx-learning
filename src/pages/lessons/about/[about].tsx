@@ -20,7 +20,7 @@ const AboutPage = ({ lessons }: Props) => {
 
 export default AboutPage;
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch("https://jsonkeeper.com/b/HDDH");
+  const res = await fetch("https://jsonkeeper.com/b/4S3V");
   const courses = await res.json();
 
   const aboutCourse: any = [];
@@ -37,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://jsonkeeper.com/b/HDDH");
+  const res = await fetch("https://jsonkeeper.com/b/4S3V");
   //
   const courses = await res.json();
 
