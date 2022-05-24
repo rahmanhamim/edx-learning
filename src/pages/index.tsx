@@ -7,7 +7,6 @@ import { Course } from "datatypes/coursetypes";
 
 const Home: NextPage<{ courses: Course[] }> = (courses) => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch({
       type: "COURSE_FETCH",

@@ -17,7 +17,7 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
     const foundQuestion = quizData.find(
       (question) => question.qid === submitId
     );
-    // console.log("found ques", foundQuestion);
+
     const userAnswer = answers.find((answer) => answer?.qid === submitId);
 
     if (!userAnswer) {
@@ -38,8 +38,6 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
               }
         );
         setClonedQuizData(updatedQuizData);
-
-        console.log(updatedQuizData, "this is updated state");
 
         // alert("correct answer");
       } else {

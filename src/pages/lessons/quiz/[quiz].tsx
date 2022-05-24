@@ -1,26 +1,23 @@
 import LessonQuiz from "components/lessons/LessonQuiz";
+import { Course, ModuleContent } from "datatypes/coursetypes";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-const QuizLesson = ({ lessons }: any) => {
-  const [quizData, setQuizData] = useState([]);
-  // console.log(lessons);
+interface Props {
+  lessons: ModuleContent[];
+  courses: Course[];
+}
 
-  useEffect(() => {
-    fetch("/quizData.json")
-      .then((res) => res.json())
-      .then((data) => setQuizData(data));
-  }, []);
-
+const QuizLesson = ({ lessons, courses }: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({
-      type: "QUIZ_DATA_FETCH",
-      payload: quizData,
+      type: "COURSE_FETCH",
+      payload: courses,
     });
-  }, [quizData]);
+  }, [courses, dispatch]);
 
   dispatch({
     type: "QUIZ_LESSON_FETCH",
@@ -55,7 +52,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch("https://jsonkeeper.com/b/4S3V");
-  const courses = await res.json();
+  const courses: Course[] = await res.json();
 
   const quizLessons: any = [];
 
@@ -70,5 +67,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const lessons = quizLessons;
 
-  return { props: { lessons } };
+  return { props: { lessons, courses } };
 };
