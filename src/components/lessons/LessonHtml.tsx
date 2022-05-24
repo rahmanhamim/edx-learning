@@ -31,7 +31,6 @@ const LessonHtml = () => {
     let allRouteLessonTypeIndex: any[] = [];
 
     courses.modules.forEach((module: any) => {
-      // console.log(module.moduleContent, "s");
       module.moduleContent.forEach((eachMod: any) => {
         allRoutes.push(eachMod.id);
         allRouteLessonTypeIndex.push(eachMod.type);
@@ -40,13 +39,38 @@ const LessonHtml = () => {
 
     let currentRouteIndex = allRoutes.indexOf(routeID);
 
+    if (allRoutes.length - 1 === currentRouteIndex) {
+      alert("lesson finished");
+      return;
+    }
     let nextRoute = `/lessons/${
       allRouteLessonTypeIndex[currentRouteIndex + 1]
     }/${allRoutes[currentRouteIndex + 1]}`;
 
-    // console.log(allRoutes.indexOf(routeID));
-    // console.log(allRoutes);
     router.push(nextRoute);
+  };
+  const prevModuleBtn = () => {
+    let allRoutes: any[] = [];
+    let allRouteLessonTypeIndex: any[] = [];
+
+    courses.modules.forEach((module: any) => {
+      module.moduleContent.forEach((eachMod: any) => {
+        allRoutes.push(eachMod.id);
+        allRouteLessonTypeIndex.push(eachMod.type);
+      });
+    });
+
+    let currentRouteIndex = allRoutes.indexOf(routeID);
+
+    if (currentRouteIndex === 0) {
+      alert("This is first module");
+      return;
+    }
+    let prevRoute = `/lessons/${
+      allRouteLessonTypeIndex[currentRouteIndex - 1]
+    }/${allRoutes[currentRouteIndex - 1]}`;
+
+    router.push(prevRoute);
   };
 
   // Styles
@@ -126,18 +150,15 @@ const LessonHtml = () => {
       <Box component="main" sx={Styles.contentContainer}>
         {/* NEXT PREVIOUS BUTTONS */}
         <Box sx={Styles.topNextPrevContainer}>
-          <Button sx={Styles.topNextPrevBtn}>
+          <Button sx={Styles.topNextPrevBtn} onClick={prevModuleBtn}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.saveBtn}>
             <SaveIcon sx={{ color: "#0D7D4D" }} />
             <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
           </Button>
-          <Button sx={Styles.topNextPrevBtn}>
+          <Button sx={Styles.topNextPrevBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
-          </Button>
-          <Button onClick={nextModuleBtn}>
-            <a>Next</a>
           </Button>
         </Box>
         {/* LESSON DATA */}
@@ -166,7 +187,7 @@ const LessonHtml = () => {
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box sx={Styles.bottomNextPrevBtnContainer}>
-          <Button sx={Styles.bottomPrevBtn}>
+          <Button sx={Styles.bottomPrevBtn} onClick={prevModuleBtn}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.bottomNextBtn}>

@@ -8,7 +8,6 @@ const TestQuiz = () => {
   const [step, setStep] = useState(2);
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
-  console.log(answers);
 
   return (
     <Container sx={{ my: 20 }}>
