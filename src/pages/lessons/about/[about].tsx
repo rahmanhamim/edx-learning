@@ -1,15 +1,23 @@
 import LessonAbout from "components/lessons/LessonAbout";
-import { AboutCourse } from "datatypes/coursetypes";
+import { AboutCourse, Course } from "datatypes/coursetypes";
 import { GetStaticPaths, GetStaticProps } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 interface Props {
   lessons: AboutCourse[];
+  courses: Course[];
 }
 
-const AboutPage = ({ lessons }: Props) => {
+const AboutPage = ({ lessons, courses }: Props) => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: "COURSE_FETCH",
+      payload: courses,
+    });
+  }, [courses, dispatch]);
+
   dispatch({
     type: "ABOUT_LESSON_FETCH",
     payload: lessons,
@@ -38,8 +46,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch("https://jsonkeeper.com/b/4S3V");
-  //
-  const courses = await res.json();
+  const courses: Course[] = await res.json();
 
   const aboutCourse: any = [];
 
@@ -50,5 +57,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const lessons = aboutCourse;
 
-  return { props: { lessons } };
+  return { props: { lessons, courses } };
 };

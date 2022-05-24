@@ -288,7 +288,7 @@ const LessonVideo = () => {
           <Button sx={Styles.bottomPrevBtn} onClick={prevModuleBtn}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
-          <Button sx={Styles.bottomNextBtn}>
+          <Button sx={Styles.bottomNextBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
           </Button>
         </Box>

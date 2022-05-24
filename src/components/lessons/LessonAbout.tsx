@@ -23,6 +23,60 @@ const LessonAbout = () => {
   const lesson = lessons.find(
     (lesson: any) => lesson.id.toString() === routeID
   );
+  // --------------------------------------------------------------------------
+  const courses = useSelector((state: State) => state.courses.courseData[0]);
+  const nextModuleBtn = () => {
+    let aboutRoutes: any[] = [];
+    let allRouteAboutTypeIndex: any[] = [];
+    courses.aboutCourse.forEach((about: any) => {
+      aboutRoutes.push(about.id);
+      allRouteAboutTypeIndex.push("about");
+    });
+
+    let allLessonsRoutes: any[] = [];
+    let allRouteLessonTypeIndex: any[] = [];
+    courses.modules.forEach((module: any) => {
+      module.moduleContent.forEach((eachMod: any) => {
+        allLessonsRoutes.push(eachMod.id);
+        allRouteLessonTypeIndex.push(eachMod.type);
+      });
+    });
+
+    let currentRouteIndex = aboutRoutes.indexOf(routeID);
+
+    if (aboutRoutes.length - 1 === currentRouteIndex) {
+      let nextModuleRoute = `/lessons/${allRouteLessonTypeIndex[0]}/${allLessonsRoutes[0]}`;
+      router.push(nextModuleRoute);
+      return;
+    }
+    let nextRoute = `/lessons/${
+      allRouteAboutTypeIndex[currentRouteIndex + 1]
+    }/${aboutRoutes[currentRouteIndex + 1]}`;
+
+    router.push(nextRoute);
+  };
+
+  const prevModuleBtn = () => {
+    let aboutRoutes: any[] = [];
+    let allRouteAboutTypeIndex: any[] = [];
+
+    courses.aboutCourse.forEach((about: any) => {
+      aboutRoutes.push(about.id);
+      allRouteAboutTypeIndex.push("about");
+    });
+
+    let currentRouteIndex = aboutRoutes.indexOf(routeID);
+
+    if (currentRouteIndex === 0) {
+      alert("This is first module");
+      return;
+    }
+    let prevRoute = `/lessons/${
+      allRouteAboutTypeIndex[currentRouteIndex - 1]
+    }/${aboutRoutes[currentRouteIndex - 1]}`;
+
+    router.push(prevRoute);
+  };
 
   // Styles Here
   const Styles = {
@@ -109,14 +163,14 @@ const LessonAbout = () => {
       <Box component="main" sx={Styles.contentContainer}>
         {/* NEXT PREVIOUS BUTTONS */}
         <Box sx={Styles.topNextPrevContainer}>
-          <Button sx={Styles.topNextPrevBtn}>
+          <Button sx={Styles.topNextPrevBtn} onClick={prevModuleBtn}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.saveBtn}>
             <SaveIcon sx={{ color: "#0D7D4D" }} />
             <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
           </Button>
-          <Button sx={Styles.topNextPrevBtn}>
+          <Button sx={Styles.topNextPrevBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
           </Button>
         </Box>
@@ -155,7 +209,7 @@ const LessonAbout = () => {
           <Button sx={Styles.bottomPrevBtn}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
-          <Button sx={Styles.bottomNextBtn}>
+          <Button sx={Styles.bottomNextBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
           </Button>
         </Box>
