@@ -206,7 +206,7 @@ const LessonAbout = () => {
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box sx={Styles.bottomNextPrevBtnContainer}>
-          <Button sx={Styles.bottomPrevBtn}>
+          <Button sx={Styles.bottomPrevBtn} onClick={prevModuleBtn}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.bottomNextBtn} onClick={nextModuleBtn}>
