@@ -8,7 +8,7 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import LessonBreadcrumbs from "./LessonBreadcrumbs";
 import QuizQuestions from "./QuizQuestions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import _ from "lodash";
 import { ModuleContent, QuizData } from "datatypes/coursetypes";
@@ -67,6 +67,8 @@ const LessonQuiz = () => {
     },
   };
 
+  const dispatch = useDispatch();
+
   const lessons: ModuleContent[] = useSelector(
     (state: State) => state.courses.quizLessons
   );
@@ -87,7 +89,22 @@ const LessonQuiz = () => {
     setClonedQuizData(clonedState);
   }, [quizData]);
 
-  // ----------------------------------------------
+  // save and update quiz answer to redux
+  let staleLesson = lessons.find(
+    (lesson: any) => lesson.id.toString() !== routeID
+  );
+  let updatedQuiz = { ...lesson, quizContent: clonedQuizData };
+  let updatedState = [staleLesson, updatedQuiz];
+
+  const saveBtn = () => {
+    dispatch({
+      type: "QUIZ_LESSON_FETCH",
+      payload: updatedState,
+    });
+    alert("answer saved");
+  };
+  // save and update quiz answer to redux end
+
   const courses = useSelector((state: State) => state.courses.courseData[0]);
 
   const nextModuleBtn = () => {
@@ -192,6 +209,15 @@ const LessonQuiz = () => {
             quizData={clonedQuizData}
             setClonedQuizData={setClonedQuizData}
           />
+          <Box
+            sx={{
+              textAlign: "center",
+            }}
+          >
+            <Button variant="contained" onClick={saveBtn}>
+              Save &amp; Submit
+            </Button>
+          </Box>
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box sx={Styles.bottomNextPrevBtnContainer}>

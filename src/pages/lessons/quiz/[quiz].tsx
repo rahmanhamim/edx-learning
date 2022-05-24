@@ -23,10 +23,13 @@ const QuizLesson = ({ lessons, courses }: Props) => {
     });
   }
 
-  dispatch({
-    type: "QUIZ_LESSON_FETCH",
-    payload: lessons,
-  });
+  const isQuizExist = useSelector((state: State) => state.courses.quizLessons);
+  if (isQuizExist.length == 0) {
+    dispatch({
+      type: "QUIZ_LESSON_FETCH",
+      payload: lessons,
+    });
+  }
 
   return <LessonQuiz />;
 };
