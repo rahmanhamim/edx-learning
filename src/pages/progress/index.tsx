@@ -1,7 +1,8 @@
+import ProgressHome from "components/progress/ProgressHome";
 import React from "react";
 
 const index = () => {
-  return <div>this is progress</div>;
+  return <ProgressHome />;
 };
 
 export default index;
