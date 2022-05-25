@@ -12,12 +12,16 @@ const Home: NextPage<{ courses: Course[] }> = (courses) => {
   );
 
   const dispatch = useDispatch();
-  if (!isCoursesExist) {
-    dispatch({
-      type: "COURSE_FETCH",
-      payload: courses.courses,
-    });
-  }
+
+  // useEffect used for this warning: "cannot update a component while rendering a different component"
+  useEffect(() => {
+    if (!isCoursesExist) {
+      dispatch({
+        type: "COURSE_FETCH",
+        payload: courses.courses,
+      });
+    }
+  }, [courses.courses, isCoursesExist, dispatch]);
 
   return <CourseHome />;
 };
@@ -25,6 +29,7 @@ const Home: NextPage<{ courses: Course[] }> = (courses) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  // const res = await fetch("https://jsonkeeper.com/b/4S3V");
   const res = await fetch("https://jsonkeeper.com/b/I6ZT");
   const courses: Course[] = await res.json();
 

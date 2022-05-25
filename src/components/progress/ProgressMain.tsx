@@ -1,9 +1,53 @@
 import { Box, Button, Typography } from "@mui/material";
+import { Course } from "datatypes/coursetypes";
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useSelector } from "react-redux";
+import { State } from "redux/reducers";
 
 const ProgressMain = () => {
+  const courses: Course = useSelector(
+    (state: State) => state.courses.courseData[0]
+  );
+
+  let aboutModuls = courses?.aboutCourse.length;
+  let allModules = 0;
+  courses?.modules?.forEach((eachMod) => {
+    allModules = allModules + eachMod.moduleContent.length;
+  });
+
+  let totalModules = allModules + aboutModuls;
+
+  const allCourse = useSelector((state: State) => state.courses);
+
+  let userCompletedModules = 0;
+
+  allCourse.aboutLessons.forEach((lesson: any) => {
+    if (lesson.isCompleted) {
+      userCompletedModules = userCompletedModules + 1;
+    }
+  });
+  allCourse.htmlLessons.forEach((lesson: any) => {
+    if (lesson.isCompleted) {
+      userCompletedModules = userCompletedModules + 1;
+    }
+  });
+  allCourse.videoLessons.forEach((lesson: any) => {
+    if (lesson.isCompleted) {
+      userCompletedModules = userCompletedModules + 1;
+    }
+  });
+  allCourse.quizLessons.forEach((lesson: any) => {
+    if (lesson.isCompleted) {
+      userCompletedModules = userCompletedModules + 1;
+    }
+  });
+
+  let progressPercentage = (100 / totalModules) * userCompletedModules;
+
+  console.log(progressPercentage);
+
   return (
     <Box
       sx={{
@@ -70,8 +114,8 @@ const ProgressMain = () => {
                 strokeLinecap: "butt",
                 textColor: "#425B5F",
               })}
-              value={10}
-              text="10%"
+              value={progressPercentage}
+              text={`${progressPercentage}%`}
               strokeWidth={15}
             />
           </Box>
