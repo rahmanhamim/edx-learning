@@ -15,7 +15,8 @@
           "https://www.edx.org/professional-certificate/ibm-applied-ai",
           "https://www.edx.org/professional-certificate/ibm-applied-ai",
           "https://www.edx.org/professional-certificate/ibm-applied-ai"
-        ]
+        ], 
+        "isCompleted": false
       },
       {
         "id": "aboutcr2",
@@ -28,7 +29,8 @@
           "https://www.edx.org/professional-certificate/ibm-applied-ai",
           "https://www.edx.org/professional-certificate/ibm-applied-ai",
           "https://www.edx.org/professional-certificate/ibm-applied-ai"
-        ]
+        ],
+        "isCompleted": false
       }
     ],
     "modules": [
@@ -41,6 +43,7 @@
             "id": "cr1mod1content1",
             "title": "Module Introduction and Learning Objectives",
             "content": " <p>      This module teaches the basics of Python and begins by exploring some of      the different data types such as integers, real numbers, and strings.      Continue with the module and learn how to use expressions in mathematical      operations, store values in variables, and the many different ways to      manipulate strings.    </p>    <h3>LEARNING OBJECTIVES</h3>    <p>      In this lesson, you will learn the basics of Python and you will write      your first Python program:    </p>    <ul>      <li>        Demonstrate an understanding of types in python by converting/casting        data types: strings, floats, integers.      </li>      <li>        Interpret variables and solve expressions by applying mathematical        operations.      </li>    </ul>",
+            "quizContent": [],
             "isCompleted": false
           },
           {
@@ -48,6 +51,7 @@
             "id": "cr1mod1content2",
             "title": "Video: Types (3:02)",
             "content": "https://vimeo.com/683037584",
+            "quizContent": [],
             "isCompleted": false
           },
           {
@@ -125,6 +129,7 @@
             "id": "cr1mod2content1",
             "title": "Module Introduction and Learning Objectives",
             "content": " <p>      This module begins a journey into Python data structures by explaining the      use of lists and tuples and how they are able to store collections of data      in a single variable.    </p>    <p>      Next, learn about dictionaries and how they function by storing data in      pairs of keys and values, and end with Python sets to learn how this type      of collection can appear in any order and will only contain unique      elements.    </p>    <h3>LEARNING OBJECTIVES</h3>    <p>In this lesson you will:</p>    <ul>      <li>        Understand tuples and lists by describing and manipulating tuple        combinations and list data structures.      </li>      <li>        Demonstrate understanding of dictionaries by writing structures with        correct keys and values.      </li>      <li>        Understand the differences between sets, tuples, and lists by creating        sets.      </li>    </ul>",
+            "quizContent": [],
             "isCompleted": false
           },
           {
@@ -132,6 +137,7 @@
             "id": "cr1mod2content2",
             "title": "Video: Types (8:31)",
             "content": "https://vimeo.com/84791679",
+            "quizContent": [],
             "isCompleted": false
           },
           {
