@@ -1,22 +1,22 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
-import HomeIcon from "@mui/icons-material/Home";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SaveIcon from "@mui/icons-material/Save";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import { ModuleContent } from "datatypes/coursetypes";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import { useRouter } from "next/router";
-// import ReactPlayer from "react-player";
 import dynamic from "next/dynamic";
 import LessonBreadcrumbs from "./LessonBreadcrumbs";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const LessonVideo = () => {
+  const dispatch = useDispatch();
+
   const lessons: ModuleContent[] = useSelector(
     (state: State) => state.courses.videoLessons
   );
@@ -51,6 +51,18 @@ const LessonVideo = () => {
     let nextRoute = `/lessons/${
       allRouteLessonTypeIndex[currentRouteIndex + 1]
     }/${allRoutes[currentRouteIndex + 1]}`;
+
+    // updated is completed
+    let staleLessons = lessons.find(
+      (lesson: any) => lesson.id.toString() !== routeID
+    );
+    let updatedIsComplete = { ...lesson, isCompleted: true };
+    let updatedState = [staleLessons, updatedIsComplete];
+    dispatch({
+      type: "VIDEO_LESSON_FETCH",
+      payload: updatedState,
+    });
+    // updated is completed end
 
     router.push(nextRoute);
   };
@@ -92,7 +104,7 @@ const LessonVideo = () => {
     topNextPrevBtn: { px: 5, py: "10px" },
     nextPrevIcon: { fontSize: "0.8rem", mx: 1 },
     saveBtn: {
-      bgcolor: "#EEF7E4",
+      bgcolor: `${lesson?.isCompleted ? "#EEF7E4" : ""}`,
       width: "100%",
       borderBottom: "2px solid #00262B",
       borderRadius: "0px",
@@ -159,8 +171,11 @@ const LessonVideo = () => {
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.saveBtn}>
-            <SaveIcon sx={{ color: "#0D7D4D" }} />
-            <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            {lesson.isCompleted ? (
+              <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            ) : (
+              <SaveIcon sx={{ color: "#0D7D4D" }} />
+            )}
           </Button>
           <Button sx={Styles.topNextPrevBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />

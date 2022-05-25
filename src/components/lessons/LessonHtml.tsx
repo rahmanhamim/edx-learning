@@ -7,22 +7,26 @@ import SaveIcon from "@mui/icons-material/Save";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import { ModuleContent } from "datatypes/coursetypes";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import { useRouter } from "next/router";
 import LessonBreadcrumbs from "./LessonBreadcrumbs";
 
 const LessonHtml = () => {
-  const lessons: ModuleContent[] = useSelector(
-    (state: State) => state.courses.htmlLessons
-  );
+  const dispatch = useDispatch();
 
   const router = useRouter();
   const routeID = router.query.html;
 
+  const lessons: ModuleContent[] = useSelector(
+    (state: State) => state.courses.htmlLessons
+  );
+
   const lesson = lessons.find(
     (lesson: any) => lesson.id.toString() === routeID
   );
+
+  // ----------------------------------------- work on progress
 
   const courses = useSelector((state: State) => state.courses.courseData[0]);
 
@@ -46,6 +50,18 @@ const LessonHtml = () => {
     let nextRoute = `/lessons/${
       allRouteLessonTypeIndex[currentRouteIndex + 1]
     }/${allRoutes[currentRouteIndex + 1]}`;
+
+    // updated is completed
+    let staleLessons = lessons.find(
+      (lesson: any) => lesson.id.toString() !== routeID
+    );
+    let updatedIsComplete = { ...lesson, isCompleted: true };
+    let updatedState = [staleLessons, updatedIsComplete];
+    dispatch({
+      type: "HTML_LESSON_FETCH",
+      payload: updatedState,
+    });
+    // updated is completed end
 
     router.push(nextRoute);
   };
@@ -87,7 +103,7 @@ const LessonHtml = () => {
     topNextPrevBtn: { px: 5, py: "10px" },
     nextPrevIcon: { fontSize: "0.8rem", mx: 1 },
     saveBtn: {
-      bgcolor: "#EEF7E4",
+      bgcolor: `${lesson?.isCompleted ? "#EEF7E4" : ""}`,
       width: "100%",
       borderBottom: "2px solid #00262B",
       borderRadius: "0px",
@@ -154,8 +170,11 @@ const LessonHtml = () => {
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.saveBtn}>
-            <SaveIcon sx={{ color: "#0D7D4D" }} />
-            <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            {lesson.isCompleted ? (
+              <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            ) : (
+              <SaveIcon sx={{ color: "#0D7D4D" }} />
+            )}
           </Button>
           <Button sx={Styles.topNextPrevBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />

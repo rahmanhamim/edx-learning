@@ -11,10 +11,11 @@ interface Props {
 }
 
 const HtmlLesson = ({ lessons, courses }: Props) => {
+  const dispatch = useDispatch();
+
   const isCoursesExist = useSelector(
     (state: State) => state.courses.courseData[0]
   );
-  const dispatch = useDispatch();
 
   if (!isCoursesExist) {
     dispatch({
@@ -23,10 +24,15 @@ const HtmlLesson = ({ lessons, courses }: Props) => {
     });
   }
 
-  dispatch({
-    type: "HTML_LESSON_FETCH",
-    payload: lessons,
-  });
+  const isHtmlLessonsExist = useSelector(
+    (state: State) => state.courses.htmlLessons
+  );
+  if (isHtmlLessonsExist.length == 0) {
+    dispatch({
+      type: "HTML_LESSON_FETCH",
+      payload: lessons,
+    });
+  }
 
   return <LessonHtml />;
 };

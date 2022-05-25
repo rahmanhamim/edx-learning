@@ -23,10 +23,15 @@ const VideoLesson = ({ lessons, courses }: Props) => {
     });
   }
 
-  dispatch({
-    type: "VIDEO_LESSON_FETCH",
-    payload: lessons,
-  });
+  const isVideolLessonsExist = useSelector(
+    (state: State) => state.courses.videoLessons
+  );
+  if (isVideolLessonsExist.length == 0) {
+    dispatch({
+      type: "VIDEO_LESSON_FETCH",
+      payload: lessons,
+    });
+  }
 
   return <LessonVideo />;
 };

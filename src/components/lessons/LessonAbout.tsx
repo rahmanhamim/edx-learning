@@ -16,6 +16,7 @@ const LessonAbout = () => {
   const lessons: AboutCourse[] = useSelector(
     (state: State) => state.courses.aboutLessons
   );
+  // console.log(lessons);
 
   const router = useRouter();
   const routeID = router.query.about;
@@ -23,7 +24,7 @@ const LessonAbout = () => {
   const lesson = lessons.find(
     (lesson: any) => lesson.id.toString() === routeID
   );
-  // --------------------------------------------------------------------------
+  // ----------------------------------------------------------
   const courses = useSelector((state: State) => state.courses.courseData[0]);
   const nextModuleBtn = () => {
     let aboutRoutes: any[] = [];

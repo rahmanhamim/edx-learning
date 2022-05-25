@@ -15,58 +15,6 @@ import { ModuleContent, QuizData } from "datatypes/coursetypes";
 import { useRouter } from "next/router";
 
 const LessonQuiz = () => {
-  const Styles = {
-    topNextPrevContainer: {
-      display: "flex",
-      justifyContent: "space-between",
-      borderBottom: "1px solid #eaeaea",
-    },
-    topNextPrevBtn: { px: 5, py: "10px" },
-    nextPrevIcon: { fontSize: "0.8rem", mx: 1 },
-    saveBtn: {
-      bgcolor: "#EEF7E4",
-      width: "100%",
-      borderBottom: "2px solid #00262B",
-      borderRadius: "0px",
-      py: "10px",
-    },
-    bookmarkBox: {
-      display: "flex",
-      alignItems: "center",
-      cursor: "pointer",
-    },
-    bookmarkIcon: {
-      mr: 1,
-      mt: 1,
-    },
-    bottomNextPrevBtnContainer: {
-      display: "flex",
-      justifyContent: "center",
-      mb: 5,
-    },
-    bottomPrevBtn: {
-      px: 5,
-      py: "10px",
-      border: "1px solid #EAEAEA",
-      mx: "2px",
-      "&: hover": {
-        bgcolor: "#454545",
-        color: "#fff",
-      },
-    },
-    bottomNextBtn: {
-      px: 5,
-      py: "10px",
-      border: "1px solid #EAEAEA",
-      mx: "2px",
-      width: "400px",
-      "&: hover": {
-        bgcolor: "#00262b",
-        color: "#fff",
-      },
-    },
-  };
-
   const dispatch = useDispatch();
 
   const lessons: ModuleContent[] = useSelector(
@@ -93,7 +41,12 @@ const LessonQuiz = () => {
   let staleLesson = lessons.find(
     (lesson: any) => lesson.id.toString() !== routeID
   );
-  let updatedQuiz = { ...lesson, quizContent: clonedQuizData };
+
+  let updatedQuiz = {
+    ...lesson,
+    quizContent: clonedQuizData,
+    isCompleted: true,
+  };
   let updatedState = [staleLesson, updatedQuiz];
 
   const saveBtn = () => {
@@ -155,7 +108,59 @@ const LessonQuiz = () => {
     router.push(prevRoute);
   };
 
-  //
+  // Styles Start
+  const Styles = {
+    topNextPrevContainer: {
+      display: "flex",
+      justifyContent: "space-between",
+      borderBottom: "1px solid #eaeaea",
+    },
+    topNextPrevBtn: { px: 5, py: "10px" },
+    nextPrevIcon: { fontSize: "0.8rem", mx: 1 },
+    saveBtn: {
+      bgcolor: `${lesson?.isCompleted ? "#EEF7E4" : ""}`,
+      width: "100%",
+      borderBottom: "2px solid #00262B",
+      borderRadius: "0px",
+      py: "10px",
+    },
+    bookmarkBox: {
+      display: "flex",
+      alignItems: "center",
+      cursor: "pointer",
+    },
+    bookmarkIcon: {
+      mr: 1,
+      mt: 1,
+    },
+    bottomNextPrevBtnContainer: {
+      display: "flex",
+      justifyContent: "center",
+      mb: 5,
+    },
+    bottomPrevBtn: {
+      px: 5,
+      py: "10px",
+      border: "1px solid #EAEAEA",
+      mx: "2px",
+      "&: hover": {
+        bgcolor: "#454545",
+        color: "#fff",
+      },
+    },
+    bottomNextBtn: {
+      px: 5,
+      py: "10px",
+      border: "1px solid #EAEAEA",
+      mx: "2px",
+      width: "400px",
+      "&: hover": {
+        bgcolor: "#00262b",
+        color: "#fff",
+      },
+    },
+  };
+  // Styles End
 
   if (!lesson) {
     return <h1>Loading...</h1>;
@@ -176,8 +181,11 @@ const LessonQuiz = () => {
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.saveBtn}>
-            <SaveIcon sx={{ color: "#0D7D4D" }} />
-            <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            {lesson.isCompleted ? (
+              <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            ) : (
+              <SaveIcon sx={{ color: "#0D7D4D" }} />
+            )}
           </Button>
           <Button sx={Styles.topNextPrevBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
