@@ -7,24 +7,25 @@ import SaveIcon from "@mui/icons-material/Save";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import { AboutCourse } from "datatypes/coursetypes";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import { useRouter } from "next/router";
 import LessonBreadcrumbs from "./LessonBreadcrumbs";
 
 const LessonAbout = () => {
-  const lessons: AboutCourse[] = useSelector(
-    (state: State) => state.courses.aboutLessons
-  );
-  // console.log(lessons);
+  const dispatch = useDispatch();
 
   const router = useRouter();
   const routeID = router.query.about;
 
+  const lessons: AboutCourse[] = useSelector(
+    (state: State) => state.courses.aboutLessons
+  );
+
   const lesson = lessons.find(
     (lesson: any) => lesson.id.toString() === routeID
   );
-  // ----------------------------------------------------------
+
   const courses = useSelector((state: State) => state.courses.courseData[0]);
   const nextModuleBtn = () => {
     let aboutRoutes: any[] = [];
@@ -42,6 +43,19 @@ const LessonAbout = () => {
         allRouteLessonTypeIndex.push(eachMod.type);
       });
     });
+
+    // updated is completed
+    let staleLessons = lessons.find(
+      (lesson: any) => lesson.id.toString() !== routeID
+    );
+    let updatedIsComplete = { ...lesson, isCompleted: true };
+    let updatedState = [staleLessons, updatedIsComplete];
+
+    dispatch({
+      type: "ABOUT_LESSON_FETCH",
+      payload: updatedState,
+    });
+    // updated is completed end
 
     let currentRouteIndex = aboutRoutes.indexOf(routeID);
 
@@ -93,7 +107,7 @@ const LessonAbout = () => {
     topNextPrevBtn: { px: 5, py: "10px" },
     nextPrevIcon: { fontSize: "0.8rem", mx: 1 },
     saveBtn: {
-      bgcolor: "#EEF7E4",
+      bgcolor: `${lesson?.isCompleted ? "#EEF7E4" : ""}`,
       width: "100%",
       borderBottom: "2px solid #00262B",
       borderRadius: "0px",
@@ -168,8 +182,11 @@ const LessonAbout = () => {
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.saveBtn}>
-            <SaveIcon sx={{ color: "#0D7D4D" }} />
-            <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            {lesson.isCompleted ? (
+              <CheckRoundedIcon sx={{ color: "#0D7D4D" }} />
+            ) : (
+              <SaveIcon sx={{ color: "#0D7D4D" }} />
+            )}
           </Button>
           <Button sx={Styles.topNextPrevBtn} onClick={nextModuleBtn}>
             Next <ArrowForwardIosIcon sx={Styles.nextPrevIcon} />
