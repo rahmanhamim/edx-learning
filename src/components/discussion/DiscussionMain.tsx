@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import React from "react";
+import DiscussionPosts from "./DiscussionPosts";
 import DiscussionTopBar from "./DiscussionTopBar";
 import DiscussionUpgradeNotify from "./DiscussionUpgradeNotify";
 
@@ -16,6 +17,7 @@ const DiscussionMain = () => {
     >
       <DiscussionTopBar />
       <DiscussionUpgradeNotify />
+      <DiscussionPosts />
     </Container>
   );
 };
