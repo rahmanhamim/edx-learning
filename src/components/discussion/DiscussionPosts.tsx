@@ -1,8 +1,9 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import { useRouter } from "next/router";
+import { Today } from "@mui/icons-material";
 
 export interface FaqData {
   title: string;
@@ -12,8 +13,6 @@ export interface FaqData {
 
 const DiscussionPosts = () => {
   const [faqData, setfaqData] = useState<FaqData[]>([]);
-
-  const router = useRouter();
 
   useEffect(() => {
     fetch("/faqData.json")
@@ -26,6 +25,40 @@ const DiscussionPosts = () => {
   useEffect(() => {
     setSingleItem(faqData[0]);
   }, [faqData]);
+
+  // ------------------ comments
+
+  let commentsData = [
+    {
+      username: "chibuike_edochie",
+      date: "20-Mar-22",
+      comment: "Thanks for the information and the provided alternative.",
+    },
+    {
+      username: "kwesten",
+      date: "23-May-22",
+      comment:
+        "I cannot find the 'get started' button. I managed to start the 30 days trial but keep turning in circles trying to find out how to get started. My screen just doesn't look like the example :( I always end up here",
+    },
+  ];
+
+  const [liveCommentData, setLiveCommentData] = useState(commentsData);
+  const [commentText, setCommentText] = useState("");
+
+  const addResponseBtn = () => {
+    if (commentText === "") {
+      alert("please enter your comment");
+    }
+    const newComment = {
+      username: "anonymous",
+      date: "Today",
+      comment: commentText,
+    };
+    setLiveCommentData([...liveCommentData, newComment]);
+    console.log(liveCommentData);
+  };
+
+  // --------------------------------
 
   if (!singleItem) {
     return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
@@ -112,6 +145,35 @@ const DiscussionPosts = () => {
             }}
             dangerouslySetInnerHTML={{ __html: singleItem.postContent }}
           ></Box>
+          {/* comments below */}
+          <Box sx={{ border: "1px solid #DEE2E6", minHeight: "10vh", my: 4 }}>
+            {liveCommentData.map((comment, index) => (
+              <Box key={index} sx={{ borderBottom: "1px solid #DEE2E6" }}>
+                <Box sx={{ p: 3 }}>
+                  <Typography sx={{ color: "#016EA8", fontSize: ".8rem" }}>
+                    {comment.username}
+                  </Typography>
+                  <Typography sx={{ color: "#4B4B4B", fontSize: ".8rem" }}>
+                    {comment.date}
+                  </Typography>
+                  <Typography>{comment.comment}</Typography>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+          <Box>
+            <textarea
+              name=""
+              id=""
+              cols={30}
+              rows={6}
+              style={{ width: "100%", fontSize: "1rem" }}
+              onChange={(e) => setCommentText(e.target.value)}
+            ></textarea>
+            <Button variant="contained" onClick={addResponseBtn}>
+              Add Response
+            </Button>
+          </Box>
         </Grid>
       </Grid>
     </Box>
