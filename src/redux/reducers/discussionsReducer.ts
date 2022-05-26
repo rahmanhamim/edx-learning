@@ -1,16 +1,16 @@
 const initialState = {
-  comments: [],
+  discussionsData: [],
 };
 
-export const commentsReducer = (
+export const discussionsReducer = (
   state: any = initialState,
   action: any
 ): any => {
   switch (action.type) {
-    case "COMMENTS_FETCH":
+    case "DISCUSSIONS_FETCH":
       return {
         ...state,
-        comments: action.payload,
+        discussionsData: action.payload,
       };
 
     default:

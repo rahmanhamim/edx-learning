@@ -1,24 +1,38 @@
 import DiscussionMain from "components/discussion/DiscussionMain";
 import { GetStaticProps } from "next";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "redux/reducers";
 
 interface Props {
-  comments: CommentData[];
-}
-interface CommentData {
-  username: string;
-  comment: string;
-  date: string;
+  discussionsData: DiscussionsData[];
 }
 
-const DiscussionPage = ({ comments }: Props) => {
+export interface DiscussionsData {
+  title: string;
+  id: number;
+  postContent: string;
+  comments: Comment[];
+}
+export interface Comment {
+  username: string;
+  date: string;
+  comment: string;
+}
+
+const DiscussionPage = ({ discussionsData }: Props) => {
   const dispatch = useDispatch();
 
-  dispatch({
-    type: "COMMENTS_FETCH",
-    payload: comments,
-  });
+  const discussions: DiscussionsData[] = useSelector(
+    (state: State) => state.discussionsData.discussionsData
+  );
+
+  if (discussions.length === 0) {
+    dispatch({
+      type: "DISCUSSIONS_FETCH",
+      payload: discussionsData,
+    });
+  }
 
   return <DiscussionMain />;
 };
@@ -26,12 +40,12 @@ const DiscussionPage = ({ comments }: Props) => {
 export default DiscussionPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api/comments");
-  const comments: CommentData[] = await res.json();
+  const res = await fetch("https://jsonkeeper.com/b/ZR1V");
+  const discussionsData: DiscussionsData[] = await res.json();
 
   return {
     props: {
-      comments,
+      discussionsData,
     },
   };
 };

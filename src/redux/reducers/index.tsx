@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import { commentsReducer } from "./commentsReducer";
+import { discussionsReducer } from "./discussionsReducer";
 import { courseReducer } from "./courseReducer";
 
 const reducers = combineReducers({
   courses: courseReducer,
-  commentsData: commentsReducer,
+  discussionsData: discussionsReducer,
 });
 
 export default reducers;

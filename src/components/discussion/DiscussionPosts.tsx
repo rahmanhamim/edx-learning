@@ -1,68 +1,71 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
-import { useRouter } from "next/router";
-import { Today } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "redux/reducers";
 
-export interface FaqData {
+export interface DiscussionsData {
   title: string;
   id: number;
   postContent: string;
+  comments: Comment[];
+}
+export interface Comment {
+  username: string;
+  date: string;
+  comment: string;
 }
 
 const DiscussionPosts = () => {
-  const [faqData, setfaqData] = useState<FaqData[]>([]);
+  const dispatch = useDispatch();
 
+  const discussions: DiscussionsData[] = useSelector(
+    (state: State) => state.discussionsData.discussionsData
+  );
+
+  discussions.sort(function (a, b) {
+    return a.id - b.id;
+  });
+
+  const [singleItem, setSingleItem] = useState<DiscussionsData>();
+  const [currentId, setCurrentId] = useState(discussions[0].id);
+
+  const currentItem = discussions.find((item) => item.id == currentId);
   useEffect(() => {
-    fetch("/faqData.json")
-      .then((res) => res.json())
-      .then((data) => setfaqData(data));
-  }, []);
+    setSingleItem(currentItem);
+  }, [currentItem]);
 
-  const [singleItem, setSingleItem] = useState<FaqData>();
-
-  useEffect(() => {
-    setSingleItem(faqData[0]);
-  }, [faqData]);
-
-  // ------------------ comments
-
-  let commentsData = [
-    {
-      username: "chibuike_edochie",
-      date: "20-Mar-22",
-      comment: "Thanks for the information and the provided alternative.",
-    },
-    {
-      username: "kwesten",
-      date: "23-May-22",
-      comment:
-        "I cannot find the 'get started' button. I managed to start the 30 days trial but keep turning in circles trying to find out how to get started. My screen just doesn't look like the example :( I always end up here",
-    },
-  ];
-
-  const [liveCommentData, setLiveCommentData] = useState(commentsData);
   const [commentText, setCommentText] = useState("");
-
-  const addResponseBtn = () => {
-    if (commentText === "") {
-      alert("please enter your comment");
-    }
-    const newComment = {
-      username: "anonymous",
-      date: "Today",
-      comment: commentText,
-    };
-    setLiveCommentData([...liveCommentData, newComment]);
-    console.log(liveCommentData);
-  };
-
-  // --------------------------------
 
   if (!singleItem) {
     return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
   }
+
+  // console.log(currentItem, "currentItemsss");
+
+  const otherDatas = discussions.find((item) => item.id !== currentId);
+
+  const updateComment = () => {
+    const updatedComment = {
+      username: "anonymous",
+      date: "today",
+      comment: commentText,
+    };
+    setCommentText("");
+
+    const currentCommentUpdated = {
+      ...currentItem,
+      comments: [...currentItem!.comments, updatedComment],
+    };
+
+    const updatedState = [otherDatas, currentCommentUpdated];
+
+    dispatch({
+      type: "DISCUSSIONS_FETCH",
+      payload: updatedState,
+    });
+  };
 
   return (
     <Box sx={{ px: 3 }}>
@@ -96,7 +99,7 @@ const DiscussionPosts = () => {
                 border: "1px solid #DEE2E6",
               }}
             >
-              {faqData.map((post) => (
+              {discussions.map((post) => (
                 <Box
                   key={post.title}
                   sx={{
@@ -106,7 +109,7 @@ const DiscussionPosts = () => {
                     alignItems: "center",
                     cursor: "pointer",
                   }}
-                  onClick={() => setSingleItem(post)}
+                  onClick={() => setCurrentId(post.id)}
                 >
                   <QuestionAnswerRoundedIcon
                     sx={{ fontSize: ".9rem", mr: 1 }}
@@ -147,9 +150,9 @@ const DiscussionPosts = () => {
           ></Box>
           {/* comments below */}
           <Box sx={{ border: "1px solid #DEE2E6", minHeight: "10vh", my: 4 }}>
-            {liveCommentData.map((comment, index) => (
-              <Box key={index} sx={{ borderBottom: "1px solid #DEE2E6" }}>
-                <Box sx={{ p: 3 }}>
+            <Box sx={{ borderBottom: "1px solid #DEE2E6" }}>
+              {singleItem.comments.map((comment, index) => (
+                <Box key={index} sx={{ p: 3 }}>
                   <Typography sx={{ color: "#016EA8", fontSize: ".8rem" }}>
                     {comment.username}
                   </Typography>
@@ -158,8 +161,8 @@ const DiscussionPosts = () => {
                   </Typography>
                   <Typography>{comment.comment}</Typography>
                 </Box>
-              </Box>
-            ))}
+              ))}
+            </Box>
           </Box>
           <Box>
             <textarea
@@ -169,8 +172,9 @@ const DiscussionPosts = () => {
               rows={6}
               style={{ width: "100%", fontSize: "1rem" }}
               onChange={(e) => setCommentText(e.target.value)}
+              value={commentText}
             ></textarea>
-            <Button variant="contained" onClick={addResponseBtn}>
+            <Button variant="contained" onClick={updateComment}>
               Add Response
             </Button>
           </Box>
