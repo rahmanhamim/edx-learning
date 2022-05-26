@@ -1,10 +1,16 @@
 import { Container } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
+import { State } from "redux/reducers";
 import DiscussionPosts from "./DiscussionPosts";
 import DiscussionTopBar from "./DiscussionTopBar";
 import DiscussionUpgradeNotify from "./DiscussionUpgradeNotify";
 
 const DiscussionMain = () => {
+  const comments = useSelector((state: State) => state.commentsData.comments);
+
+  console.log(comments, "comments data");
+
   return (
     <Container
       maxWidth="xl"
