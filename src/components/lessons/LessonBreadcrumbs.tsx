@@ -14,6 +14,7 @@ const LessonBreadcrumbs = ({ moduleTitle, title }: Props) => {
       mt: 5,
       display: "flex",
       alignItems: "center",
+      flexWrap: "wrap",
     },
     courseText: {
       display: "flex",

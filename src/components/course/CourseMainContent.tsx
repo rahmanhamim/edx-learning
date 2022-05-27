@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 import CourseMainModulesList from "./CourseMainModulesList";
 
@@ -31,9 +32,14 @@ const CourseMainContent = () => {
         <Typography variant="h6" sx={Styles.pickCourseText}>
           Pick up where you left off
         </Typography>
-        <Button variant="contained" sx={Styles.startCourseBtn}>
-          Start Course
-        </Button>
+        {/* this link is static */}
+        <Link href="/lessons/about/aboutcr1">
+          <a>
+            <Button variant="contained" sx={Styles.startCourseBtn}>
+              Start Course
+            </Button>
+          </a>
+        </Link>
       </Box>
       <CourseMainModulesList />
     </Box>
