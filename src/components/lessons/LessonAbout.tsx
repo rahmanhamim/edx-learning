@@ -27,6 +27,7 @@ const LessonAbout = () => {
   );
 
   const courses = useSelector((state: State) => state.courses.courseData[0]);
+
   const nextModuleBtn = () => {
     let aboutRoutes: any[] = [];
     let allRouteAboutTypeIndex: any[] = [];
@@ -56,6 +57,18 @@ const LessonAbout = () => {
       payload: updatedState,
     });
     // updated is completed end
+    // update is completed to main course in redux
+    courses?.aboutCourse?.map((item: any) => {
+      if (item.id === routeID) {
+        item.isCompleted = true;
+      }
+    });
+    const updatedCourses = [courses];
+    dispatch({
+      type: "COURSE_FETCH",
+      payload: updatedCourses,
+    });
+    // update is completed to main course in end redux
 
     let currentRouteIndex = aboutRoutes.indexOf(routeID);
 

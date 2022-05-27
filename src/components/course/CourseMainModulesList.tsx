@@ -106,7 +106,11 @@ const CourseMainModulesList = () => {
         ------------------------ */}
         {course.aboutCourse.map((about) => (
           <AccordionDetails key={about.id} sx={Styles.accordionDetails}>
-            <CheckCircleOutlineIcon sx={Styles.circleIcon} />
+            {about.isCompleted ? (
+              <CheckCircleIcon sx={{ mr: 2, color: "#0d7d4d" }} />
+            ) : (
+              <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+            )}
             <Link href={`/lessons/about/${about.id}`}>
               <a style={{ color: "#00688D" }}>{about.title}</a>
             </Link>
