@@ -46,8 +46,6 @@ const ProgressMain = () => {
 
   let progressPercentage = (100 / totalModules) * userCompletedModules;
 
-  console.log(progressPercentage);
-
   return (
     <Box
       sx={{

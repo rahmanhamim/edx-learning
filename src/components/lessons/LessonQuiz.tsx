@@ -37,6 +37,8 @@ const LessonQuiz = () => {
     setClonedQuizData(clonedState);
   }, [quizData]);
 
+  const courses = useSelector((state: State) => state.courses.courseData[0]);
+
   // save and update quiz answer to redux
   let staleLesson = lessons.find(
     (lesson: any) => lesson.id.toString() !== routeID
@@ -55,10 +57,23 @@ const LessonQuiz = () => {
       payload: updatedState,
     });
     alert("answer saved");
+
+    // update is completed to main course in redux
+    courses?.modules?.map((item: any) =>
+      item.moduleContent.map((obj: any) => {
+        if (obj.id === routeID) {
+          obj.isCompleted = true;
+        }
+      })
+    );
+    const updatedCourses = [courses];
+    dispatch({
+      type: "COURSE_FETCH",
+      payload: updatedCourses,
+    });
+    // update is completed to main course in end redux
   };
   // save and update quiz answer to redux end
-
-  const courses = useSelector((state: State) => state.courses.courseData[0]);
 
   const nextModuleBtn = () => {
     let allRoutes: any[] = [];

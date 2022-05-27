@@ -9,6 +9,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Course } from "datatypes/coursetypes";
 import { useSelector } from "react-redux";
 import { State } from "redux/reducers";
@@ -132,7 +133,12 @@ const CourseMainModulesList = () => {
               key={lessons.id}
               sx={Styles.moduleAccordionDetails}
             >
-              <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+              {lessons.isCompleted ? (
+                <CheckCircleIcon sx={{ mr: 2, color: "#0d7d4d" }} />
+              ) : (
+                <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+              )}
+
               {lessons.type === "html" && (
                 <Link href={`/lessons/html/${lessons.id}`}>
                   <a style={{ color: "#00688D" }}>{lessons.title}</a>

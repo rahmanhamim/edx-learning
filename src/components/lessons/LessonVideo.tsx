@@ -31,8 +31,6 @@ const LessonVideo = () => {
   // ---------------------------------
   const courses = useSelector((state: State) => state.courses.courseData[0]);
 
-  console.log(courses);
-
   const nextModuleBtn = () => {
     let allRoutes: any[] = [];
     let allRouteLessonTypeIndex: any[] = [];
@@ -65,6 +63,22 @@ const LessonVideo = () => {
       payload: updatedState,
     });
     // updated is completed end
+    // update is completed to main course in redux
+    courses?.modules?.map((item: any) =>
+      item.moduleContent.map((obj: any) => {
+        if (obj.id === routeID) {
+          obj.isCompleted = true;
+        }
+      })
+    );
+    const updatedCourses = [courses];
+    console.log(updatedCourses);
+
+    dispatch({
+      type: "COURSE_FETCH",
+      payload: updatedCourses,
+    });
+    // update is completed to main course in end redux
 
     router.push(nextRoute);
   };
