@@ -8,7 +8,7 @@ const CourseMainContent = () => {
       boxShadow: "1px 1px 2px 1px rgba(215,215,215,.5)",
       p: 3,
       borderRadius: "5px",
-      display: "flex",
+      display: { xs: "block", sm: "flex" },
       justifyContent: "space-between",
     },
     pickCourseText: {
@@ -21,6 +21,7 @@ const CourseMainContent = () => {
       "&: hover": { bgcolor: "secondary.dark" },
       p: { xs: ".5rem 1rem", md: ".5rem 2rem" },
       fontSize: ".8rem",
+      mt: { xs: 1, sm: 0 },
     },
   };
 

@@ -84,6 +84,7 @@ const NavigationBar = () => {
             display: "flex",
             justifyContent: "space-between",
             padding: "0 !important",
+            mt: { xs: 2, sm: 0 },
           }}
         >
           <Box
