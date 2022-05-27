@@ -63,6 +63,22 @@ const LessonHtml = () => {
     });
     // updated is completed end
 
+    // update is completed to main course in redux
+    courses?.modules?.map((item: any) =>
+      item.moduleContent.map((obj: any) => {
+        if (obj.id === routeID) {
+          obj.isCompleted = true;
+        }
+      })
+    );
+    const updatedCourses = [courses];
+
+    dispatch({
+      type: "COURSE_FETCH",
+      payload: updatedCourses,
+    });
+    // update is completed to main course in end redux
+
     router.push(nextRoute);
   };
   const prevModuleBtn = () => {

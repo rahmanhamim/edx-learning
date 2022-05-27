@@ -31,6 +31,8 @@ const LessonVideo = () => {
   // ---------------------------------
   const courses = useSelector((state: State) => state.courses.courseData[0]);
 
+  console.log(courses);
+
   const nextModuleBtn = () => {
     let allRoutes: any[] = [];
     let allRouteLessonTypeIndex: any[] = [];
