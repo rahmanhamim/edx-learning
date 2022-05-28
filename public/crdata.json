@@ -3,6 +3,7 @@
     "id": 1,
     "progress": 0,
     "title": "Python Basics for Data Science",
+    "isAboutSectionComplete": false,
     "aboutCourse": [
       {
         "id": "aboutcr1",
@@ -37,6 +38,7 @@
       {
         "id": "cr1mod1",
         "title": "Module 1- Python Basics",
+        "isCompleted": false,
         "moduleContent": [
           {
             "type": "html",
@@ -138,6 +140,7 @@
       {
         "id": "cr1mod2",
         "title": "Module 2 - Python Data Structures",
+        "isCompleted": false,
         "moduleContent": [
           {
             "type": "html",

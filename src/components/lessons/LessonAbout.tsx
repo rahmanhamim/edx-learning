@@ -61,6 +61,12 @@ const LessonAbout = () => {
     courses?.aboutCourse?.map((item: any) => {
       if (item.id === routeID) {
         item.isCompleted = true;
+        if (
+          courses.aboutCourse.length - 1 ===
+          courses.aboutCourse.indexOf(item)
+        ) {
+          courses.isAboutSectionComplete = true;
+        }
       }
     });
     const updatedCourses = [courses];

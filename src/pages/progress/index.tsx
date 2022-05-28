@@ -32,7 +32,7 @@ export default ProgressPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   // const res = await fetch("https://jsonkeeper.com/b/4S3V");
-  const res = await fetch("https://jsonkeeper.com/b/I6ZT");
+  const res = await fetch("https://jsonkeeper.com/b/EWB1");
   const courses: Course[] = await res.json();
 
   return {

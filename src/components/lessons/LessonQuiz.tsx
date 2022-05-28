@@ -63,6 +63,12 @@ const LessonQuiz = () => {
       item.moduleContent.map((obj: any) => {
         if (obj.id === routeID) {
           obj.isCompleted = true;
+          if (
+            item.moduleContent.indexOf(obj) ==
+            item.moduleContent.length - 1
+          ) {
+            item.isCompleted = true;
+          }
         }
       })
     );

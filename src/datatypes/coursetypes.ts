@@ -2,6 +2,7 @@ export interface Course {
   id: number;
   progress: number;
   title: string;
+  isAboutSectionComplete: boolean;
   aboutCourse: AboutCourse[];
   modules: Module[];
 }
@@ -18,6 +19,7 @@ export interface AboutCourse {
 export interface Module {
   id: string;
   title: string;
+  isCompleted: boolean;
   moduleContent: ModuleContent[];
 }
 

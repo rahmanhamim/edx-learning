@@ -98,7 +98,12 @@ const CourseMainModulesList = () => {
           id="panel1a-header"
           sx={Styles.aboutCourseSummary}
         >
-          <CheckCircleOutlineIcon sx={Styles.circleIcon} />
+          {course.isAboutSectionComplete ? (
+            <CheckCircleIcon sx={{ mr: 2, color: "#0d7d4d" }} />
+          ) : (
+            <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+          )}
+
           <Typography sx={{ fontWeight: "bold" }}>About This Course</Typography>
         </AccordionSummary>
         {/* --------------------- 
@@ -128,7 +133,12 @@ const CourseMainModulesList = () => {
             id="panel1a-header"
             sx={Styles.moduleAccordionSummary}
           >
-            <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+            {module.isCompleted ? (
+              <CheckCircleIcon sx={{ mr: 2, color: "#0d7d4d" }} />
+            ) : (
+              <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
+            )}
+
             <Typography sx={{ fontWeight: "bold" }}>{module?.title}</Typography>
           </AccordionSummary>
 
