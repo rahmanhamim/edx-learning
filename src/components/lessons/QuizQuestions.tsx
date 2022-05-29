@@ -60,7 +60,7 @@ const QuizQuestions = ({ quizData, setClonedQuizData }: Props) => {
   return (
     <>
       {quizData.map((quiz, index) => (
-        <Box key={index} sx={{ m: 5, color: "#41464B" }}>
+        <Box key={index} sx={{ m: { xs: 0, sm: 5 }, color: "#41464B" }}>
           <Typography variant="h5" sx={{ fontSize: "1.8rem" }}>
             Question {index + 1}
           </Typography>
