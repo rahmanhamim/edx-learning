@@ -13,6 +13,7 @@ import { State } from "redux/reducers";
 import _ from "lodash";
 import { ModuleContent, QuizData } from "datatypes/coursetypes";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 const LessonQuiz = () => {
   const dispatch = useDispatch();
@@ -56,7 +57,6 @@ const LessonQuiz = () => {
       type: "QUIZ_LESSON_FETCH",
       payload: updatedState,
     });
-    alert("answer saved");
 
     // update is completed to main course in redux
     courses?.modules?.map((item: any) =>
@@ -77,8 +77,15 @@ const LessonQuiz = () => {
       type: "COURSE_FETCH",
       payload: updatedCourses,
     });
+    Swal.fire({
+      icon: "success",
+      title: "Saved!",
+      timer: 1200,
+      showConfirmButton: false,
+    });
     // update is completed to main course in end redux
   };
+
   // save and update quiz answer to redux end
 
   const nextModuleBtn = () => {
@@ -95,7 +102,13 @@ const LessonQuiz = () => {
     let currentRouteIndex = allRoutes.indexOf(routeID);
 
     if (allRoutes.length - 1 === currentRouteIndex) {
-      alert("lesson finished");
+      Swal.fire({
+        icon: "success",
+        title: "Congratulations!",
+        text: "All lessons completed",
+        confirmButtonColor: "#00688C",
+      });
+
       return;
     }
     let nextRoute = `/lessons/${
