@@ -44,18 +44,52 @@ a {
 /* .react-player > div {
 } */
 
-@keyframes SHOW-BOX {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+.progress-container {
+  width: 160px;
+  height: 160px;
+  background: #f2f0ef;
+  position: relative;
+  border-radius: 50%;
+}
+.outer {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  /* box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgba(184, 187, 201, 0.7); */
+  padding: 20px;
+}
+.inner {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  background-color: #fff;
+  /* box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 6px -1px rgba(184, 187, 201, 0.7),
+    -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+    0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.show-box {
-  animation: SHOW-BOX 1s ease;
+circle {
+  fill: none;
+  /* stroke: #006081; */
+  /* stroke: url(#GradientColor); */
+  stroke: #006081;
+  stroke-width: 20px;
+  stroke-dasharray: 440;
+  /* animation: progressanim 2s linear forwards; */
 }
+.stroke-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* @keyframes progressanim {
+  100% {
+    stroke-dashoffset: 165;
+  }
+} */

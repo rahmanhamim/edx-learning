@@ -1,8 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Course } from "datatypes/coursetypes";
 import React from "react";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import { useSelector } from "react-redux";
 import { State } from "redux/reducers";
 
@@ -46,6 +44,8 @@ const ProgressMain = () => {
 
   let progressPercentage = (100 / totalModules) * userCompletedModules;
 
+  let circleStrokeCalc = 440 - 440 * (progressPercentage / 100);
+
   return (
     <Box
       sx={{
@@ -84,7 +84,64 @@ const ProgressMain = () => {
           my: { xs: 2, md: 0 },
         }}
       >
+        {/* ----------------------------------------------- */}
         <Box
+          className="progress-container"
+          sx={{ mx: "auto", transform: "rotate(-170deg)" }}
+        >
+          <Box className="outer">
+            <Box className="inner">
+              <Box id="number" sx={{ transform: "rotate(170deg)" }}>
+                <Typography
+                  sx={{
+                    fontSize: "1.9rem",
+                    ml: "10px",
+                    fontWeight: "bold",
+                    color: "#425B5F",
+                  }}
+                >
+                  {progressPercentage}%
+                </Typography>
+                <Typography sx={{ mt: "-10px", fontSize: ".9rem" }}>
+                  completed
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          <svg
+            className="stroke-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            width="160px"
+            height="160px"
+          >
+            <defs>
+              <linearGradient id="GradientColor">
+                <stop offset="0%" stopColor="#e91e63" />
+                <stop offset="100%" stopColor="#673ab7" />
+              </linearGradient>
+            </defs>
+            <circle
+              style={{
+                strokeDashoffset: `${circleStrokeCalc}`,
+              }}
+              cx="80"
+              cy="80"
+              r="70"
+              strokeLinecap="square"
+            />
+          </svg>
+        </Box>
+        {/* ------------------------------------------------ */}
+      </Box>
+    </Box>
+  );
+};
+
+export default ProgressMain;
+
+{
+  /* <Box
           sx={{
             position: "relative",
             width: 150,
@@ -105,6 +162,8 @@ const ProgressMain = () => {
               },
             }}
           >
+          // import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+          // import "react-circular-progressbar/dist/styles.css";
             <CircularProgressbar
               styles={buildStyles({
                 pathColor: "#006081",
@@ -117,10 +176,5 @@ const ProgressMain = () => {
               strokeWidth={15}
             />
           </Box>
-        </Box>
-      </Box>
-    </Box>
-  );
-};
-
-export default ProgressMain;
+        </Box> */
+}
