@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Fade, Grid, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
@@ -17,7 +17,11 @@ export interface Comment {
   comment: string;
 }
 
-const DiscussionPosts = () => {
+interface Props {
+  showTopic: boolean;
+}
+
+const DiscussionPosts = ({ showTopic }: Props) => {
   const dispatch = useDispatch();
 
   const discussions: DiscussionsData[] = useSelector(
@@ -70,59 +74,66 @@ const DiscussionPosts = () => {
   return (
     <Box sx={{ px: 3 }}>
       <Grid container spacing={2} sx={{ mb: 2 }}>
-        <Grid item xs={3}>
-          <Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                px: 2,
-                py: 1,
-                bgcolor: "#F2F0EF",
-                borderBottom: "1px solid #DEE2E6",
-                "*": {
-                  fontSize: "12px",
-                },
-              }}
-            >
-              <Typography>
-                Show all posts <KeyboardArrowDownIcon />
-              </Typography>
-              <Typography>
-                by recent activity <KeyboardArrowDownIcon />
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                height: "500px",
-                overflowY: "scroll",
-                border: "1px solid #DEE2E6",
-              }}
-            >
-              {discussions.map((post) => (
+        {showTopic && (
+          <Grid item xs={12} sm={3} sx={{ transition: "all 1s ease-in" }}>
+            <Fade in={showTopic} timeout={600}>
+              <Box>
                 <Box
-                  key={post.title}
                   sx={{
-                    p: 1,
-                    borderBottom: "1px solid #DEE2E6",
                     display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
+                    justifyContent: "space-between",
+                    px: 2,
+                    py: 1,
+                    bgcolor: "#F2F0EF",
+                    borderBottom: "1px solid #DEE2E6",
+                    "*": {
+                      fontSize: "12px",
+                    },
                   }}
-                  onClick={() => setCurrentId(post.id)}
                 >
-                  <QuestionAnswerRoundedIcon
-                    sx={{ fontSize: ".9rem", mr: 1 }}
-                  />
-                  <Typography sx={{ fontWeight: "light", fontSize: ".9rem" }}>
-                    {post.title}
+                  <Typography>
+                    Show all posts <KeyboardArrowDownIcon />
+                  </Typography>
+                  <Typography>
+                    by recent activity <KeyboardArrowDownIcon />
                   </Typography>
                 </Box>
-              ))}
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={9}>
+                <Box
+                  sx={{
+                    height: { xs: "300px", sm: "500px" },
+                    overflowY: "scroll",
+                    border: "1px solid #DEE2E6",
+                  }}
+                >
+                  {discussions.map((post) => (
+                    <Box
+                      key={post.title}
+                      sx={{
+                        p: 1,
+                        borderBottom: "1px solid #DEE2E6",
+                        display: "flex",
+                        alignItems: "center",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setCurrentId(post.id)}
+                    >
+                      <QuestionAnswerRoundedIcon
+                        sx={{ fontSize: ".9rem", mr: 1 }}
+                      />
+                      <Typography
+                        sx={{ fontWeight: "light", fontSize: ".9rem" }}
+                      >
+                        {post.title}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            </Fade>
+          </Grid>
+        )}
+
+        <Grid item xs={12} sm={9}>
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
             {singleItem?.title}
           </Typography>

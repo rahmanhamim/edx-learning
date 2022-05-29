@@ -2,7 +2,11 @@ import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const DiscussionTopBar = () => {
+interface Props {
+  allTopicBtn: () => void;
+}
+
+const DiscussionTopBar = ({ allTopicBtn }: Props) => {
   const Styles = {
     btnStyles: {
       mr: 2,
@@ -36,34 +40,44 @@ const DiscussionTopBar = () => {
             fontSize: "1rem",
           },
         }}
+        onClick={allTopicBtn}
       >
         <MenuIcon sx={{ mr: 1 }} />
         <Typography component="span">All Topics</Typography>
       </Typography>
       <Box
         sx={{
-          display: "flex",
+          display: { xs: "block", sm: "flex" },
           alignItems: "center",
           "*": {
             fontSize: ".8rem",
           },
         }}
       >
-        <Button variant="contained" sx={{ ...Styles.btnStyles }}>
+        <Button
+          variant="contained"
+          sx={{ ...Styles.btnStyles, mt: { xs: 2, sm: 0 } }}
+        >
           Add Post
         </Button>
-        <input
-          type="text"
-          style={{
-            padding: "13px 5px",
-            border: "1px solid #DEE2E6",
-            borderRadius: "none",
-            fontSize: "1rem",
+        <Box
+          sx={{
+            my: { xs: 2 },
           }}
-        />
-        <Button variant="contained" sx={Styles.btnStyles}>
-          Search
-        </Button>
+        >
+          <input
+            type="text"
+            style={{
+              padding: "10.5px 5px 13px 5px",
+              border: "1px solid #DEE2E6",
+              borderRadius: "none",
+              fontSize: "1rem",
+            }}
+          />
+          <Button variant="contained" sx={Styles.btnStyles}>
+            Search
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

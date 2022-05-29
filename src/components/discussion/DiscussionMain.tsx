@@ -1,10 +1,18 @@
 import { Container } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import DiscussionPosts from "./DiscussionPosts";
 import DiscussionTopBar from "./DiscussionTopBar";
 import DiscussionUpgradeNotify from "./DiscussionUpgradeNotify";
 
 const DiscussionMain = () => {
+  const [showTopic, setShowTopic] = useState(true);
+
+  const allTopicBtn = () => {
+    setShowTopic(!showTopic);
+  };
+
+  console.log(showTopic);
+
   return (
     <Container
       maxWidth="xl"
@@ -15,9 +23,9 @@ const DiscussionMain = () => {
         padding: "0px !important",
       }}
     >
-      <DiscussionTopBar />
+      <DiscussionTopBar allTopicBtn={allTopicBtn} />
       <DiscussionUpgradeNotify />
-      <DiscussionPosts />
+      <DiscussionPosts showTopic={showTopic} />
     </Container>
   );
 };
