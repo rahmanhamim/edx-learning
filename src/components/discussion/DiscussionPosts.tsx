@@ -1,9 +1,10 @@
 import { Box, Button, Fade, Grid, Typography } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
+import { Editor } from "@tinymce/tinymce-react";
 
 export interface DiscussionsData {
   title: string;
@@ -46,9 +47,11 @@ const DiscussionPosts = ({ showTopic }: Props) => {
     return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
   }
 
-  // console.log(currentItem, "currentItemsss");
-
   const otherDatas = discussions.find((item) => item.id !== currentId);
+
+  const handleEditorChange = (content: any, editor: any) => {
+    setCommentText(content);
+  };
 
   const updateComment = () => {
     const updatedComment = {
@@ -170,13 +173,16 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                   <Typography sx={{ color: "#4B4B4B", fontSize: ".8rem" }}>
                     {comment.date}
                   </Typography>
-                  <Typography>{comment.comment}</Typography>
+                  {/* <Typography>{comment.comment}</Typography> */}
+                  <Typography
+                    dangerouslySetInnerHTML={{ __html: comment.comment }}
+                  ></Typography>
                 </Box>
               ))}
             </Box>
           </Box>
           <Box>
-            <textarea
+            {/* <textarea
               name=""
               id=""
               cols={30}
@@ -184,8 +190,22 @@ const DiscussionPosts = ({ showTopic }: Props) => {
               style={{ width: "100%", fontSize: "1rem" }}
               onChange={(e) => setCommentText(e.target.value)}
               value={commentText}
-            ></textarea>
-            <Button variant="contained" onClick={updateComment}>
+            ></textarea> */}
+            <Editor
+              apiKey="oyoide2nrtdzemizwpgefdmh9vdsr36o6higj971xx2f7f07"
+              init={{
+                icons: "thin",
+                placeholder: "Write your comment...",
+                height: 250,
+                menubar: true,
+                textcolor_rows: "4",
+                toolbar:
+                  "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent ",
+              }}
+              onEditorChange={handleEditorChange}
+              value={commentText}
+            />
+            <Button sx={{ mt: 1 }} variant="contained" onClick={updateComment}>
               Add Response
             </Button>
           </Box>

@@ -72,7 +72,6 @@ const LessonVideo = () => {
       })
     );
     const updatedCourses = [courses];
-    console.log(updatedCourses);
 
     dispatch({
       type: "COURSE_FETCH",

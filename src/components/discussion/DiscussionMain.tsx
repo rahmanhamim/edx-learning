@@ -11,8 +11,6 @@ const DiscussionMain = () => {
     setShowTopic(!showTopic);
   };
 
-  console.log(showTopic);
-
   return (
     <Container
       maxWidth="xl"
