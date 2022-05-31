@@ -31,6 +31,7 @@ const LessonAbout = () => {
   const nextModuleBtn = () => {
     let aboutRoutes: any[] = [];
     let allRouteAboutTypeIndex: any[] = [];
+
     courses.aboutCourse.forEach((about: any) => {
       aboutRoutes.push(about.id);
       allRouteAboutTypeIndex.push("about");

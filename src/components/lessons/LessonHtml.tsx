@@ -92,12 +92,18 @@ const LessonHtml = () => {
       });
     });
 
+    let aboutRoutes: any[] = [];
+    courses.aboutCourse.forEach((about: any) => {
+      aboutRoutes.push(about.id);
+    });
+
     let currentRouteIndex = allRoutes.indexOf(routeID);
 
     if (currentRouteIndex === 0) {
-      alert("This is first module");
+      router.push(`/lessons/about/${aboutRoutes[aboutRoutes.length - 1]}`);
       return;
     }
+
     let prevRoute = `/lessons/${
       allRouteLessonTypeIndex[currentRouteIndex - 1]
     }/${allRoutes[currentRouteIndex - 1]}`;
