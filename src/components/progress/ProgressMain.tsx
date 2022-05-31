@@ -111,7 +111,6 @@ const ProgressMain = () => {
                 </Box>
               </Box>
             </Box>
-            <div className="icon-st">Hel</div>
             <svg
               className="stroke-svg"
               xmlns="http://www.w3.org/2000/svg"
@@ -127,8 +126,7 @@ const ProgressMain = () => {
               </defs>
               <circle
                 style={{
-                  strokeDashoffset: `40`,
-                  // strokeDashoffset: `${circleStrokeCalc}`,
+                  strokeDashoffset: `${circleStrokeCalc}`,
                 }}
                 cx="80"
                 cy="80"
@@ -187,34 +185,7 @@ export default ProgressMain;
         </Box>
         
         // ----------------------------------------------
-
-         <Box className={styles.circular}>
-        <Box className={styles.inner}></Box>
-        <Box className={styles.outer}></Box>
-        <Box className={styles.numb}>0%</Box>
-        <Box className={styles.circle}>
-          <Box className={styles.dot}>
-            <span>
-              <LockIcon
-                sx={{
-                  fontSize: ".6rem",
-                  transform: "rotate(80deg)",
-                  color: "white",
-                  position: "absolute",
-                  top: "20%",
-                  left: "20%",
-                }}
-              />
-            </span>
-          </Box>
-          <Box className={`${styles.bar} ${styles.left}`}>
-            <Box className={styles.progress}></Box>
-          </Box>
-          <Box className={`${styles.bar} ${styles.right}`}>
-            <Box className={styles.progress}></Box>
-          </Box>
-        </Box>
-      </Box>
+        
         
         */
 }

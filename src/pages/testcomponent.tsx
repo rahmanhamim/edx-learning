@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Box, CircularProgress, Container } from "@mui/material";
 import React from "react";
 import styles from "../styles/TestComponent.module.css";
 
@@ -21,6 +21,10 @@ const TestComponent = () => {
           </div>
         </div>
       </div>
+
+      <Box>
+        <CircularProgress />
+      </Box>
     </Container>
   );
 };
