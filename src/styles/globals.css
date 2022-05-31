@@ -32,12 +32,20 @@ a {
 
 .react-player {
   width: 75% !important;
+  height: 450px !important;
   background-color: #000000;
 }
 
 @media only screen and (max-width: 900px) {
   .react-player {
     width: 100% !important;
+    height: 380px !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .react-player {
+    width: 100% !important;
+    max-height: 210px !important;
   }
 }
 
