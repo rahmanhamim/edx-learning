@@ -1,9 +1,8 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { Course } from "datatypes/coursetypes";
 import React from "react";
 import { useSelector } from "react-redux";
 import { State } from "redux/reducers";
-import styles from "../../styles/ProgressMain.module.css";
 import LockIcon from "@mui/icons-material/Lock";
 
 const ProgressMain = () => {
@@ -48,6 +47,8 @@ const ProgressMain = () => {
 
   let circleStrokeCalc = 440 - 440 * (progressPercentage / 100);
 
+  let iconRotateAngle = progressPercentage * 3.6;
+
   return (
     <>
       <Box
@@ -89,51 +90,91 @@ const ProgressMain = () => {
         >
           {/* ----------------------------------------------- */}
           <Box
-            className="progress-container"
-            sx={{ mx: "auto", transform: "rotate(-170deg)" }}
+            sx={{
+              position: "relative",
+              display: "inline-block",
+            }}
           >
-            <Box className="outer">
-              <Box className="inner">
-                <Box id="number" sx={{ transform: "rotate(170deg)" }}>
-                  <Typography
-                    sx={{
-                      fontSize: "1.9rem",
-                      ml: "10px",
-                      fontWeight: "bold",
-                      color: "#425B5F",
-                    }}
-                  >
-                    {progressPercentage}%
-                  </Typography>
-                  <Typography sx={{ mt: "-10px", fontSize: ".9rem" }}>
-                    completed
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-            <svg
-              className="stroke-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              version="1.1"
-              width="160px"
-              height="160px"
+            <CircularProgress
+              color="primary"
+              sx={{
+                color: "#fff",
+                position: "absolute",
+                zIndex: "102",
+                top: "49%",
+                left: "50%",
+                transform: "translate(-50%, -50%) !important",
+              }}
+              variant="determinate"
+              value={100}
+              size={131}
+              thickness={22}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                fontSize: "1.6rem",
+                fontWeight: "bold",
+                color: "#00262B",
+                zIndex: "200",
+              }}
             >
-              <defs>
-                <linearGradient id="GradientColor">
-                  <stop offset="0%" stopColor="#e91e63" />
-                  <stop offset="100%" stopColor="#673ab7" />
-                </linearGradient>
-              </defs>
-              <circle
-                style={{
-                  strokeDashoffset: `${circleStrokeCalc}`,
-                }}
-                cx="80"
-                cy="80"
-                r="70"
-                strokeLinecap="square"
-              />
-            </svg>
+              {progressPercentage}%
+              <Typography sx={{ fontSize: "0.7rem", mt: "-5px" }}>
+                complete
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                position: "absolute",
+                background:
+                  "linear-gradient(360deg,rgba(17, 10, 148, 0) 0%, rgba(55, 187, 23, 0) 51%, rgba(0, 0, 0, 1) 52%, rgba(0, 0, 0, 1) 100%)",
+                color: "#fff",
+                height: "180px",
+                left: "50%",
+                transform: `translateX(-50%) rotate(${iconRotateAngle}deg)`,
+                zIndex: 100,
+              }}
+            >
+              {progressPercentage < 100 && (
+                <LockIcon
+                  sx={{ padding: "2px", borderLeft: "2px solid #fff" }}
+                />
+              )}
+            </Box>
+            <CircularProgress
+              color="primary"
+              sx={{ color: "#F2F0EF" }}
+              variant="determinate"
+              value={100}
+              size={180}
+              thickness={6}
+            />
+            <CircularProgress
+              color="primary"
+              sx={{ color: "#00688C", position: "absolute", top: 0, left: 0 }}
+              variant="determinate"
+              value={progressPercentage}
+              size={180}
+              thickness={6}
+            />
+            <CircularProgress
+              color="primary"
+              sx={{
+                color: "#fff",
+                position: "absolute",
+                top: "-13px",
+                left: "-14px",
+                zIndex: "1000",
+              }}
+              variant="determinate"
+              value={100}
+              size={206}
+              thickness={3}
+            />
           </Box>
           {/* ------------------------------------------------ */}
         </Box>
@@ -145,47 +186,3 @@ const ProgressMain = () => {
 };
 
 export default ProgressMain;
-
-{
-  /* <Box
-          sx={{
-            position: "relative",
-            width: 150,
-            height: 150,
-            mx: "auto",
-          }}
-        >
-          <Box
-            sx={{
-              "&::before": {
-                content: "'completed'",
-                position: "absolute",
-                top: "58%",
-                left: "50%",
-                transform: "translateX(-50%)",
-                fontSize: ".8rem",
-                fontWeight: "light",
-              },
-            }}
-          >
-          // import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-          // import "react-circular-progressbar/dist/styles.css";
-            <CircularProgressbar
-              styles={buildStyles({
-                pathColor: "#006081",
-                trailColor: "#F2F0EF",
-                strokeLinecap: "butt",
-                textColor: "#425B5F",
-              })}
-              value={progressPercentage}
-              text={`${progressPercentage}%`}
-              strokeWidth={15}
-            />
-          </Box>
-        </Box>
-        
-        // ----------------------------------------------
-        
-        
-        */
-}
