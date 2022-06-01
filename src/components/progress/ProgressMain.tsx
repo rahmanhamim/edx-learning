@@ -88,11 +88,12 @@ const ProgressMain = () => {
             my: { xs: 2, md: 0 },
           }}
         >
-          {/* ----------------------------------------------- */}
+          {/* --------------------- circular progress -------------------------- */}
           <Box
             sx={{
               position: "relative",
               display: "inline-block",
+              transform: "rotate(-65deg)",
             }}
           >
             <CircularProgress
@@ -115,7 +116,7 @@ const ProgressMain = () => {
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                transform: "translate(-50%, -50%)",
+                transform: "translate(-50%, -50%) rotate(65deg)",
                 fontSize: "1.6rem",
                 fontWeight: "bold",
                 color: "#00262B",
@@ -123,8 +124,8 @@ const ProgressMain = () => {
               }}
             >
               {progressPercentage}%
-              <Typography sx={{ fontSize: "0.7rem", mt: "-5px" }}>
-                complete
+              <Typography sx={{ fontSize: "0.8rem", mt: "-4px" }}>
+                completed
               </Typography>
             </Box>
             <Box
