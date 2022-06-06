@@ -31,10 +31,27 @@ const CustomExpandIcon = () => {
       }}
     >
       <div className="expandIconWrapper">
-        <RemoveIcon sx={{ fontSize: "1.8rem", color: "black" }} />
+        <RemoveIcon sx={{
+          fontSize: "1.8rem",
+          color: "black",
+          '&:hover': {
+            backgroundColor: 'black',
+            borderRadius: '50%',
+            color: 'white',
+          }
+        }}
+        />
       </div>
       <div className="collapsIconWrapper">
-        <AddIcon sx={{ fontSize: "1.8rem", color: "black" }} />
+        <AddIcon sx={{
+          fontSize: "1.8rem",
+          color: "black",
+          '&:hover': {
+            backgroundColor: 'black',
+            borderRadius: '50%',
+            color: 'white',
+          }
+        }} />
       </div>
     </Box>
   );
@@ -117,7 +134,7 @@ const CourseMainModulesList = () => {
               <CheckCircleOutlineIcon sx={{ mr: 2, color: "#8F8F8F" }} />
             )}
             <Link href={`/lessons/about/${about.id}`}>
-              <a style={{ color: "#00688D" }}>{about.title}</a>
+              <a style={{ color: "#00688D", fontWeight: '500' }}>{about.title}</a>
             </Link>
           </AccordionDetails>
         ))}
