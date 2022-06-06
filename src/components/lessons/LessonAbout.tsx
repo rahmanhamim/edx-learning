@@ -1,6 +1,6 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SaveIcon from "@mui/icons-material/Save";
@@ -14,7 +14,7 @@ import LessonBreadcrumbs from "./LessonBreadcrumbs";
 
 const LessonAbout = () => {
   const dispatch = useDispatch();
-
+  const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const router = useRouter();
   const routeID = router.query.about;
 
@@ -84,9 +84,8 @@ const LessonAbout = () => {
       router.push(nextModuleRoute);
       return;
     }
-    let nextRoute = `/lessons/${
-      allRouteAboutTypeIndex[currentRouteIndex + 1]
-    }/${aboutRoutes[currentRouteIndex + 1]}`;
+    let nextRoute = `/lessons/${allRouteAboutTypeIndex[currentRouteIndex + 1]
+      }/${aboutRoutes[currentRouteIndex + 1]}`;
 
     router.push(nextRoute);
   };
@@ -102,13 +101,10 @@ const LessonAbout = () => {
 
     let currentRouteIndex = aboutRoutes.indexOf(routeID);
 
-    if (currentRouteIndex === 0) {
-      alert("This is first module");
-      return;
-    }
-    let prevRoute = `/lessons/${
-      allRouteAboutTypeIndex[currentRouteIndex - 1]
-    }/${aboutRoutes[currentRouteIndex - 1]}`;
+    setCurrentLessonIndex(currentRouteIndex);
+
+    let prevRoute = `/lessons/${allRouteAboutTypeIndex[currentRouteIndex - 1]
+      }/${aboutRoutes[currentRouteIndex - 1]}`;
 
     router.push(prevRoute);
   };
@@ -198,7 +194,7 @@ const LessonAbout = () => {
       <Box component="main" sx={Styles.contentContainer}>
         {/* NEXT PREVIOUS BUTTONS */}
         <Box sx={Styles.topNextPrevContainer}>
-          <Button sx={Styles.topNextPrevBtn} onClick={prevModuleBtn}>
+          <Button sx={Styles.topNextPrevBtn} onClick={prevModuleBtn} disabled={currentLessonIndex > 0 ? false : true}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.saveBtn}>
@@ -244,7 +240,7 @@ const LessonAbout = () => {
         </Box>
         {/* NEXT PREV BUTTON BOTTOM */}
         <Box sx={Styles.bottomNextPrevBtnContainer}>
-          <Button sx={Styles.bottomPrevBtn} onClick={prevModuleBtn}>
+          <Button sx={Styles.bottomPrevBtn} onClick={prevModuleBtn} disabled={currentLessonIndex > 0 ? false : true}>
             <ArrowBackIosIcon sx={Styles.nextPrevIcon} /> Previous
           </Button>
           <Button sx={Styles.bottomNextBtn} onClick={nextModuleBtn}>

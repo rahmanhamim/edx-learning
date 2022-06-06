@@ -172,17 +172,17 @@ const CourseMainModulesList = () => {
 
               {lessons.type === "html" && (
                 <Link href={`/lessons/html/${lessons.id}`}>
-                  <a style={{ color: "#00688D" }}>{lessons.title}</a>
+                  <a style={{ color: "#00688D", fontWeight: '500' }}>{lessons.title}</a>
                 </Link>
               )}
               {lessons.type === "video" && (
                 <Link href={`/lessons/video/${lessons.id}`}>
-                  <a style={{ color: "#00688D" }}>{lessons.title}</a>
+                  <a style={{ color: "#00688D", fontWeight: '500' }}>{lessons.title}</a>
                 </Link>
               )}
               {lessons.type === "quiz" && (
                 <Link href={`/lessons/quiz/${lessons.id}`}>
-                  <a style={{ color: "#00688D" }}>{lessons.title}</a>
+                  <a style={{ color: "#00688D", fontWeight: '500' }}>{lessons.title}</a>
                 </Link>
               )}
 
