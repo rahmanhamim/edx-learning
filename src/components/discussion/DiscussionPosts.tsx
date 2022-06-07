@@ -1,4 +1,4 @@
-import { Box, Button, Fade, Grid, Typography } from "@mui/material";
+import { Box, Button, Fade, Grid, Link as MuiLink, TextField, Typography } from "@mui/material";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
@@ -12,10 +12,18 @@ export interface DiscussionsData {
   postContent: string;
   comments: Comment[];
 }
+
+export interface Replies {
+  username: string;
+  date: string;
+  content: string;
+}
 export interface Comment {
+  id: string;
   username: string;
   date: string;
   comment: string;
+  replies: Replies[];
 }
 
 interface Props {
@@ -35,6 +43,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
 
   const [singleItem, setSingleItem] = useState<DiscussionsData>();
   const [currentId, setCurrentId] = useState(discussions[0].id);
+  const [currentCommentId, setCurrentCommentId] = useState('');
 
   const currentItem = discussions.find((item) => item.id == currentId);
   useEffect(() => {
@@ -56,7 +65,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
   const updateComment = () => {
     const updatedComment = {
       username: "anonymous",
-      date: "today",
+      date: new Date().toLocaleDateString(),
       comment: commentText,
     };
     setCommentText("");
@@ -163,24 +172,66 @@ const DiscussionPosts = ({ showTopic }: Props) => {
             dangerouslySetInnerHTML={{ __html: singleItem.postContent }}
           ></Box>
           {/* comments below */}
-          <Box sx={{ border: "1px solid #DEE2E6", minHeight: "10vh", my: 4 }}>
-            <Box sx={{ borderBottom: "1px solid #DEE2E6" }}>
-              {singleItem.comments.map((comment, index) => (
-                <Box key={index} sx={{ p: 3 }}>
+          {singleItem.comments.map((comment, index) => (
+            <Box key={index} sx={{ border: "1px solid #DEE2E6", minHeight: "10vh", my: 2 }}>
+              <Box sx={{ borderBottom: "1px solid #DEE2E6", marginTop: '5px' }}>
+
+                <Box sx={{ p: 2, color: "#454545" }}>
                   <Typography sx={{ color: "#016EA8", fontSize: ".8rem" }}>
                     {comment.username}
                   </Typography>
-                  <Typography sx={{ color: "#4B4B4B", fontSize: ".8rem" }}>
+                  <Typography sx={{ color: "#454545", fontSize: ".7rem" }}>
                     {comment.date}
                   </Typography>
                   {/* <Typography>{comment.comment}</Typography> */}
                   <Typography
+                    sx={{ mb: 4, fontSize: ".9rem" }}
                     dangerouslySetInnerHTML={{ __html: comment.comment }}
                   ></Typography>
+                  {comment.replies.map((reply, index) =>
+                    <Box key={index} sx={{ borderTop: "1px solid #DEE2E6", width: '100%', p: 3 }}>
+                      <Typography dangerouslySetInnerHTML={{ __html: reply.content }} sx={{ fontSize: ".9rem" }} />
+                      <Typography component='p' sx={{ fontSize: ".8rem" }}>
+                        posted on {reply.date} by <MuiLink sx={{ color: "#00688D", fontWeight: 'bold' }}>{reply.username}</MuiLink>
+                      </Typography>
+                    </Box>
+                  )}
+                  <Box sx={{ borderTop: "1px solid #DEE2E6" }}>
+                    {currentCommentId === comment.id ?
+                      <>
+                        <Editor
+                          apiKey="oyoide2nrtdzemizwpgefdmh9vdsr36o6higj971xx2f7f07"
+                          init={{
+                            icons: "thin",
+                            placeholder: "Write your comment...",
+                            height: 250,
+                            menubar: true,
+                            textcolor_rows: "4",
+                            toolbar:
+                              "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent ",
+                          }}
+                          onEditorChange={handleEditorChange}
+                          value={commentText}
+                        />
+
+                        <Box sx={{ width: '100%', backgroundColor: '#F5F5F5', p: 4, mt: '2px' }} >
+                          Preview
+
+                          <Typography dangerouslySetInnerHTML={{ __html: commentText }}></Typography>
+                        </Box>
+                        <Button sx={{ mt: 1 }} variant="contained">
+                          Submit
+                        </Button>
+                      </>
+                      :
+                      <TextField sx={{ mt: 2, width: "100%" }} placeholder="Add a comment" onClick={() => setCurrentCommentId(comment.id)}></TextField>
+                    }
+                  </Box>
                 </Box>
-              ))}
+
+              </Box>
             </Box>
-          </Box>
+          ))}
           <Box>
             {/* <textarea
               name=""
@@ -211,7 +262,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
           </Box>
         </Grid>
       </Grid>
-    </Box>
+    </Box >
   );
 };
 

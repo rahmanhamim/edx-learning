@@ -40,7 +40,8 @@ const DiscussionPage = ({ discussionsData }: Props) => {
 export default DiscussionPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("https://jsonkeeper.com/b/ZR1V");
+  // const res = await fetch("https://jsonkeeper.com/b/ZR1V");
+  const res = await fetch("https://jsonkeeper.com/b/B911");
   const discussionsData: DiscussionsData[] = await res.json();
 
   return {
