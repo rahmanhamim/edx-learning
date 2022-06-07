@@ -62,6 +62,38 @@ const DiscussionPosts = ({ showTopic }: Props) => {
     setCommentText(content);
   };
 
+  const addReply = () => {
+    // "username": "anny",
+    //         "date": "06/07/22",
+    //         "content": "<strong>No Answer</strong>"
+    if (!commentText) {
+      alert('Please Write Comment');
+      return;
+    }
+    const newReply = {
+      username: "dynamic_user",
+      date: new Date().toLocaleDateString(),
+      content: commentText
+    };
+    setCommentText("");
+    const filterChangingComment = currentItem?.comments.find(comment => comment.id === currentCommentId);
+    if (filterChangingComment) {
+      const newReplies = [...filterChangingComment?.replies, newReply];
+      filterChangingComment.replies = newReplies;
+    }
+    console.log(filterChangingComment);
+    const currentCommentUpdated = {
+      ...currentItem,
+      comments: [...currentItem!.comments, filterChangingComment],
+    };
+    const updatedState = [otherDatas, currentCommentUpdated];
+    dispatch({
+      type: "DISCUSSIONS_FETCH",
+      payload: updatedState,
+    });
+
+  }
+
   const updateComment = () => {
     const updatedComment = {
       username: "anonymous",
@@ -82,7 +114,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
       payload: updatedState,
     });
   };
-
+  // console.log(singleItem)
   return (
     <Box sx={{ px: 3 }}>
       <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -183,7 +215,6 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                   <Typography sx={{ color: "#454545", fontSize: ".7rem" }}>
                     {comment.date}
                   </Typography>
-                  {/* <Typography>{comment.comment}</Typography> */}
                   <Typography
                     sx={{ mb: 4, fontSize: ".9rem" }}
                     dangerouslySetInnerHTML={{ __html: comment.comment }}
@@ -219,7 +250,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
 
                           <Typography dangerouslySetInnerHTML={{ __html: commentText }}></Typography>
                         </Box>
-                        <Button sx={{ mt: 1 }} variant="contained">
+                        <Button sx={{ mt: 1 }} variant="contained" onClick={addReply}>
                           Submit
                         </Button>
                       </>
@@ -233,15 +264,6 @@ const DiscussionPosts = ({ showTopic }: Props) => {
             </Box>
           ))}
           <Box>
-            {/* <textarea
-              name=""
-              id=""
-              cols={30}
-              rows={6}
-              style={{ width: "100%", fontSize: "1rem" }}
-              onChange={(e) => setCommentText(e.target.value)}
-              value={commentText}
-            ></textarea> */}
             <Editor
               apiKey="oyoide2nrtdzemizwpgefdmh9vdsr36o6higj971xx2f7f07"
               init={{
