@@ -67,22 +67,27 @@ const NavigationBar = () => {
   };
 
   const router = useRouter();
+  console.log(router)
 
   return (
     <AppBar
       sx={{
         bgcolor: "primary.light",
         color: "primary.main",
-        borderBottom: "1px solid #EAEAEA",
+        borderBottom: router.pathname !== "/discussion" ? "1px solid #EAEAEA" : "transparent",
       }}
       elevation={0}
       position="static"
     >
-      <Container maxWidth="xl">
+      <Container maxWidth={router.pathname !== "/discussion" && "xl"} sx={{
+        padding: '5px 10px',
+      }}>
         <Toolbar
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            borderBottom: router.pathname === '/discussion' ? '1px solid black' : 'none',
+            width: '100%',
             padding: "0 !important",
             mt: { xs: 2, sm: 0 },
           }}
@@ -126,13 +131,14 @@ const NavigationBar = () => {
             </Box>
           </Box>
 
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center", }}>
+
             <Link href="/home">
               <a style={{ margin: "0 1em", fontSize: "1.1rem" }}>Help</a>
             </Link>
 
             <Box sx={{ display: "flex" }}>
-              <Box>
+              <Box >
                 <FormControl>
                   <Select
                     sx={{
@@ -189,9 +195,8 @@ const NavigationBar = () => {
             <a
               className="navlinks"
               style={{
-                borderBottom: `${
-                  router.pathname === "/" ? "4px solid #00262B" : "transparent"
-                }`,
+                borderBottom: `${router.pathname === "/" ? "4px solid #00262B" : "transparent"
+                  }`,
               }}
             >
               Course
@@ -201,11 +206,10 @@ const NavigationBar = () => {
             <a
               className="navlinks"
               style={{
-                borderBottom: `${
-                  router.pathname === "/progress"
-                    ? "4px solid #00262B"
-                    : "transparent"
-                }`,
+                borderBottom: `${router.pathname === "/progress"
+                  ? "4px solid #00262B"
+                  : "transparent"
+                  }`,
               }}
             >
               Progress
@@ -215,11 +219,10 @@ const NavigationBar = () => {
             <a
               className="navlinks"
               style={{
-                borderBottom: `${
-                  router.pathname === "/dates"
-                    ? "4px solid #00262B"
-                    : "transparent"
-                }`,
+                borderBottom: `${router.pathname === "/dates"
+                  ? "4px solid #00262B"
+                  : "transparent"
+                  }`,
               }}
             >
               Dates
@@ -229,11 +232,10 @@ const NavigationBar = () => {
             <a
               className="navlinks"
               style={{
-                borderBottom: `${
-                  router.pathname === "/discussion"
-                    ? "4px solid #00262B"
-                    : "transparent"
-                }`,
+                borderBottom: `${router.pathname === "/dates"
+                  ? "4px solid #00262B"
+                  : "transparent"
+                  }`,
               }}
             >
               Discussion
