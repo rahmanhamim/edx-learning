@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import { Editor } from "@tinymce/tinymce-react";
 import { useTheme } from "@emotion/react";
-
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import StarIcon from '@mui/icons-material/Star';
 export interface DiscussionsData {
   title: string;
   id: number;
@@ -191,31 +192,65 @@ const DiscussionPosts = ({ showTopic }: Props) => {
         )}
 
         <Grid item xs={12} sm={9}>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            {singleItem?.title}
-          </Typography>
-          <Typography sx={{ fontSize: ".8rem", fontWeight: "light" }}>
-            discussion posted 8 months ago by{" "}
-            <Typography
-              component="span"
-              sx={{
-                fontSize: ".8rem",
-                fontWeight: "bold",
-                color: "#00688D",
-                textDecoration: "underline",
-              }}
-            >
-              pratikshapv
-            </Typography>
-          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box>
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                {singleItem?.title}
+              </Typography>
+              <Typography sx={{ fontSize: ".8rem", fontWeight: "light" }}>
+                discussion posted 8 months ago by{" "}
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: ".8rem",
+                    fontWeight: "bold",
+                    color: "#00688D",
+                    textDecoration: "underline",
+                  }}
+                >
+                  pratikshapv
+                </Typography>
+              </Typography>
+            </Box>
+            <Box>
+              <AddOutlinedIcon
+                sx={{
+                  color: "#6c757d",
+                  border: '1px solid #dee2e6',
+                  borderRadius: '3px',
+                  position: 'relative',
+                  display: 'block',
+                  '&:hover': {
+                    backgroundColor: '#0D7D4D',
+                    color: '#fff',
+                    '&:before': {
+                      content: "''",
+                      width: '30px',
+                      height: '30px',
+                      position: 'absolute',
+                      top: '20px',
+                      border: '2px solid red',
+
+                    }
+                  }
+                }} />
+              <StarIcon sx={{
+                mt: 1,
+                color: "#6c757d",
+                border: '1px solid #dee2e6',
+              }} />
+            </Box>
+          </Box>
           <Box
             sx={{
               "& p": {
                 fontSize: "0.9rem",
               },
             }}
-            dangerouslySetInnerHTML={{ __html: singleItem.postContent }}
-          ></Box>
+          >
+            <Typography dangerouslySetInnerHTML={{ __html: singleItem.postContent }}></Typography>
+
+          </Box>
           <Box
             sx={{
               mt: 5,
@@ -260,10 +295,31 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                   <Typography sx={{ color: "#454545", fontSize: ".7rem" }}>
                     {comment.date}
                   </Typography>
-                  <Typography
-                    sx={{ mb: 4, fontSize: ".9rem" }}
-                    dangerouslySetInnerHTML={{ __html: comment.comment }}
-                  ></Typography>
+                  <Box sx={{ display: "flex", justifyContent: "space-between", }}>
+                    <Typography
+                      sx={{ mb: 4, fontSize: ".9rem" }}
+                      dangerouslySetInnerHTML={{ __html: comment.comment }}
+                    ></Typography>
+                    <AddOutlinedIcon
+                      sx={{
+                        color: "#6c757d",
+                        border: '1px solid #dee2e6',
+                        borderRadius: '3px',
+                        position: 'relative',
+                        '&:hover': {
+                          backgroundColor: '#0D7D4D',
+                          color: '#fff',
+                          '&:before': {
+                            content: "''",
+                            width: '30px',
+                            height: '30px',
+                            position: 'absolute',
+                            top: '20px',
+                            border: '2px solid red'
+                          }
+                        }
+                      }} />
+                  </Box>
                   {comment?.replies?.map((reply, index) =>
                     <Box key={index} sx={{ borderTop: "1px solid #DEE2E6", width: '100%', p: 3 }}>
                       <Typography dangerouslySetInnerHTML={{ __html: reply.content }} sx={{ fontSize: ".9rem" }} />
