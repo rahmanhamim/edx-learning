@@ -5,6 +5,7 @@ import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
 import { Editor } from "@tinymce/tinymce-react";
+import { useTheme } from "@emotion/react";
 
 export interface DiscussionsData {
   title: string;
@@ -33,7 +34,7 @@ interface Props {
 
 const DiscussionPosts = ({ showTopic }: Props) => {
   const dispatch = useDispatch();
-
+  const theme: any = useTheme();
   const discussions: DiscussionsData[] = useSelector(
     (state: State) => state.discussionsData.discussionsData
   );
@@ -53,7 +54,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
 
   const [commentText, setCommentText] = useState("");
   const [replyText, setReplyText] = useState("");
-
+  const postCommentSection: any = useRef();
   if (!singleItem) {
     return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
   }
@@ -118,6 +119,12 @@ const DiscussionPosts = ({ showTopic }: Props) => {
     dispatch({
       type: "DISCUSSIONS_FETCH",
       payload: updatedState,
+    });
+  };
+  const scrollDown = () => {
+    window.scrollTo({
+      top: postCommentSection && postCommentSection.current.offsetTop,
+      behavior: 'smooth',
     });
   };
 
@@ -209,6 +216,38 @@ const DiscussionPosts = ({ showTopic }: Props) => {
             }}
             dangerouslySetInnerHTML={{ __html: singleItem.postContent }}
           ></Box>
+          <Box
+            sx={{
+              mt: 5,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
+
+            <Box>
+              <Typography sx={{ fontSize: '.8rem ' }}>This post is visible to everyone.</Typography>
+
+              <Button
+                sx={{
+                  mt: 1,
+                  borderRadius: 0,
+                  fontWeight: 'bold',
+                  border: '1px solid #DEE2E6',
+                  padding: ".6rem 1.2rem",
+                  '&:hover': {
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.light,
+                  }
+                }} variant="outlined"
+                disableElevation={true}
+                onClick={scrollDown}
+              >
+                Add Response
+              </Button>
+            </Box>
+
+            <Typography sx={{ fontSize: '.8rem  ' }}>{singleItem.comments.length} responses</Typography>
+          </Box>
           {/* comments below */}
           {singleItem.comments.map((comment, index) => (
             <Box key={index} sx={{ border: "1px solid #DEE2E6", minHeight: "10vh", my: 2 }}>
@@ -269,7 +308,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
               </Box>
             </Box>
           ))}
-          <Box>
+          <Box ref={postCommentSection}>
             <Editor
               apiKey="oyoide2nrtdzemizwpgefdmh9vdsr36o6higj971xx2f7f07"
               init={{
@@ -281,6 +320,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                 toolbar:
                   "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent ",
               }}
+
               onClick={() => setCurrentCommentId('')}
               onEditorChange={handleEditorChange}
               value={commentText}
@@ -290,8 +330,22 @@ const DiscussionPosts = ({ showTopic }: Props) => {
 
               <Typography dangerouslySetInnerHTML={{ __html: commentText }}></Typography>
             </Box>
-            <Button sx={{ mt: 1 }} variant="contained" onClick={updateComment}>
-              Add Response
+            <Button
+              sx={{
+                mt: 1,
+                borderRadius: 0,
+                fontWeight: 'bold',
+                border: '1px solid #DEE2E6',
+                padding: ".6rem 1.2rem",
+                '&:hover': {
+                  backgroundColor: theme.palette.primary.main,
+                  color: theme.palette.primary.light,
+                }
+              }}
+              variant="outlined"
+              disableElevation={true}
+              onClick={updateComment}>
+              Submit
             </Button>
           </Box>
         </Grid>
