@@ -26,6 +26,7 @@ export interface Comment {
   replies: Replies[];
 }
 
+
 interface Props {
   showTopic: boolean;
 }
@@ -51,6 +52,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
   }, [currentItem]);
 
   const [commentText, setCommentText] = useState("");
+  const [replyText, setReplyText] = useState("");
 
   if (!singleItem) {
     return <h1 style={{ textAlign: "center" }}>Loading...</h1>;
@@ -58,35 +60,37 @@ const DiscussionPosts = ({ showTopic }: Props) => {
 
   const otherDatas = discussions.find((item) => item.id !== currentId);
 
-  const handleEditorChange = (content: any, editor: any) => {
-    setCommentText(content);
+  const handleEditorChange = (content: any) => {
+    if (currentCommentId) {
+      setReplyText(content);
+    }
+    else {
+      setCommentText(content);
+    }
   };
 
   const addReply = () => {
-    // "username": "anny",
-    //         "date": "06/07/22",
-    //         "content": "<strong>No Answer</strong>"
-    if (!commentText) {
+
+    if (!replyText) {
       alert('Please Write Comment');
       return;
     }
     const newReply = {
       username: "dynamic_user",
       date: new Date().toLocaleDateString(),
-      content: commentText
+      content: replyText,
     };
-    setCommentText("");
-    const filterChangingComment = currentItem?.comments.find(comment => comment.id === currentCommentId);
-    if (filterChangingComment) {
-      const newReplies = [...filterChangingComment?.replies, newReply];
-      filterChangingComment.replies = newReplies;
-    }
-    console.log(filterChangingComment);
-    const currentCommentUpdated = {
-      ...currentItem,
-      comments: [...currentItem!.comments, filterChangingComment],
-    };
-    const updatedState = [otherDatas, currentCommentUpdated];
+    setReplyText("");
+    setCurrentCommentId("");
+
+    currentItem?.comments.map(comment => {
+      if (comment.id === currentCommentId) {
+        comment.replies = [...comment.replies, newReply];
+      }
+    });
+
+    const updatedState = [otherDatas, currentItem];
+
     dispatch({
       type: "DISCUSSIONS_FETCH",
       payload: updatedState,
@@ -96,9 +100,11 @@ const DiscussionPosts = ({ showTopic }: Props) => {
 
   const updateComment = () => {
     const updatedComment = {
+      id: Math.floor(Math.random() * 100 + 20),
       username: "anonymous",
       date: new Date().toLocaleDateString(),
       comment: commentText,
+      replies: []
     };
     setCommentText("");
 
@@ -114,7 +120,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
       payload: updatedState,
     });
   };
-  // console.log(singleItem)
+
   return (
     <Box sx={{ px: 3 }}>
       <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -219,7 +225,7 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                     sx={{ mb: 4, fontSize: ".9rem" }}
                     dangerouslySetInnerHTML={{ __html: comment.comment }}
                   ></Typography>
-                  {comment.replies.map((reply, index) =>
+                  {comment?.replies?.map((reply, index) =>
                     <Box key={index} sx={{ borderTop: "1px solid #DEE2E6", width: '100%', p: 3 }}>
                       <Typography dangerouslySetInnerHTML={{ __html: reply.content }} sx={{ fontSize: ".9rem" }} />
                       <Typography component='p' sx={{ fontSize: ".8rem" }}>
@@ -242,13 +248,13 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                               "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent ",
                           }}
                           onEditorChange={handleEditorChange}
-                          value={commentText}
+                          value={replyText}
                         />
 
                         <Box sx={{ width: '100%', backgroundColor: '#F5F5F5', p: 4, mt: '2px' }} >
                           Preview
 
-                          <Typography dangerouslySetInnerHTML={{ __html: commentText }}></Typography>
+                          <Typography dangerouslySetInnerHTML={{ __html: replyText }}></Typography>
                         </Box>
                         <Button sx={{ mt: 1 }} variant="contained" onClick={addReply}>
                           Submit
@@ -275,9 +281,15 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                 toolbar:
                   "undo redo | styleselect | fontsizeselect| code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent ",
               }}
+              onClick={() => setCurrentCommentId('')}
               onEditorChange={handleEditorChange}
               value={commentText}
             />
+            <Box sx={{ width: '100%', backgroundColor: '#F5F5F5', p: 4, mt: '2px' }} >
+              Preview
+
+              <Typography dangerouslySetInnerHTML={{ __html: commentText }}></Typography>
+            </Box>
             <Button sx={{ mt: 1 }} variant="contained" onClick={updateComment}>
               Add Response
             </Button>
