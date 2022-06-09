@@ -10,11 +10,12 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Theme, useTheme } from "@mui/material/styles";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -65,9 +66,19 @@ const NavigationBar = () => {
       },
     },
   };
-
+  const dispatch = useDispatch();
   const router = useRouter();
-  console.log(router)
+  const { asPath } = router;
+
+  useEffect(() => {
+    if (asPath.startsWith("/lesson")) {
+      dispatch({
+        type: "SET_LATEST_LESSON",
+        payload: asPath
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asPath, router])
 
   return (
     <AppBar

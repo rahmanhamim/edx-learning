@@ -5,6 +5,7 @@ const initialState = {
   aboutLessons: [],
   quizLessons: [],
   quizData: [],
+  latestLesson: ""
 };
 
 export const courseReducer = (state: any = initialState, action: any): any => {
@@ -38,6 +39,11 @@ export const courseReducer = (state: any = initialState, action: any): any => {
       return {
         ...state,
         quizLessons: action.payload,
+      };
+    case "SET_LATEST_LESSON":
+      return {
+        ...state,
+        latestLesson: action.payload,
       };
 
     default:

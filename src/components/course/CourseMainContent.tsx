@@ -1,6 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "redux/reducers";
 import CourseMainModulesList from "./CourseMainModulesList";
 
 const CourseMainContent = () => {
@@ -26,6 +29,10 @@ const CourseMainContent = () => {
     },
   };
 
+
+  const { latestLesson } = useSelector((state: State) => state.courses);
+  console.log(latestLesson)
+
   return (
     <Box component="main">
       <Box sx={Styles.pickCourse}>
@@ -33,10 +40,10 @@ const CourseMainContent = () => {
           Pick up where you left off
         </Typography>
         {/* this link is static */}
-        <Link href="/lessons/about/aboutcr1">
+        <Link href={!latestLesson ? "/lessons/about/aboutcr1" : latestLesson}>
           <a>
             <Button variant="contained" sx={Styles.startCourseBtn}>
-              Start Course
+              {!latestLesson ? "Start Course" : "Resume Course"}
             </Button>
           </a>
         </Link>
