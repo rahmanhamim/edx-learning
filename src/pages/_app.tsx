@@ -6,6 +6,7 @@ import Footer from "components/shared/footer/Footer";
 import { wrapper } from "redux/store";
 import NextNProgress from "nextjs-progressbar";
 
+
 const theme = createTheme({
   palette: {
     primary: {

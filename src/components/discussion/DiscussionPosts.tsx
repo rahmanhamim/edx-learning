@@ -230,7 +230,6 @@ const DiscussionPosts = ({ showTopic }: Props) => {
                       position: 'absolute',
                       top: '20px',
                       border: '2px solid red',
-
                     }
                   }
                 }} />
