@@ -72,7 +72,6 @@ const LessonVideo = () => {
       })
     );
     const updatedCourses = [courses];
-    console.log(updatedCourses);
 
     dispatch({
       type: "COURSE_FETCH",
@@ -246,7 +245,7 @@ const LessonVideo = () => {
               <Box
                 sx={{
                   width: { xs: "100%", md: "25%" },
-                  pl: 1,
+                  pl: 2,
                   "*": {
                     color: "#2074B5",
                     cursor: "pointer",
