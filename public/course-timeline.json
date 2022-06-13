@@ -1,0 +1,55 @@
+[
+    {
+        "id":"1",
+        "date":"Thu, Jun 2, 2022",
+        "title": "Course starts"
+    },
+    {
+        "id":"2",
+        "date":"Tue, Jun 7, 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    },
+    {
+        "id":"3",
+        "date":"Fri, Jun 10, 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    },
+    {
+        "id":"4",
+        "date":"Fri, Jun 12, 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    },
+    {
+        "id":"4",
+        "date":"Fri, Jun 12, 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    },
+    {
+        "id":"5",
+        "date":"Fri, Jun 14, 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    },
+    {
+        "id":"6",
+        "date":"Fri, Jun 15, 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    },
+    {
+        "id":"7",
+        "date":"Fri, Jun 16, 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    },
+    {
+        "id":"8",
+        "date":"Fri, Jun 17 2022",
+        "title": "Graded Quiz: Graded Quiz: Python Basics",
+        "dueTime": "5:30 PM GMT+6"
+    }
+]

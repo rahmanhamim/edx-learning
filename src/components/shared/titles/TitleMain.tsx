@@ -3,7 +3,7 @@ import React from "react";
 
 interface Props {
   text: string;
-  my: string;
+  my?: string;
 }
 
 const TitleMain = ({ text, my }: Props) => {
